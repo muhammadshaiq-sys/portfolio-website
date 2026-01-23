@@ -1,0 +1,1276 @@
+/* ========== RESET & BASE STYLES ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #3b82f6;
+    --secondary: #f59e0b;
+    --background: #030712;
+    --nav-bg: rgba(15, 23, 42, 0.97);
+    --card-bg: rgba(20, 25, 35, 0.8);
+    --text-light: #94a3b8;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+
+/* ========== CANVAS & BACKGROUND ========== */
+#globeCanvas {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.wq-texture {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* ========== FIXED NAVBAR ========== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    background: var(--nav-bg);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Blinking name in navbar */
+.nav-left .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: subtle-pulse 3s infinite;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.5px;
+}
+
+@keyframes subtle-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Desktop Navigation - Clean, no lines */
+.nav-right ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-right ul li {
+    position: relative;
+}
+
+.nav-right ul li a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Clean hover effect - no underline unless hovering */
+.nav-right ul li a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.nav-right ul li a:hover::before {
+    width: 80%;
+}
+
+.nav-right ul li a:hover {
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+}
+
+/* ========== HAMBURGER MENU ========== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* ========== HERO SECTION ========== */
+.firstSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 2rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 4rem;
+}
+
+.leftSection {
+    flex: 1;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+}
+
+/* Fixed the double underline issue */
+.leftSection>* {
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* Purple text - NO BLINK */
+.purple {
+    color: #9333ea;
+    margin-top: 20px;
+    font-weight: 800;
+    text-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+    /* Removed blink animation */
+}
+
+/* Typed.js container */
+.typed-cursor {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Custom cursor styling */
+.custom-cursor {
+    color: var(--secondary);
+    font-weight: bold;
+    animation: custom-blink 1s infinite;
+    margin-left: 2px;
+    text-shadow: 0 0 10px var(--secondary);
+}
+
+@keyframes custom-blink {
+
+    0%,
+    50% {
+        color: red;
+    }
+
+    51%,
+    100% {
+        color: orange;
+    }
+}
+
+/* Fix hero text appearance */
+#element {
+    color: var(--secondary);
+    font-weight: 700;
+    min-height: 60px;
+    display: inline-flex;
+    align-items: center;
+    margin: 1rem 0;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-family: 'JetBrains Mono', monospace;
+    background: linear-gradient(135deg, #f59e0b, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+/* Remove any white borders from text */
+#element::before,
+#element::after {
+    content: none !important;
+}
+
+
+/* Buttons Container */
+.buttons {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
+}
+
+.btn:nth-child(2) {
+    background: linear-gradient(135deg, var(--secondary), #ea580c);
+}
+
+/* Right Section - Image */
+.rightSection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightSection img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 20px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.5s ease;
+    filter: brightness(1.05) contrast(1.1);
+    position: relative;
+}
+
+.rightSection img:hover {
+    transform: perspective(1000px) rotateY(5deg) rotateX(2deg);
+    box-shadow:
+        0 30px 80px rgba(59, 130, 246, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+/* ========== UNIQUE VISUALIZATION SECTION ========== */
+/* Add this after your buttons in HTML */
+.unique-visuals {
+    margin: 4rem auto;
+    max-width: 1200px;
+    padding: 0 5%;
+}
+
+.visual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.visual-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.visual-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.visual-card:hover::before {
+    transform: scaleX(1);
+}
+
+.visual-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.visual-card h3 {
+    color: var(--white);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.visual-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.math-symbol {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+/* Live Equation Display */
+.equation-display {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    margin: 1rem 0;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.equation {
+    font-size: 1.1rem;
+    color: var(--secondary);
+    text-align: center;
+}
+
+/* ========== QUANT VISUALIZER ========== */
+.quant-visualizer {
+    padding: 4rem 5%;
+    max-width: 1200px;
+    margin: 4rem auto;
+    background: rgba(10, 15, 25, 0.6);
+    border-radius: 24px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.visualizer-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.visualizer-header h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: blink 3s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Keep existing quant visualizer styles but clean them up */
+.visualizer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 1024px) {
+    .firstSection {
+        flex-direction: column;
+        text-align: center;
+        gap: 3rem;
+    }
+
+    .leftSection,
+    .rightSection {
+        width: 100%;
+    }
+
+    .rightSection img {
+        max-width: 400px;
+    }
+
+    .visualizer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Show hamburger menu */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Mobile navigation menu */
+    .nav-right {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        width: 80%;
+        height: calc(100vh - 80px);
+        background: var(--nav-bg);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 3rem 2rem;
+        transition: right 0.4s ease;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-right.active {
+        right: 0;
+    }
+
+    .nav-right ul {
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .nav-right ul li a {
+        display: block;
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    /* Hero section mobile */
+    .leftSection {
+        font-size: 2rem;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* Quant visualizer mobile */
+    .quant-visualizer {
+        padding: 2rem;
+        margin: 2rem;
+    }
+
+    .flow-container {
+        flex-wrap: wrap;
+    }
+
+    .flow-arrow {
+        transform: rotate(90deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0 1rem;
+    }
+
+    .firstSection {
+        padding: 1rem;
+    }
+
+    .leftSection {
+        font-size: 1.8rem;
+    }
+
+    .visual-card {
+        padding: 1.5rem;
+    }
+
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+/* ========== FOOTER ========== */
+.footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-top: 4rem;
+    background: rgba(10, 15, 25, 0.6);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.social-link {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.social-link:hover {
+    color: var(--primary);
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-5px);
+}
+
+@keyframes equation-change {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    10%,
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.equation {
+    animation: equation-change 15s infinite;
+}
+
+.equation:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.equation:nth-child(2) {
+    animation-delay: 5s;
+}
+
+.equation:nth-child(3) {
+    animation-delay: 10s;
+}
+
+/* ========== QUANT MARKET DASHBOARD - MOBILE FIRST ========== */
+.quant-market {
+    padding: 2rem 1rem;
+    margin: 2rem auto;
+    background: rgba(10, 15, 25, 0.9);
+    border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    max-width: 1400px;
+    width: 95%;
+    overflow: hidden;
+}
+
+.market-container {
+    width: 100%;
+}
+
+/* Market Header - Stack on mobile */
+.market-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.market-title h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.subtitle {
+    color: var(--text-light);
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Market Clock - Full width on mobile */
+.market-clock {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.clock-time {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--secondary);
+    margin-bottom: 0.25rem;
+}
+
+.clock-status {
+    font-size: 0.85rem;
+    color: #10b981;
+    font-weight: 600;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.clock-date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+/* SIMPLIFIED MARKET GRID - No complex grids */
+.market-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* All containers have same base style */
+.chart-container {
+    background: rgba(20, 25, 35, 0.8);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+}
+
+/* Main Chart - Full width */
+.main-chart .chart-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .main-chart .chart-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.chart-title {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .chart-title {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.chart-title h3 {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chart-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.time-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 60px;
+}
+
+.time-btn:hover,
+.time-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.chart-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+@media (min-width: 480px) {
+    .chart-stats {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.stat {
+    text-align: center;
+    flex: 1;
+}
+
+@media (min-width: 768px) {
+    .stat {
+        text-align: right;
+    }
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .stat-value {
+        font-size: 1.5rem;
+    }
+}
+
+.stat-value.positive {
+    color: #10b981;
+}
+
+.stat-value.negative {
+    color: #ef4444;
+}
+
+/* Chart Canvas - Fixed height */
+.chart-wrapper {
+    height: 250px;
+    position: relative;
+    width: 100%;
+}
+
+/* Heatmap - Simplified for mobile */
+.heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 480px) {
+    .heatmap-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.heatmap-cell {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+    padding: 0.5rem;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.heatmap-cell:hover {
+    transform: scale(1.05);
+}
+
+/* Stats Grid - Stack on mobile, grid on desktop */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.algo-stat {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Order Book - Stack vertically on mobile */
+.orderbook-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .orderbook-content {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.orderbook-side {
+    flex: 1;
+}
+
+.orderbook-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.orderbook-rows {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.orderbook-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.orderbook-spread {
+    padding: 1rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin: 0.5rem 0;
+}
+
+@media (min-width: 768px) {
+    .orderbook-spread {
+        margin: 0 1rem;
+        align-self: center;
+    }
+}
+
+.spread-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.spread-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
+}
+
+/* Training Section */
+.training-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .training-content {
+        flex-direction: row;
+    }
+}
+
+.training-model {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+.model-progress {
+    margin: 1rem 0;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 4px;
+}
+
+.training-log {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.log-entry {
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Indicators Grid - Responsive */
+.indicators-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.indicators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.indicator {
+    background: rgba(20, 25, 35, 0.6);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+/* ========== MAIN LAYOUT FIXES ========== */
+/* Ensure body doesn't overflow */
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Fix first section on mobile */
+.firstSection {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    margin: 1rem 0;
+    gap: 2rem;
+    min-height: auto;
+}
+
+@media (min-width: 1024px) {
+    .firstSection {
+        flex-direction: row;
+        padding: 4rem 5%;
+    }
+}
+
+.leftSection {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    text-align: center;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .leftSection {
+        text-align: left;
+    }
+}
+
+.rightSection {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.rightSection img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+/* Buttons responsive */
+.buttons {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .buttons {
+        justify-content: flex-start;
+    }
+}
+
+.btn {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+}
+
+/* Navbar fixes for mobile */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 1rem;
+    }
+
+    .nav-left .logo {
+        font-size: 1.4rem;
+    }
+
+    /* Hide nav on mobile, show hamburger */
+    .nav-right {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        width: 80%;
+        height: calc(100vh - 80px);
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem;
+        transition: right 0.4s ease;
+        z-index: 999;
+    }
+
+    .nav-right.active {
+        right: 0;
+    }
+
+    .nav-right ul {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .nav-right ul li a {
+        display: block;
+        text-align: center;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* Prevent horizontal scrolling */
+@media (max-width: 768px) {
+
+    .quant-market,
+    .firstSection,
+    .navbar {
+        width: 100vw;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    body {
+        width: 100%;
+        overflow-x: hidden;
+        position: relative;
+    }
+}
+
+/* Smooth transitions for all elements */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Force remove any overflow issues */
+.chart-container,
+.market-grid,
+.stats-grid {
+    overflow: hidden;
+}
+/* Add this to your CSS file (in the chart-wrapper section) */
+.chart-wrapper {
+    height: 250px;
+    position: relative;
+    width: 100%;
+    background: rgba(10, 15, 25, 0.6);
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Make sure chart canvas is smooth */
+#stockChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Professional chart header styling */
+.main-chart .chart-header {
+    background: rgba(15, 23, 42, 0.8);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Professional time buttons */
+.time-btn {
+    padding: 0.4rem 0.8rem;
+    background: transparent;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: var(--text-light);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    min-width: 50px;
+}
+
+.time-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Professional stat boxes */
+.chart-stats .stat {
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary);
+}

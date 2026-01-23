@@ -1,0 +1,2170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>Contact</title>
+</head>
+<style>
+    :root {
+        --primary: #3b82f6;
+        --secondary: #f59e0b;
+        --accent: #10b981;
+        --danger: #ef4444;
+        --dark: #030712;
+        --darker: #02040a;
+        --light: #f8fafc;
+        --gray-400: #94a3b8;
+        --card-bg: rgba(20, 25, 35, 0.8);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: var(--darker);
+        color: white;
+        line-height: 1.6;
+        overflow-x: hidden;
+        padding-top: 80px;
+        position: relative;
+    }
+
+    /* ========== ANIMATED BACKGROUND ========== */
+    #contactBgCanvas {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 80px);
+        z-index: -2;
+        pointer-events: none;
+    }
+
+    .contact-texture {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 80px);
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+            radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+            radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 40%);
+        opacity: 0.6;
+    }
+
+    /* ========== RESPONSIVE NAVBAR ========== */
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5%;
+        background: rgba(15, 23, 42, 0.97);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-left {
+        font-size: 1.8rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--primary), var(--secondary), #9333ea);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: matrix-blinking 3s infinite;
+        font-family: 'JetBrains Mono', monospace;
+        letter-spacing: -0.5px;
+        text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    }
+
+    @keyframes matrix-blinking {
+
+        0%,
+        45%,
+        55%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.7;
+        }
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+        z-index: 1001;
+    }
+
+    .nav-right ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-right ul li {
+        position: relative;
+    }
+
+    .nav-right ul li a {
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Clean hover effect - no underline unless hovering */
+    .nav-right ul li a::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
+    }
+
+    .nav-right ul li a:hover::before {
+        width: 80%;
+    }
+
+    .nav-right ul li a:hover {
+        background: rgba(59, 130, 246, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: white;
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .nav-right ul {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-right ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        background: transparent;
+    }
+
+    .nav-right ul li a:hover {
+        background: rgba(59, 130, 246, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .nav-right ul li a.active {
+        background: rgba(59, 130, 246, 0.2);
+        color: var(--primary);
+    }
+
+    /* ========== CONTACT SECTION ========== */
+    .contact-section {
+        padding: 4rem 5%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .contact-container {
+        max-width: 1400px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .contact-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .contact-header h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.2;
+    }
+
+    .contact-subtitle {
+        font-size: 1.2rem;
+        color: var(--gray-400);
+        max-width: 600px;
+        margin: 0 auto 1rem;
+        line-height: 1.6;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1.25rem;
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 2rem;
+        color: var(--accent);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    /* ========== UNIQUE CONTACT GRID ========== */
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+        .contact-grid {
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            height: 500px;
+        }
+    }
+
+    /* Profile Card - Full Height */
+    .profile-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    @media (min-width: 1024px) {
+        .profile-card {
+            grid-column: span 4;
+            grid-row: span 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+
+    .profile-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .profile-header {
+            flex-direction: row;
+            text-align: left;
+        }
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid rgba(59, 130, 246, 0.3);
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    @media (min-width: 768px) {
+        .profile-image {
+            margin-right: 2rem;
+            margin-bottom: 0;
+        }
+    }
+
+    .profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .profile-card:hover .profile-image img {
+        transform: scale(1.1);
+    }
+
+    .profile-info h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: white;
+    }
+
+    .profile-tagline {
+        color: var(--gray-400);
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .contact-info-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .info-item {
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        border-left: 3px solid var(--primary);
+    }
+
+    .info-item-label {
+        font-size: 0.85rem;
+        color: var(--gray-400);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+
+    .info-item-value {
+        font-size: 1rem;
+        color: white;
+        font-weight: 500;
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Contact Cards */
+    .contact-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    @media (min-width: 1024px) {
+        .contact-card {
+            grid-column: span 4;
+            grid-row: span 1;
+        }
+    }
+
+    .contact-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+    }
+
+    .contact-card:hover::before {
+        transform: translateX(100%);
+    }
+
+    .contact-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        border-color: var(--primary);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .contact-card-icon {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 50px;
+        height: 50px;
+        background: rgba(59, 130, 246, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--primary);
+        transition: transform 0.3s ease;
+    }
+
+    .contact-card:hover .contact-card-icon {
+        transform: rotate(15deg) scale(1.1);
+    }
+
+    .contact-card-content {
+        margin-top: 4rem;
+        flex: 1;
+    }
+
+    .contact-card-label {
+        font-size: 0.85rem;
+        color: var(--gray-400);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+    }
+
+    .contact-card-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: white;
+    }
+
+    .contact-card-detail {
+        font-size: 0.95rem;
+        color: var(--gray-400);
+        line-height: 1.6;
+    }
+
+    .contact-card-email {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
+        color: var(--primary);
+        word-break: break-all;
+        margin-top: 0.5rem;
+    }
+
+    /* Card Type Styles */
+    .linkedin-card {
+        background: linear-gradient(135deg, rgba(10, 102, 194, 0.1) 0%, rgba(10, 102, 194, 0.05) 100%);
+    }
+
+    .linkedin-card .contact-card-icon {
+        background: rgba(10, 102, 194, 0.15);
+        color: #0a66c2;
+    }
+
+    .github-card {
+        background: linear-gradient(135deg, rgba(31, 41, 55, 0.1) 0%, rgba(31, 41, 55, 0.05) 100%);
+    }
+
+    .github-card .contact-card-icon {
+        background: rgba(31, 41, 55, 0.2);
+        color: var(--light);
+    }
+
+    .business-card {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+    }
+
+    .business-card .contact-card-icon {
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--secondary);
+    }
+
+    .personal-card {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+    }
+
+    .personal-card .contact-card-icon {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--accent);
+    }
+
+    /* ========== UNIQUE CUSTOMER PORTAL ========== */
+    .customer-section {
+        padding: 6rem 5%;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        z-index: 1;
+        scroll-margin-top: 80px;
+        /* Fix for anchor scrolling */
+    }
+
+    .customer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .customer-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .customer-header h2 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .customer-header p {
+        color: var(--gray-400);
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* QUANT STATS BAR */
+    .quant-stats-bar {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 2rem 0 3rem;
+        flex-wrap: wrap;
+    }
+
+    .quant-stat {
+        text-align: center;
+        padding: 1rem 1.5rem;
+        background: rgba(59, 130, 246, 0.1);
+        border-radius: 12px;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        min-width: 150px;
+    }
+
+    .quant-stat-value {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary);
+        font-family: 'JetBrains Mono', monospace;
+        margin-bottom: 0.25rem;
+    }
+
+    .quant-stat-label {
+        font-size: 0.85rem;
+        color: var(--gray-400);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .customer-options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .customer-options {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .customer-option {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .customer-option:hover {
+        transform: translateY(-10px) scale(1.02);
+        border-color: var(--secondary);
+        box-shadow: 0 20px 40px rgba(245, 158, 11, 0.2);
+    }
+
+    .customer-option::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(245, 158, 11, 0.1), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+    }
+
+    .customer-option:hover::before {
+        transform: translateX(100%);
+    }
+
+    .option-icon {
+        width: 70px;
+        height: 70px;
+        background: rgba(245, 158, 11, 0.1);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        color: var(--secondary);
+        font-size: 1.8rem;
+        transition: transform 0.3s ease;
+    }
+
+    .customer-option:hover .option-icon {
+        transform: rotate(15deg) scale(1.1);
+    }
+
+    .customer-option h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .customer-option p {
+        color: var(--gray-400);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+        flex: 1;
+    }
+
+    .option-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--secondary);
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        width: fit-content;
+        border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .option-button:hover {
+        background: rgba(245, 158, 11, 0.2);
+        transform: translateX(5px);
+        border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    /* ========== ENHANCED MODAL ========== */
+    .contact-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+    }
+
+    .modal-content {
+        background: var(--card-bg);
+        border-radius: 24px;
+        width: 100%;
+        max-width: 700px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-50px) scale(0.9);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: var(--gray-400);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+
+    .close-modal:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        transform: rotate(90deg);
+    }
+
+    .modal-form {
+        padding: 3rem;
+    }
+
+    .modal-form h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .modal-form h3 i {
+        color: var(--secondary);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--gray-400);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 500;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+        width: 100%;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .form-textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .submit-button {
+        width: 100%;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .submit-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
+    }
+
+    .success-message {
+        padding: 4rem 2rem;
+        text-align: center;
+    }
+
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        color: var(--accent);
+        font-size: 2rem;
+        animation: successPulse 2s infinite;
+    }
+
+    @keyframes successPulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    .success-message h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .success-message p {
+        color: var(--gray-400);
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    /* ========== RESPONSIVE DESIGN ========== */
+    @media (max-width: 768px) {
+        .navbar {
+            padding: 0 1rem;
+        }
+
+        .hamburger {
+            display: flex;
+        }
+
+        .nav-right {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: 80%;
+            height: calc(100vh - 80px);
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            flex-direction: column;
+            padding: 2rem;
+            transition: right 0.4s ease;
+            z-index: 999;
+        }
+
+        .nav-right.active {
+            right: 0;
+        }
+
+        .nav-right ul {
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .nav-right ul li a {
+            display: block;
+            text-align: center;
+            padding: 1rem;
+            width: 100%;
+        }
+
+        .contact-grid,
+        .customer-options {
+            grid-template-columns: 1fr;
+        }
+
+        .modal-form {
+            padding: 2rem;
+        }
+
+        .quant-stats-bar {
+            gap: 1rem;
+        }
+
+        .quant-stat {
+            min-width: 120px;
+            padding: 0.75rem 1rem;
+        }
+
+        .quant-stat-value {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        .contact-section,
+        .customer-section {
+            padding: 2rem 1rem;
+        }
+
+        .modal-form {
+            padding: 1.5rem;
+        }
+
+        .profile-header {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .profile-image {
+            margin-right: 0;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    /* ========== ANIMATIONS ========== */
+    .fade-in {
+        animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Scroll animations */
+    .contact-card,
+    .customer-option {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .contact-card.visible,
+    .customer-option.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ========== FIXED CONTACT GRID LAYOUT ========== */
+    .contact-grid {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .profile-card {
+        flex: 0 0 35%;
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-cards-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .contact-cards-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        height: 50%;
+    }
+
+    .contact-card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        height: 100%;
+    }
+
+    .contact-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .contact-card-content {
+        margin-top: auto;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Fix text alignment and spacing */
+    .contact-card-label {
+        font-size: 0.85rem;
+        color: var(--gray-400);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+
+    .contact-card-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: white;
+        line-height: 1.3;
+    }
+
+    .contact-card-detail {
+        font-size: 0.95rem;
+        color: var(--gray-400);
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    .contact-card-email {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
+        color: var(--primary);
+        word-break: break-all;
+        margin-top: 0.5rem;
+    }
+
+    /* Fixed toggle/layout issue - ensure consistent card heights */
+    .contact-card-link {
+        height: 100%;
+    }
+
+    .contact-card {
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Responsive layout for tablets */
+    @media (max-width: 1024px) {
+        .contact-grid {
+            flex-direction: column;
+        }
+
+        .profile-card {
+            flex: 1;
+            width: 100%;
+        }
+
+        .contact-cards-row {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+
+    /* Responsive layout for mobile */
+    @media (max-width: 768px) {
+        .contact-cards-row {
+            grid-template-columns: 1fr;
+        }
+
+        .contact-card {
+            min-height: 180px;
+        }
+    }
+</style>
+
+<body>
+    <!-- Animated Background -->
+    <canvas id="contactBgCanvas"></canvas>
+    <div class="contact-texture"></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                Muhammad Shaiq
+            </div>
+
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-right" id="navMenu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="project.html">Projects</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Replace the entire contact-grid section with this fixed version -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-header fade-in-up">
+                <h1>Let's Connect</h1>
+                <div class="contact-subtitle">
+                    Quant Strategist & ML Developer. <br>
+                    Specializing in algorithmic trading infrastructure.
+                </div>
+                <div class="status-badge">
+                    <div class="status-dot"></div>
+                    OPEN TO OPPORTUNITIES
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Left Column - Profile Card (Full Height) -->
+                <div class="profile-card fade-in-up delay-1">
+                    <div class="profile-header">
+                        <div class="profile-image">
+                            <img src="company picture.jpg" alt="Muhammad Shaiq">
+                        </div>
+                        <div class="profile-info">
+                            <h2>Muhammad Shaiq</h2>
+                            <div class="profile-tagline">
+                                Quantitative Analyst // ML Developer // Mathematician
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-grid">
+                        <div class="info-item">
+                            <div class="info-item-label">Location</div>
+                            <div class="info-item-value">Multan, Pakistan</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Contact No</div>
+                            <div class="info-item-value">+92-3198501420</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Time Zone</div>
+                            <div class="info-item-value">PKT (UTC+5)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Contact Cards (Grid Layout) -->
+                <div class="contact-cards-container">
+                    <!-- Row 1: LinkedIn & Code Portfolio -->
+                    <div class="contact-cards-row">
+                        <!-- LinkedIn Card -->
+                        <a href="https://www.linkedin.com/in/muhammad-shaiq-b32873383/" target="_blank"
+                            class="contact-card-link fade-in-up delay-2">
+                            <div class="contact-card linkedin-card">
+                                <div class="contact-card-icon linkedin-icon">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                </div>
+                                <div class="contact-card-content">
+                                    <div class="contact-card-label">Professional</div>
+                                    <h3 class="contact-card-title">LinkedIn</h3>
+                                    <p class="contact-card-detail">View Full Profile & Experience</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- GitHub Card -->
+                        <a href="https://github.com/muhammadshaiq-sys" target="_blank"
+                            class="contact-card-link fade-in-up delay-3">
+                            <div class="contact-card github-card">
+                                <div class="contact-card-icon">
+                                    <i class="fa-brands fa-github"></i>
+                                </div>
+                                <div class="contact-card-content">
+                                    <div class="contact-card-label">Code Portfolio</div>
+                                    <h3 class="contact-card-title">GitHub</h3>
+                                    <p class="contact-card-detail">Browse Projects & Code</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Row 2: Email & Portfolio -->
+                    <div class="contact-cards-row">
+                        <!-- Email Card (Primary) -->
+                        <a href="mailto:Muhammadshaiq68@gmail.com" class="contact-card-link fade-in-up delay-4">
+                            <div class="contact-card business-card">
+                                <div class="contact-card-icon">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div class="contact-card-content">
+                                    <div class="contact-card-label">Primary Contact</div>
+                                    <h3 class="contact-card-title">Email</h3>
+                                    <p class="contact-card-detail contact-card-email">Muhammadshaiq68@gmail.com</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- ResearchGate/CV/Portfolio Card -->
+                        <a href="https://github.com/muhammadshaiq-sys?tab=repositories" target="_blank"
+                            class="contact-card-link fade-in-up delay-2">
+                            <div class="contact-card personal-card">
+                                <div class="contact-card-icon">
+                                    <i class="fa-solid fa-file-contract"></i>
+                                </div>
+                                <div class="contact-card-content">
+                                    <div class="contact-card-label">Portfolio</div>
+                                    <h3 class="contact-card-title">Research & CV</h3>
+                                    <p class="contact-card-detail">View Publications & Resume</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Customer Contact Section -->
+    <section class="customer-section" id="customer-contact">
+        <div class="customer-container">
+            <div class="customer-header">
+                <h2>Client & Visitor Portal</h2>
+                <p>For existing clients, project inquiries, feedback, or technical support</p>
+            </div>
+            <!-- Quant Stats Bar -->
+            <div class="quant-stats-bar">
+                <div class="quant-stat">
+                    <div class="quant-stat-value">24h</div>
+                    <div class="quant-stat-label">Response Time</div>
+                </div>
+                <div class="quant-stat">
+                    <div class="quant-stat-value">100%</div>
+                    <div class="quant-stat-label">Success Rate</div>
+                </div>
+                <div class="quant-stat">
+                    <div class="quant-stat-value">50+</div>
+                    <div class="quant-stat-label">Projects Delivered</div>
+                </div>
+                <div class="quant-stat">
+                    <div class="quant-stat-value">∞</div>
+                    <div class="quant-stat-label">Passion</div>
+                </div>
+            </div>
+            <div class="customer-options">
+                <!-- Project Inquiry -->
+                <div class="customer-option">
+                    <div class="option-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Project Collaboration</h3>
+                    <p>Interested in collaborating on a quantitative or ML project? Share your project details and
+                        requirements.</p>
+                    <a href="#" class="option-button" onclick="openModal('project')">
+                        <i class="fas fa-rocket"></i>
+                        Submit Project Details
+                    </a>
+                </div>
+
+                <!-- Technical Support -->
+                <div class="customer-option">
+                    <div class="option-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Technical Support</h3>
+                    <p>Need help with deployed ML models, algorithms, or quantitative tools? Submit a support ticket.
+                    </p>
+                    <a href="#" class="option-button" onclick="openModal('support')">
+                        <i class="fas fa-life-ring"></i>
+                        Open Support Ticket
+                    </a>
+                </div>
+
+                <!-- Feedback & Reviews -->
+                <div class="customer-option">
+                    <div class="option-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3>Feedback & Reviews</h3>
+                    <p>Share your experience working with me or provide feedback on projects and services.</p>
+                    <a href="#" class="option-button" onclick="openModal('feedback')">
+                        <i class="fas fa-star"></i>
+                        Share Feedback
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Modal -->
+    <div class="contact-modal" id="contactModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+
+            <!-- Project Inquiry Form -->
+            <div id="projectForm" class="modal-form">
+                <h3>Project Collaboration Inquiry</h3>
+                <form id="projectInquiryForm">
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Project Type</label>
+                        <select class="form-select" required>
+                            <option value="" disabled selected>Select project type</option>
+                            <option value="quantitative-analysis">Quantitative Analysis</option>
+                            <option value="algorithmic-trading">Algorithmic Trading Strategy</option>
+                            <option value="machine-learning">Machine Learning Development</option>
+                            <option value="data-science">Data Science Solution</option>
+                            <option value="fraud-detection">Fraud Detection System</option>
+                            <option value="stock-prediction">Stock Market Prediction</option>
+                            <option value="mathematical-modeling">Mathematical Modeling</option>
+                            <option value="portfolio-optimization">Portfolio Optimization</option>
+                            <option value="risk-analysis">Risk Analysis & Management</option>
+                            <option value="time-series">Time Series Analysis</option>
+                            <option value="computer-vision">Computer Vision / Image Classification</option>
+                            <option value="web-development">Quantitative Web Development</option>
+                            <option value="research">Academic Research</option>
+                            <option value="consultation">Quantitative Consultation</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Similar to My Projects</label>
+                        <select class="form-select">
+                            <option value="" disabled selected>Select similar project (optional)</option>
+                            <option value="credit-fraud">Credit Fraud Detection System</option>
+                            <option value="stock-predictor">Stock Predictor & Future Analyzer</option>
+                            <option value="breast-cancer">Binary Classification of Breast Cancer</option>
+                            <option value="customer-segmentation">Customer Segmentation</option>
+                            <option value="image-classification">Multi Image Classification using CNN</option>
+                            <option value="digit-classification">Digit Classification (Deep Learning)</option>
+                            <option value="quant-strategy">Quantitative Trading Strategy</option>
+                            <option value="skin-cancer">Multiclassification of Skin Cancer (SkinSense)</option>
+                            <option value="website-development">Professional Website Development</option>
+                            <option value="other">Other/New Project</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Project Timeline</label>
+                        <select class="form-select" required>
+                            <option value="" disabled selected>Select timeline</option>
+                            <option value="urgent">Urgent (1-2 weeks)</option>
+                            <option value="short-term">Short-term (1-3 months)</option>
+                            <option value="medium-term">Medium-term (3-6 months)</option>
+                            <option value="long-term">Long-term (6+ months)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Project Description</label>
+                        <textarea class="form-textarea"
+                            placeholder="Describe your project requirements, goals, datasets, expected outcomes, and any specific technical details..."
+                            required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Budget Range (if any)</label>
+                        <select class="form-select">
+                            <option value="" disabled selected>Select budget range</option>
+                            <option value="500-2000">$500 - $2,000</option>
+                            <option value="2000-5000">$2,000 - $5,000</option>
+                            <option value="5000-10000">$5,000 - $10,000</option>
+                            <option value="10000+">$10,000+</option>
+                            <option value="tbd">To be discussed</option>
+                            <option value="academic">Academic/Research Project</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Preferred Technologies</label>
+                        <div class="tech-checkboxes"
+                            style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px;">
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="tech" value="python"> Python
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="tech" value="tensorflow"> TensorFlow/PyTorch
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="tech" value="scikit-learn"> Scikit-learn
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="tech" value="matlab"> MATLAB
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="tech" value="c++"> C++
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="tech" value="javascript"> JavaScript
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="tech" value="sql"> SQL
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="tech" value="other"> Other
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Project Inquiry
+                    </button>
+                </form>
+            </div>
+
+            <!-- Technical Support Form -->
+            <div id="supportForm" class="modal-form" style="display: none;">
+                <h3>Technical Support Ticket</h3>
+                <form id="supportTicketForm">
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Which Project/Model?</label>
+                        <select class="form-select" required>
+                            <option value="" disabled selected>Select project experiencing issues</option>
+                            <optgroup label="Machine Learning Projects">
+                                <option value="credit-fraud">Credit Fraud Detection System</option>
+                                <option value="breast-cancer">Breast Cancer Classification</option>
+                                <option value="customer-segmentation">Customer Segmentation</option>
+                                <option value="skin-cancer">Skin Cancer Classification (SkinSense)</option>
+                                <option value="digit-classification">Digit Classification Model</option>
+                                <option value="image-classification">Multi-Image CNN Classifier</option>
+                            </optgroup>
+                            <optgroup label="Quantitative/Financial Projects">
+                                <option value="stock-predictor">Stock Predictor & Future Analyzer</option>
+                                <option value="quant-strategy">Quantitative Trading Strategy</option>
+                                <option value="portfolio-optimizer">Portfolio Optimization Tool</option>
+                            </optgroup>
+                            <optgroup label="Web Development">
+                                <option value="quant-website">Quantitative Portfolio Website</option>
+                                <option value="property-website">Property Dealer Website</option>
+                                <option value="dashboard">ML Project Dashboard</option>
+                            </optgroup>
+                            <option value="other">Other/General Issue</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Issue Type</label>
+                        <select class="form-select" required>
+                            <option value="" disabled selected>Select issue type</option>
+                            <optgroup label="Code/Technical Issues">
+                                <option value="bug">Code Bug/Error</option>
+                                <option value="performance">Performance Issue (Slow)</option>
+                                <option value="deployment">Deployment/Setup Issue</option>
+                                <option value="compatibility">Compatibility Issue</option>
+                                <option value="dependency">Dependency/Package Issue</option>
+                            </optgroup>
+                            <optgroup label="Model/Algorithm Issues">
+                                <option value="accuracy">Low Model Accuracy</option>
+                                <option value="overfitting">Overfitting/Underfitting</option>
+                                <option value="convergence">Model Not Converging</option>
+                                <option value="prediction">Incorrect Predictions</option>
+                                <option value="training">Training Failure</option>
+                            </optgroup>
+                            <optgroup label="Data Issues">
+                                <option value="data-quality">Data Quality Problem</option>
+                                <option value="preprocessing">Data Preprocessing Issue</option>
+                                <option value="missing-data">Missing Data Handling</option>
+                            </optgroup>
+                            <optgroup label="Website Issues">
+                                <option value="ui-issue">UI/Display Problem</option>
+                                <option value="responsive">Responsive Design Issue</option>
+                                <option value="functionality">Feature Not Working</option>
+                                <option value="performance-web">Website Performance</option>
+                            </optgroup>
+                            <option value="other">Other Issue</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Error Message (if any)</label>
+                        <input type="text" class="form-input" placeholder="Paste error message or describe symptoms">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Issue Description</label>
+                        <textarea class="form-textarea"
+                            placeholder="Describe the issue in detail including:\n• Steps to reproduce\n• Expected behavior\n• Actual behavior\n• Screenshots/references\n• Environment details (OS, Python version, etc.)"
+                            required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Priority Level</label>
+                        <select class="form-select" required>
+                            <option value="low">Low - General question/non-urgent</option>
+                            <option value="medium" selected>Medium - Minor functionality affected</option>
+                            <option value="high">High - Major functionality affected</option>
+                            <option value="critical">Critical - System down/blocking work</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Have you tried fixing it?</label>
+                        <select class="form-select">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="yes-solved">Yes, and I solved it</option>
+                            <option value="yes-not-solved">Yes, but couldn't solve</option>
+                            <option value="no">No, not yet</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-life-ring"></i>
+                        Submit Support Ticket
+                    </button>
+                </form>
+            </div>
+
+            <!-- Feedback Form -->
+            <div id="feedbackForm" class="modal-form" style="display: none;">
+                <h3>Feedback & Review</h3>
+                <form id="feedbackReviewForm">
+                    <div class="form-group">
+                        <label class="form-label">Your Name (Optional)</label>
+                        <input type="text" class="form-input" placeholder="Enter your name (optional)">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email (Optional - for follow-up)</label>
+                        <input type="email" class="form-input" placeholder="Enter your email (optional)">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Which project/service?</label>
+                        <select class="form-select">
+                            <option value="" disabled selected>Select project/service</option>
+                            <optgroup label="Machine Learning Projects">
+                                <option value="credit-fraud">Credit Fraud Detection</option>
+                                <option value="stock-predictor">Stock Predictor</option>
+                                <option value="breast-cancer">Breast Cancer Classifier</option>
+                                <option value="customer-segmentation">Customer Segmentation</option>
+                                <option value="skin-cancer">Skin Cancer Detection (SkinSense)</option>
+                                <option value="image-classification">Image Classification</option>
+                                <option value="digit-classification">Digit Classification</option>
+                            </optgroup>
+                            <optgroup label="Quantitative Services">
+                                <option value="quant-analysis">Quantitative Analysis</option>
+                                <option value="algo-trading">Algorithmic Trading</option>
+                                <option value="data-science">Data Science Solutions</option>
+                                <option value="mathematical-modeling">Mathematical Modeling</option>
+                            </optgroup>
+                            <optgroup label="Web Development">
+                                <option value="portfolio-website">Portfolio Website</option>
+                                <option value="property-website">Property Dealer Website</option>
+                                <option value="website-design">Website Design & Development</option>
+                            </optgroup>
+                            <option value="general">General Experience</option>
+                            <option value="consultation">Consultation Service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Rating</label>
+                        <div style="display: flex; gap: 10px; margin: 10px 0; flex-wrap: wrap;">
+                            <label
+                                style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                                <input type="radio" name="rating" value="5" required>
+                                <span style="color: #f59e0b; font-size: 18px;">★★★★★ Excellent</span>
+                            </label>
+                            <label
+                                style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                                <input type="radio" name="rating" value="4">
+                                <span style="color: #f59e0b; font-size: 18px;">★★★★☆ Very Good</span>
+                            </label>
+                            <label
+                                style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                                <input type="radio" name="rating" value="3">
+                                <span style="color: #f59e0b; font-size: 18px;">★★★☆☆ Good</span>
+                            </label>
+                            <label
+                                style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                                <input type="radio" name="rating" value="2">
+                                <span style="color: #f59e0b; font-size: 18px;">★★☆☆☆ Fair</span>
+                            </label>
+                            <label
+                                style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                                <input type="radio" name="rating" value="1">
+                                <span style="color: #f59e0b; font-size: 18px;">★☆☆☆☆ Poor</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your Feedback</label>
+                        <textarea class="form-textarea"
+                            placeholder="Share your experience, what you liked, areas for improvement, suggestions, or any comments..."
+                            required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">What aspect was strongest?</label>
+                        <select class="form-select">
+                            <option value="" disabled selected>Select strongest aspect</option>
+                            <option value="technical">Technical Skills & Knowledge</option>
+                            <option value="communication">Communication & Responsiveness</option>
+                            <option value="quality">Code/Project Quality</option>
+                            <option value="timeliness">Timeliness & Deadlines</option>
+                            <option value="problem-solving">Problem-Solving Ability</option>
+                            <option value="creativity">Creativity & Innovation</option>
+                            <option value="professionalism">Professionalism</option>
+                            <option value="all">All of the above</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Would you recommend to others?</label>
+                        <div style="display: flex; gap: 15px; margin: 10px 0;">
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="radio" name="recommend" value="yes-definitely">
+                                <span>Yes, definitely</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="radio" name="recommend" value="yes-likely">
+                                <span>Yes, very likely</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="radio" name="recommend" value="maybe">
+                                <span>Maybe</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="radio" name="recommend" value="no">
+                                <span>Probably not</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Type of collaboration</label>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px;">
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="collab-type" value="client">
+                                <span>Client/Employer</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="collab-type" value="collaborator">
+                                <span>Project Collaborator</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="collab-type" value="student">
+                                <span>Student/Researcher</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="collab-type" value="industry">
+                                <span>Industry Professional</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="collab-type" value="academic">
+                                <span>Academic</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; color: #cbd5e1;">
+                                <input type="checkbox" name="collab-type" value="other">
+                                <span>Other</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 10px; color: #cbd5e1; font-size: 14px;">
+                            <input type="checkbox" name="permission" required>
+                            <span>I give permission to use this feedback (anonymously) on my portfolio</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-star"></i>
+                        Submit Feedback
+                    </button>
+                </form>
+            </div>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message" style="display: none;">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Thank You!</h3>
+                <p>Your submission has been received. I'll get back to you within 24 hours.</p>
+                <p style="color: #94a3b8; font-size: 14px; margin-top: 10px;">
+                    <i class="fas fa-envelope"></i> You'll receive a confirmation email shortly.
+                </p>
+                <button onclick="closeModal()" class="option-button" style="margin-top: 20px;">
+                    <i class="fas fa-times"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== MOBILE NAVIGATION ==========
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-right a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // ========== ANIMATED BACKGROUND ==========
+        document.addEventListener('DOMContentLoaded', function () {
+            const canvas = document.getElementById('contactBgCanvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight - 80;
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Create contact-themed particles
+            const particles = [];
+            const particleCount = 50;
+            const symbols = ['✉️', '📞', '💬', '🔗', '📱', '🌐', '💼', '🤝'];
+
+            class Particle {
+                constructor() {
+                    this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 20 + 15;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.color = Math.random() > 0.5 ?
+                        `rgba(59, 130, 246, ${Math.random() * 0.3 + 0.1})` :
+                        `rgba(245, 158, 11, ${Math.random() * 0.2 + 0.1})`;
+                    this.waveOffset = Math.random() * Math.PI * 2;
+                }
+
+                update() {
+                    this.waveOffset += 0.02;
+                    this.x += this.speedX + Math.sin(this.waveOffset) * 0.2;
+                    this.y += this.speedY + Math.cos(this.waveOffset) * 0.2;
+
+                    // Boundary wrap
+                    if (this.x > canvas.width + this.size) this.x = -this.size;
+                    if (this.x < -this.size) this.x = canvas.width + this.size;
+                    if (this.y > canvas.height + this.size) this.y = -this.size;
+                    if (this.y < -this.size) this.y = canvas.height + this.size;
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+
+                    // Draw symbol
+                    ctx.font = `${this.size}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = this.color;
+                    ctx.fillText(this.symbol, 0, 0);
+
+                    // Add glow
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = this.color;
+                    ctx.fillText(this.symbol, 0, 0);
+
+                    ctx.restore();
+                }
+            }
+
+            // Initialize particles
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animateBackground() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw connections
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(59, 130, 246, ${0.1 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // Update and draw particles
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+
+                ctx.shadowBlur = 0;
+                requestAnimationFrame(animateBackground);
+            }
+
+            animateBackground();
+
+            // ========== SCROLL ANIMATIONS ==========
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all cards
+            document.querySelectorAll('.contact-card, .customer-option').forEach(el => {
+                observer.observe(el);
+            });
+
+            // ========== ENHANCED MODAL FUNCTIONALITY ==========
+            let modalOpen = false;
+            let currentModalType = '';
+            let customerSection = document.getElementById('customer-contact');
+
+            function openModal(formType) {
+                currentModalType = formType;
+                modalOpen = true;
+                const modal = document.getElementById('contactModal');
+                const projectForm = document.getElementById('projectForm');
+                const supportForm = document.getElementById('supportForm');
+                const feedbackForm = document.getElementById('feedbackForm');
+                const successMessage = document.getElementById('successMessage');
+
+                // Store current scroll position
+                window.modalScrollY = window.scrollY;
+
+                // Hide all forms and success message
+                projectForm.style.display = 'none';
+                supportForm.style.display = 'none';
+                feedbackForm.style.display = 'none';
+                successMessage.style.display = 'none';
+
+                // Show selected form with animation
+                setTimeout(() => {
+                    if (formType === 'project') {
+                        projectForm.style.display = 'block';
+                        projectForm.style.animation = 'modalSlideIn 0.3s ease';
+                    } else if (formType === 'support') {
+                        supportForm.style.display = 'block';
+                        supportForm.style.animation = 'modalSlideIn 0.3s ease';
+                    } else if (formType === 'feedback') {
+                        feedbackForm.style.display = 'block';
+                        feedbackForm.style.animation = 'modalSlideIn 0.3s ease';
+                    }
+                }, 10);
+
+                // Show modal
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+
+                // Scroll to modal if needed
+                setTimeout(() => {
+                    modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+
+            function closeModal() {
+                modalOpen = false;
+                const modal = document.getElementById('contactModal');
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+
+                // Reset forms
+                document.querySelectorAll('form').forEach(form => form.reset());
+
+                // FIX: Scroll back to customer section instead of top
+                if (customerSection && window.modalScrollY) {
+                    setTimeout(() => {
+                        customerSection.scrollIntoView({ behavior: 'smooth' });
+                        window.scrollBy(0, -80); // Adjust for navbar
+                    }, 100);
+                }
+            }
+
+            // Enhanced form submissions
+            document.getElementById('projectInquiryForm')?.addEventListener('submit', function (e) {
+                e.preventDefault();
+                showSuccessMessage('project');
+            });
+
+            document.getElementById('supportTicketForm')?.addEventListener('submit', function (e) {
+                e.preventDefault();
+                showSuccessMessage('support');
+            });
+
+            document.getElementById('feedbackReviewForm')?.addEventListener('submit', function (e) {
+                e.preventDefault();
+                showSuccessMessage('feedback');
+            });
+
+            function showSuccessMessage(formType) {
+                const projectForm = document.getElementById('projectForm');
+                const supportForm = document.getElementById('supportForm');
+                const feedbackForm = document.getElementById('feedbackForm');
+                const successMessage = document.getElementById('successMessage');
+
+                // Hide current form
+                if (formType === 'project') {
+                    projectForm.style.display = 'none';
+                } else if (formType === 'support') {
+                    supportForm.style.display = 'none';
+                } else if (formType === 'feedback') {
+                    feedbackForm.style.display = 'none';
+                }
+
+                // Show success message with appropriate text
+                const successTitle = successMessage.querySelector('h3');
+                const successText = successMessage.querySelector('p');
+
+                if (formType === 'project') {
+                    successTitle.textContent = 'Project Inquiry Submitted!';
+                    successText.textContent = 'Thank you for your project inquiry. I\'ll review your requirements and get back to you within 24 hours.';
+                } else if (formType === 'support') {
+                    successTitle.textContent = 'Support Ticket Created!';
+                    successText.textContent = 'Your support ticket has been logged. I\'ll investigate the issue and respond with a solution as soon as possible.';
+                } else if (formType === 'feedback') {
+                    successTitle.textContent = 'Thank You for Your Feedback!';
+                    successText.textContent = 'Your feedback is valuable and helps me improve my services. I appreciate you taking the time to share your thoughts.';
+                }
+
+                successMessage.style.display = 'block';
+                successMessage.style.animation = 'modalSlideIn 0.3s ease';
+
+                // Auto-close after 5 seconds
+                setTimeout(() => {
+                    closeModal();
+                }, 5000);
+            }
+
+            // Close modal when clicking outside or pressing ESC
+            document.getElementById('contactModal').addEventListener('click', function (e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modalOpen) {
+                    closeModal();
+                }
+            });
+
+            // Prevent default behavior on option buttons
+            document.querySelectorAll('.option-button').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Get the form type from button onclick attribute
+                    const onclickAttr = this.getAttribute('onclick');
+                    const formTypeMatch = onclickAttr?.match(/openModal\('(\w+)'\)/);
+                    if (formTypeMatch) {
+                        openModal(formTypeMatch[1]);
+                    }
+                });
+            });
+
+            // FIX: Prevent page jump when clicking on forms
+            document.querySelectorAll('form').forEach(form => {
+                form.addEventListener('click', function (e) {
+                    if (modalOpen) {
+                        e.stopPropagation();
+                    }
+                });
+            });
+
+            // Enhanced form interactions
+            document.querySelectorAll('.form-input, .form-textarea, .form-select').forEach(element => {
+                element.addEventListener('focus', function () {
+                    this.style.borderColor = 'var(--primary)';
+                    this.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+                });
+
+                element.addEventListener('blur', function () {
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Add ripple effect to buttons
+            document.querySelectorAll('.option-button, .submit-button').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    const x = e.clientX - e.target.getBoundingClientRect().left;
+                    const y = e.clientY - e.target.getBoundingClientRect().top;
+
+                    const ripple = document.createElement('span');
+                    ripple.style.cssText = `
+                    position: absolute;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+
+                    const size = Math.max(button.offsetWidth, button.offsetHeight);
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x - size / 2 + 'px';
+                    ripple.style.top = y - size / 2 + 'px';
+
+                    button.style.position = 'relative';
+                    button.style.overflow = 'hidden';
+                    button.appendChild(ripple);
+
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+
+            // Add CSS for ripple effect
+            const rippleStyle = document.createElement('style');
+            rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+            document.head.appendChild(rippleStyle);
+
+            // Initialize animations
+            setTimeout(() => {
+                document.querySelectorAll('.contact-card, .customer-option').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 300);
+        });
+    </script>
+</body>
+
+</html>

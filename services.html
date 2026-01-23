@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantitative Services | Muhammad Shaiq</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --dark: #030712;
+            --darker: #02040a;
+            --light: #f8fafc;
+            --gray-400: #94a3b8;
+            --gray-600: #4b5563;
+            --card-bg: rgba(20, 25, 35, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        /* ========== ANIMATED BACKGROUND ========== */
+        #quantBgCanvas {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 80px);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .quant-texture {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 80px);
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 40%);
+            opacity: 0.6;
+        }
+
+        /* ========== RESPONSIVE NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background: rgba(15, 23, 42, 0.97);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-left {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: matrix-blinking 3s infinite;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        @keyframes matrix-blinking {
+
+            0%,
+            45%,
+            55%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .nav-right ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-right ul li {
+            position: relative;
+        }
+
+        .nav-right ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Clean hover effect - no underline unless hovering */
+        .nav-right ul li a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-right ul li a:hover::before {
+            width: 80%;
+        }
+
+        .nav-right ul li a:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .nav-right ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-right ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .nav-right ul li a:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-right ul li a.active {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--primary);
+        }
+
+        /* ========== SERVICES HEADER ========== */
+        .services-container {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .services-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .services-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-400);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* ========== QUANT DASHBOARD STATS ========== */
+        .quant-dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        @media (min-width: 768px) {
+            .quant-dashboard {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .dashboard-stat {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-stat:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .dashboard-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .dashboard-stat:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========== FIXED SERVICES GRID - NO COLLAPSING ========== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* FIX: Ensure all cards have same height */
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            min-height: 450px;
+            /* FIXED: Minimum height to prevent collapsing */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(59, 130, 246, 0.1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: white;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .service-description {
+            color: var(--gray-400);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        /* Service Features */
+        .service-features {
+            list-style: none;
+            margin: 1.5rem 0;
+            padding: 0;
+            flex: 2;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: var(--gray-400);
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .service-features li::before {
+            content: '▸';
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Service Tags */
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+            /* Pushes to bottom */
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .service-tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .service-tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ========== INDUSTRY SECTION ========== */
+        .industry-section {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .industry-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .industry-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .industry-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .industry-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .industry-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.2);
+        }
+
+        .industry-card h4 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ========== TECH STACK ========== */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .tech-stack {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .tech-stack {
+                grid-template-columns: repeat(7, 1fr);
+            }
+        }
+
+        .tech-item {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .tech-item:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .tech-item i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .tech-item span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gray-400);
+        }
+
+        /* ========== PROCESS SECTION ========== */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .process-steps {
+                flex-direction: row;
+            }
+        }
+
+        .process-step {
+            flex: 1;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .process-step h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .process-step p {
+            color: var(--gray-400);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* ========== CTA SECTION ========== */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(245, 158, 11, 0.1));
+            border-radius: 24px;
+            margin: 4rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .cta-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-subtitle {
+            color: var(--gray-400);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--gray-400);
+            font-size: 0.9rem;
+            background: rgba(10, 15, 25, 0.8);
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            color: var(--gray-400);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .social-link:hover {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-right {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                transition: right 0.4s ease;
+                z-index: 999;
+            }
+
+            .nav-right.active {
+                right: 0;
+            }
+
+            .nav-right ul {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .nav-right ul li a {
+                display: block;
+                text-align: center;
+                padding: 1rem;
+                width: 100%;
+            }
+
+            .quant-dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .service-card {
+                padding: 1.5rem;
+                min-height: 420px;
+                /* Adjusted for mobile */
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+
+            .tech-stack {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quant-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .services-header h1 {
+                font-size: 2rem;
+            }
+
+            .service-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .tech-stack {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                min-height: 400px;
+            }
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .service-card,
+        .industry-card,
+        .process-step {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .service-card.visible,
+        .industry-card.visible,
+        .process-step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background Canvas -->
+    <canvas id="quantBgCanvas"></canvas>
+    <div class="quant-texture"></div>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                Muhammad Shaiq
+            </div>
+
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-right" id="navMenu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="project.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Quant Dashboard Stats -->
+    <div class="quant-dashboard">
+        <div class="dashboard-stat">
+            <div class="stat-number">99.2%</div>
+            <div class="stat-label">Model Accuracy</div>
+        </div>
+        <div class="dashboard-stat">
+            <div class="stat-number">2.8x</div>
+            <div class="stat-label">Alpha Generated</div>
+        </div>
+        <div class="dashboard-stat">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Live Monitoring</div>
+        </div>
+        <div class="dashboard-stat">
+            <div class="stat-number">0.1%</div>
+            <div class="stat-label">Max Drawdown</div>
+        </div>
+    </div>
+    <!-- Services Main Section -->
+    <div class="services-container">
+        <div class="services-header">
+            <h1>Quantitative & Technical Services</h1>
+            <p class="services-subtitle">
+                Professional quantitative analysis, machine learning development, and algorithmic solutions
+                for finance, technology, and research sectors.
+            </p>
+        </div>
+
+        <!-- Core Services Grid -->
+        <div class="services-grid">
+            <!-- Service 1: Quantitative Analysis -->
+            <div class="service-card" data-delay="0.1">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Quantitative Analysis</h3>
+                <p class="service-description">
+                    Advanced statistical modeling and quantitative research for financial markets,
+                    risk assessment, and data-driven decision making.
+                </p>
+                <ul class="service-features">
+                    <li>Statistical arbitrage strategies</li>
+                    <li>Time series analysis & forecasting</li>
+                    <li>Portfolio optimization</li>
+                    <li>Risk modeling & VaR calculations</li>
+                    <li>Market microstructure analysis</li>
+                </ul>
+                <div class="service-tags">
+                    <span class="service-tag">Python</span>
+                    <span class="service-tag">Statistics</span>
+                    <span class="service-tag">Finance</span>
+                </div>
+            </div>
+
+            <!-- Service 2: Machine Learning Development -->
+            <div class="service-card" data-delay="0.2">
+                <div class="service-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Machine Learning Development</h3>
+                <p class="service-description">
+                    End-to-end ML pipeline development from data preprocessing to model deployment
+                    with focus on financial and quantitative applications.
+                </p>
+                <ul class="service-features">
+                    <li>Predictive modeling for financial markets</li>
+                    <li>Fraud detection systems</li>
+                    <li>Natural language processing for sentiment analysis</li>
+                    <li>Deep learning for pattern recognition</li>
+                    <li>Model optimization & hyperparameter tuning</li>
+                </ul>
+                <div class="service-tags">
+                    <span class="service-tag">TensorFlow</span>
+                    <span class="service-tag">Scikit-learn</span>
+                    <span class="service-tag">MLOps</span>
+                </div>
+            </div>
+
+            <!-- Service 3: Algorithmic Trading -->
+            <div class="service-card" data-delay="0.3">
+                <div class="service-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Algorithmic Trading Systems</h3>
+                <p class="service-description">
+                    Design, development, and backtesting of automated trading strategies
+                    using quantitative methods and machine learning.
+                </p>
+                <ul class="service-features">
+                    <li>Strategy research & development</li>
+                    <li>Backtesting framework implementation</li>
+                    <li>High-frequency trading algorithms</li>
+                    <li>Execution optimization</li>
+                    <li>Risk management integration</li>
+                </ul>
+                <div class="service-tags">
+                    <span class="service-tag">C++</span>
+                    <span class="service-tag">APIs</span>
+                </div>
+            </div>
+
+            <!-- Service 4: Data Science Solutions -->
+            <div class="service-card" data-delay="0.4">
+                <div class="service-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Data Science Solutions</h3>
+                <p class="service-description">
+                    Comprehensive data analysis, visualization, and insight generation
+                    for business intelligence and decision support.
+                </p>
+                <ul class="service-features">
+                    <li>Data pipeline development</li>
+                    <li>Exploratory data analysis</li>
+                    <li>Interactive dashboard creation</li>
+                    <li>Big data processing</li>
+                    <li>Business intelligence reporting</li>
+                </ul>
+                <div class="service-tags">
+                    <span class="service-tag">Pandas</span>
+                    <span class="service-tag">SK-Learn</span>
+                    <span class="service-tag">Numpy</span>
+                </div>
+            </div>
+
+            <!-- Service 5: Mathematical Modeling -->
+            <div class="service-card" data-delay="0.5">
+                <div class="service-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Mathematical Modeling</h3>
+                <p class="service-description">
+                    Advanced mathematical problem-solving and model development
+                    for complex quantitative challenges.
+                </p>
+                <ul class="service-features">
+                    <li>Differential equation modeling</li>
+                    <li>Optimization algorithms</li>
+                    <li>Stochastic processes</li>
+                    <li>Numerical methods</li>
+                    <li>Simulation modeling</li>
+                </ul>
+                <div class="service-tags">
+                    <span class="service-tag">MATLAB</span>
+                    <span class="service-tag">MAPPLE</span>
+                    <span class="service-tag">Optimization</span>
+                    <span class="service-tag">Calculus</span>
+                </div>
+            </div>
+
+            <!-- Service 6: Quantitative Research -->
+            <div class="service-card" data-delay="0.6">
+                <div class="service-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Quantitative Research</h3>
+                <p class="service-description">
+                    Research and development of quantitative methods,
+                    academic-style analysis, and publication-ready reports.
+                </p>
+                <ul class="service-features">
+                    <li>Academic research support</li>
+                    <li>Methodology development</li>
+                    <li>Statistical hypothesis testing</li>
+                    <li>Research paper preparation</li>
+                    <li>Literature review & synthesis</li>
+                </ul>
+                <div class="service-tags">
+                    <span class="service-tag">Research</span>
+                    <span class="service-tag">Statistics</span>
+                    <span class="service-tag">Papers</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Industry Specific Applications -->
+        <div class="industry-section">
+            <h2 class="industry-title">Industry Applications</h2>
+            <div class="industry-grid">
+                <div class="industry-card">
+                    <h4>Investment Banking</h4>
+                    <ul class="service-features">
+                        <li>Risk modeling & stress testing</li>
+                        <li>Derivatives pricing models</li>
+                        <li>Portfolio optimization</li>
+                        <li>Market risk analysis</li>
+                    </ul>
+                </div>
+                <div class="industry-card">
+                    <h4>Hedge Funds</h4>
+                    <ul class="service-features">
+                        <li>Algorithmic trading strategies</li>
+                        <li>Statistical arbitrage</li>
+                        <li>Quantitative research</li>
+                        <li>Execution algorithms</li>
+                    </ul>
+                </div>
+                <div class="industry-card">
+                    <h4>FinTech Companies</h4>
+                    <ul class="service-features">
+                        <li>Credit scoring models</li>
+                        <li>Fraud detection systems</li>
+                        <li>Robo-advisory algorithms</li>
+                        <li>Payment analytics</li>
+                    </ul>
+                </div>
+                <div class="industry-card">
+                    <h4>Technology Companies</h4>
+                    <ul class="service-features">
+                        <li>Predictive analytics</li>
+                        <li>Recommendation systems</li>
+                        <li>Anomaly detection</li>
+                        <li>Optimization algorithms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Stack -->
+        <!-- Technical Stack -->
+        <div class="industry-section">
+            <h2 class="section-title">Technical Arsenal</h2>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <i class="fab fa-python"></i>
+                    <span>Python</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>TensorFlow</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-brain"></i>
+                    <span>PyTorch</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-database"></i>
+                    <span>Pandas/Numpy</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-calculator"></i>
+                    <span>MATLAB</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-code"></i>
+                    <span>C++</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Scikit-learn</span>
+                </div>
+            </div>
+        </div>
+        <!-- Process -->
+        <div class="industry-section">
+            <h2 class="industry-title">Development Process</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Requirement Analysis</h4>
+                    <p>Understand business objectives and quantitative requirements</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Research & Design</h4>
+                    <p>Literature review and methodology design</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Development</h4>
+                    <p>Implementation of models and algorithms</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Testing & Validation</h4>
+                    <p>Rigorous testing and performance validation</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h4>Deployment</h4>
+                    <p>Production deployment and monitoring</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/muhammad-shaiq-b32873383/" class="social-link">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/muhammadshaiq-sys" class="social-link">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:shaiqsheikh797@gmail.com" class="social-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p>© 2024 Muhammad Shaiq. Quantitative Analyst & ML Developer.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray);">
+            Specializing in algorithmic trading, machine learning, and financial mathematics
+        </p>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-right a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // ========== ANIMATED BACKGROUND ==========
+        const canvas = document.getElementById('quantBgCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight - 80;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Create math symbols particles
+        const symbols = ['Σ', '∫', '∂', '∇', 'π', 'θ', '∞', '√', '∑', '∏', '≈', '≠'];
+        const particles = [];
+        const particleCount = 60;
+
+        class Particle {
+            constructor() {
+                this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 20 + 10;
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.speedY = (Math.random() - 0.5) * 0.8;
+                this.color = Math.random() > 0.5 ?
+                    `rgba(59, 130, 246, ${Math.random() * 0.3 + 0.1})` :
+                    `rgba(245, 158, 11, ${Math.random() * 0.2 + 0.1})`;
+                this.waveOffset = Math.random() * Math.PI * 2;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.5;
+            }
+
+            update(time) {
+                this.waveOffset += 0.03;
+                this.x += this.speedX + Math.sin(this.waveOffset) * 0.2;
+                this.y += this.speedY + Math.cos(this.waveOffset) * 0.2;
+                this.rotation += this.rotationSpeed;
+
+                // Boundary check with wrap-around
+                if (this.x > canvas.width + this.size) this.x = -this.size;
+                if (this.x < -this.size) this.x = canvas.width + this.size;
+                if (this.y > canvas.height + this.size) this.y = -this.size;
+                if (this.y < -this.size) this.y = canvas.height + this.size;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+
+                // Draw symbol with glow
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+                ctx.font = `${this.size}px 'JetBrains Mono', monospace`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = this.color;
+                ctx.fillText(this.symbol, 0, 0);
+
+                ctx.shadowBlur = 0;
+                ctx.restore();
+            }
+        }
+
+        // Initialize particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        let time = 0;
+
+        function animateBackground() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            time += 0.01;
+
+            // Draw connecting lines between nearby particles
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        const alpha = 0.15 * (1 - distance / 150);
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Update and draw particles
+            particles.forEach(particle => {
+                particle.update(time);
+                particle.draw();
+            });
+
+            // Draw grid lines occasionally
+            if (Math.floor(time * 10) % 50 === 0) {
+                const gridSize = 50;
+                ctx.strokeStyle = 'rgba(59, 130, 246, 0.05)';
+                ctx.lineWidth = 0.5;
+
+                // Vertical lines
+                for (let x = 0; x < canvas.width; x += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height);
+                    ctx.stroke();
+                }
+
+                // Horizontal lines
+                for (let y = 0; y < canvas.height; y += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(canvas.width, y);
+                    ctx.stroke();
+                }
+            }
+
+            requestAnimationFrame(animateBackground);
+        }
+
+        animateBackground();
+
+        // ========== SCROLL ANIMATIONS ==========
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all service cards and sections
+        document.querySelectorAll('.service-card, .industry-card, .process-step').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animate dashboard stats on scroll
+        const dashboardStats = document.querySelectorAll('.dashboard-stat');
+        const dashboardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    dashboardStats.forEach((stat, index) => {
+                        setTimeout(() => {
+                            stat.classList.add('fade-in');
+                        }, index * 100);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (document.querySelector('.quant-dashboard')) {
+            dashboardObserver.observe(document.querySelector('.quant-dashboard'));
+        }
+
+        // Add hover effects to tech stack
+        document.querySelectorAll('.tech-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Service card hover animations
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.service-icon');
+                if (icon) {
+                    icon.style.transform = 'rotate(15deg) scale(1.1)';
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.service-icon');
+                if (icon) {
+                    icon.style.transform = 'rotate(0) scale(1)';
+                }
+            });
+        });
+
+        // Auto-animate tech stack on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.tech-item').forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 500);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#') && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

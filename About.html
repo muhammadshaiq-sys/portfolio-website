@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Shaiq | Quantitative Analyst & ML Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    :root {
+        --primary: #3b82f6;
+        --secondary: #f59e0b;
+        --accent: #10b981;
+        --danger: #ef4444;
+        --dark: #030712;
+        --darker: #02040a;
+        --light: #f8fafc;
+        --gray-400: #94a3b8;
+        --gray-600: #4b5563;
+        --card-bg: rgba(20, 25, 35, 0.8);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: var(--darker);
+        color: white;
+        line-height: 1.6;
+        overflow-x: hidden;
+        padding-top: 80px;
+    }
+
+    /* ========== RESPONSIVE NAVBAR ========== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    background: var(--nav-bg);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Blinking name in navbar */
+.nav-left  {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: subtle-pulse 3s infinite;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.5px;
+}
+
+@keyframes subtle-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* Desktop Navigation - Clean, no lines */
+.nav-right ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-right ul li {
+    position: relative;
+}
+
+.nav-right ul li a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Clean hover effect - no underline unless hovering */
+.nav-right ul li a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.nav-right ul li a:hover::before {
+    width: 80%;
+}
+
+.nav-right ul li a:hover {
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+}
+    /* Hamburger Menu */
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+        z-index: 1001;
+    }
+
+    .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: var(--white);
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+
+    .nav-right ul {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-right ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        background: transparent;
+    }
+
+    .nav-right ul li a:hover {
+        background: rgba(59, 130, 246, 0.1);
+        transform: translateY(-2px);
+    }
+
+    /* ========== BACKGROUND ========== */
+    #techBgCanvas {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 80px);
+        z-index: -2;
+        pointer-events: none;
+    }
+
+    .tech-texture {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 80px);
+        z-index: -1;
+        pointer-events: none;
+        background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+    }
+
+    /* ========== HERO SECTION ========== */
+    .about-hero {
+        padding: 4rem 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .hero-container {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        margin-bottom: 4rem;
+    }
+
+    @media (min-width: 1024px) {
+        .hero-container {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    .hero-text {
+        flex: 1;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-tagline {
+        font-size: 1.1rem;
+        color: var(--gray-400);
+        margin-bottom: 2rem;
+        max-width: 600px;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1.25rem;
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 2rem;
+        color: var(--accent);
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    /* ========== UNIQUE QUANT STATS ========== */
+    .quant-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    @media (min-width: 768px) {
+        .quant-stats {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    .quant-stat {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .quant-stat:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .quant-stat::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+    }
+
+    .quant-stat:hover::before {
+        transform: scaleX(1);
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+        color: var(--gray-400);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* ========== HERO IMAGE ========== */
+    .hero-image {
+        flex: 1;
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    .hero-image:hover img {
+        transform: scale(1.05);
+    }
+
+    /* ========== QUANT EXPERTISE CARDS ========== */
+    .section {
+        margin: 4rem 0;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(59, 130, 246, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .section-header:hover .section-icon {
+        transform: rotate(15deg) scale(1.1);
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 800;
+        color: white;
+    }
+
+    .expertise-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .expertise-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .expertise-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .expertise-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .expertise-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+    }
+
+    .expertise-card:hover::before {
+        transform: translateX(100%);
+    }
+
+    .expertise-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        border-color: var(--primary);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .expertise-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+        transition: transform 0.3s ease;
+    }
+
+    .expertise-card:hover .expertise-icon {
+        transform: scale(1.2) rotate(5deg);
+    }
+
+    .expertise-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .expertise-desc {
+        color: var(--gray-400);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    /* ========== QUANT TECH TAGS ========== */
+    .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tech-tag {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--primary);
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-family: 'JetBrains Mono', monospace;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .tech-tag:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* ========== TIMELINE ========== */
+    .timeline {
+        position: relative;
+        padding-left: 2rem;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 2.5rem;
+        padding-left: 2rem;
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+        border-color: var(--primary);
+        transform: translateX(10px);
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -10px;
+        top: 1.5rem;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--primary);
+        border: 3px solid var(--darker);
+        box-shadow: 0 0 10px var(--primary);
+    }
+
+    .timeline-date {
+        color: var(--secondary);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .timeline-date::before {
+        content: '📅';
+        font-size: 0.8rem;
+    }
+
+    .timeline-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: white;
+    }
+
+    .timeline-desc {
+        color: var(--gray-400);
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    /* ========== MISSION & VISION ========== */
+    .mission-vision-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .mission-vision-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .mv-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mv-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .mv-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--secondary);
+        transition: transform 0.3s ease;
+    }
+
+    .mv-card:hover .mv-icon {
+        transform: rotate(15deg) scale(1.1);
+    }
+
+    .mv-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .mv-content {
+        color: var(--gray-400);
+        line-height: 1.7;
+    }
+
+    /* ========== TECHNICAL SKILLS MATRIX ========== */
+    .skills-matrix {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .skill-category {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .skill-category h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .skill-bar {
+        height: 6px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+        margin: 0.5rem 0;
+        overflow: hidden;
+    }
+
+    .skill-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        border-radius: 3px;
+        width: 0;
+        animation: fillSkill 1.5s ease-out forwards;
+    }
+
+    @keyframes fillSkill {
+        to { width: var(--skill-level); }
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta-section {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(245, 158, 11, 0.1));
+        border-radius: 20px;
+        margin: 4rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .cta-title {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: white;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta-subtitle {
+        color: var(--gray-400);
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        font-size: 1.1rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 2rem;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s;
+    }
+
+    .cta-button:hover::before {
+        left: 100%;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+        text-align: center;
+        padding: 3rem 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        color: var(--gray-400);
+        font-size: 0.9rem;
+        background: rgba(10, 15, 25, 0.8);
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .social-link {
+        color: var(--gray-400);
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .social-link:hover {
+        color: var(--primary);
+        background: rgba(59, 130, 246, 0.1);
+        transform: translateY(-5px);
+    }
+
+    /* ========== RESPONSIVE DESIGN ========== */
+    @media (max-width: 768px) {
+        .navbar {
+            padding: 0 1rem;
+        }
+
+        .hamburger {
+            display: flex;
+        }
+
+        .nav-right {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: 80%;
+            height: calc(100vh - 80px);
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            flex-direction: column;
+            padding: 2rem;
+            transition: right 0.4s ease;
+            z-index: 999;
+        }
+
+        .nav-right.active {
+            right: 0;
+        }
+
+        .nav-right ul {
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .nav-right ul li a {
+            display: block;
+            text-align: center;
+            padding: 1rem;
+            width: 100%;
+        }
+
+        .hero-container {
+            flex-direction: column;
+        }
+
+        .quant-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .expertise-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .mv-card {
+            padding: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .quant-stats {
+            grid-template-columns: 1fr;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+        }
+
+        .cta-section {
+            padding: 2rem 1rem;
+        }
+    }
+
+    /* ========== ANIMATIONS ========== */
+    .fade-in {
+        animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-in-left {
+        animation: slideInLeft 1s ease-out;
+    }
+
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    .slide-in-right {
+        animation: slideInRight 1s ease-out;
+    }
+
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+</style>
+</head>
+
+<body>
+    <canvas id="techBgCanvas"></canvas>
+    <div class="tech-texture"></div>
+
+    <header>
+        <nav class="navbar">
+    <div class="nav-left">
+        Muhammad Shaiq
+    </div>
+    
+    <!-- Hamburger Menu -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <div class="nav-right" id="navMenu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="About.html" class="active">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+    </header>
+    <main class="about-hero">
+        <!-- Hero Section -->
+        <section class="hero-container">
+            <div class="hero-text">
+                <h1>Quantitative Strategist & Machine Learning Developer</h1>
+                <p class="hero-tagline">
+                    Mathematician turned quantitative analyst specializing in algorithmic trading systems,
+                    predictive modeling, and machine learning infrastructure. Building the future of finance
+                    through data-driven intelligence.
+                </p>
+                <div class="status-badge">
+                    <div class="status-dot"></div>
+                    <span>OPEN TO QUANT & ML ROLES</span>
+                </div>
+<div class="quant-stats">
+    <div class="quant-stat">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Quant + ML Projects</div>
+    </div>
+    <div class="quant-stat">
+        <div class="stat-number">98.7%</div>
+        <div class="stat-label">Model Accuracy</div>
+    </div>
+    <div class="quant-stat">
+        <div class="stat-number">2.3x</div>
+        <div class="stat-label">Alpha Generated</div>
+    </div>
+    <div class="quant-stat">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Passion for Math</div>
+    </div>
+</div>
+            </div>
+
+            <div class="hero-image">
+                <img src="download.jpg" alt="Muhammad Shaiq - Quantitative Analyst">
+            </div>
+        </section>
+
+        <!-- Expertise Section -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h2 class="section-title">Core Expertise</h2>
+            </div>
+
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="expertise-title">Quantitative Analysis</h3>
+                    <p class="expertise-desc">
+                        Statistical arbitrage, time series analysis, risk modeling, and portfolio optimization
+                        using mathematical frameworks and financial engineering principles.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">NumPy</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="expertise-title">Machine Learning</h3>
+                    <p class="expertise-desc">
+                        Predictive modeling, deep learning architectures, NLP, and reinforcement learning
+                        applications for algorithmic trading and financial forecasting.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">XGBoost</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3 class="expertise-title">Mathematical Modeling</h3>
+                    <p class="expertise-desc">
+                        Stochastic calculus, differential equations, linear algebra, and optimization
+                        techniques applied to financial instruments and market microstructure.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">MATLAB</span>
+                        <span class="tech-tag">MATPLOTLIB</span>
+                        <span class="tech-tag">MAPPLE</span>
+                        <span class="tech-tag">DESMOS</span>
+                        <span class="tech-tag">GEOGEBRA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Timeline -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-road"></i>
+                </div>
+                <h2 class="section-title">Professional Journey</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Sep 2025 - PRESENT</div>
+                    <h3 class="timeline-title">Quantitative Research & Development</h3>
+                    <p class="timeline-desc">
+                        Developing algorithmic trading strategies, backtesting systems, and risk management
+                        frameworks. Focus on statistical arbitrage and machine learning applications in finance.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Sep 2025- PRESENT</div>
+                    <h3 class="timeline-title">Machine Learning Specialization</h3>
+                    <p class="timeline-desc">
+                        Advanced studies in deep learning, NLP, and computer vision. Built multiple ML
+                        projects including fraud detection, stock prediction, and customer segmentation systems.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Sep 2022 - PRESENT</div>
+                    <h3 class="timeline-title">Mathematics Foundation</h3>
+                    <p class="timeline-desc">
+                        Intensive study of advanced mathematics including probability theory, statistics,
+                        linear algebra, and calculus - forming the bedrock for quantitative finance.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2023</div>
+                    <h3 class="timeline-title">Entrepreneurial Venture: Choctime</h3>
+                    <p class="timeline-desc">
+                        Founded a student-focused product company, gaining hands-on experience in product
+                        development, market analysis, and strategic planning.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission & Vision -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h2 class="section-title">Mission & Vision</h2>
+            </div>
+
+            <div class="mission-vision-grid">
+                <div class="mv-card">
+                    <div class="mv-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="mv-title">Vision</h3>
+                    <p class="mv-content">
+                        To pioneer the development of intelligent financial systems that democratize
+                        quantitative analysis and create robust, adaptive markets. I envision a future
+                        where mathematical rigor and machine learning converge to build transparent,
+                        efficient, and inclusive financial ecosystems.
+                    </p>
+                </div>
+
+                <div class="mv-card">
+                    <div class="mv-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="mv-title">Mission</h3>
+                    <p class="mv-content">
+                        To architect quantitative frameworks that transform data into actionable
+                        financial intelligence. My mission is to bridge the gap between mathematical
+                        theory and practical trading applications, developing systems that anticipate
+                        market movements, manage risk intelligently, and generate sustainable alpha
+                        through algorithmic precision.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills Matrix -->
+<section class="section">
+    <div class="section-header">
+        <div class="section-icon">
+            <i class="fas fa-chart-network"></i>
+        </div>
+        <h2 class="section-title">Technical Proficiency Matrix</h2>
+    </div>
+
+    <div class="skills-matrix">
+        <div class="skill-category">
+            <h3><i class="fas fa-wave-square"></i> Quantitative Finance</h3>
+            <div class="skill-item">
+                <div class="skill-name">Algorithmic Trading</div>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--skill-level: 52%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Risk Analysis</div>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--skill-level: 50%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Portfolio Optimization</div>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--skill-level: 60%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h3><i class="fas fa-robot"></i> Machine Learning</h3>
+            <div class="skill-item">
+                <div class="skill-name">Deep Learning</div>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--skill-level: 70%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Reinforcement Learning</div>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--skill-level: 40%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Supervised & Unsupervised Learning</div>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--skill-level: 78%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h3><i class="fas fa-code"></i> Development</h3>
+            <div class="skill-item">
+                <div class="skill-name">Python</div>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--skill-level: 65%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">HTML & CSS</div>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--skill-level: 87%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">C++</div>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--skill-level: 60%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 class="cta-title">Ready to Build the Future of Quantitative Finance?</h2>
+            <p class="cta-subtitle">
+                Let's collaborate on innovative trading strategies, machine learning models,
+                or quantitative research that pushes the boundaries of financial technology.
+            </p>
+            <a href="contact.html" class="cta-button">
+                <span>Connect for Opportunities</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/muhammad-shaiq-b32873383/" class="social-link">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/muhammadshaiq-sys" class="social-link">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:shaiqsheikh797@gmail.com" class="social-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p>© 2024 Muhammad Shaiq. Quantitative Analyst & ML Developer.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray-600);">
+            Specializing in algorithmic trading, machine learning, and financial mathematics
+        </p>
+    </footer>
+
+ <script>
+    // Mobile Navigation
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
+    
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-right a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+    
+    // Enhanced Canvas Animation
+    const canvas = document.getElementById('techBgCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight - 80;
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    // Create advanced tech particles
+    const particles = [];
+    const particleCount = 80;
+    
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = Math.random() > 0.7 ? 'rgba(59, 130, 246, 0.6)' : 
+                        Math.random() > 0.5 ? 'rgba(245, 158, 11, 0.4)' : 
+                        'rgba(16, 185, 129, 0.3)';
+            this.waveOffset = Math.random() * Math.PI * 2;
+        }
+        
+        update(time) {
+            // Add wave motion
+            this.waveOffset += 0.05;
+            this.x += this.speedX + Math.sin(this.waveOffset) * 0.3;
+            this.y += this.speedY + Math.cos(this.waveOffset) * 0.3;
+            
+            // Boundary check
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
+        
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            
+            // Add glow
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = this.color;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+    
+    // Initialize particles
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+    
+    let time = 0;
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        time += 0.01;
+        
+        // Draw connections
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(59, 130, 246, ${0.15 * (1 - distance / 100)})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+        
+        // Update and draw particles
+        particles.forEach(particle => {
+            particle.update(time);
+            particle.draw();
+        });
+        
+        // Draw math symbols occasionally
+        if (Math.random() < 0.02) {
+            const symbols = ['Σ', '∫', '∂', '∇', 'π', 'θ', '∞', '√'];
+            const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            
+            ctx.font = '20px "JetBrains Mono"';
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.3)';
+            ctx.textAlign = 'center';
+            ctx.fillText(symbol, x, y);
+        }
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Add scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all sections
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+    });
+</script>
+</body>
+
+
+
+</html>
