@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantitative Services | Muhammad Shaiq</title>
+    <title>AI Agent Services | Muhammad Shaiq</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #3b82f6;
@@ -20,6 +19,8 @@
             --gray-400: #94a3b8;
             --gray-600: #4b5563;
             --card-bg: rgba(20, 25, 35, 0.8);
+            --nav-bg: rgba(15, 23, 42, 0.97);
+            --white: #ffffff;
         }
 
         * {
@@ -95,17 +96,8 @@
         }
 
         @keyframes matrix-blinking {
-
-            0%,
-            45%,
-            55%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.7;
-            }
+            0%, 45%, 55%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .nav-right ul {
@@ -132,7 +124,6 @@
             overflow: hidden;
         }
 
-        /* Clean hover effect - no underline unless hovering */
         .nav-right ul li a::before {
             content: '';
             position: absolute;
@@ -154,7 +145,11 @@
             transform: translateY(-2px);
         }
 
-        /* Hamburger Menu */
+        .nav-right ul li a.active {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--primary);
+        }
+
         .hamburger {
             display: none;
             flex-direction: column;
@@ -174,42 +169,11 @@
         .hamburger.active span:nth-child(1) {
             transform: rotate(45deg) translate(6px, 6px);
         }
-
         .hamburger.active span:nth-child(2) {
             opacity: 0;
         }
-
         .hamburger.active span:nth-child(3) {
             transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        .nav-right ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-right ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            background: transparent;
-        }
-
-        .nav-right ul li a:hover {
-            background: rgba(59, 130, 246, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .nav-right ul li a.active {
-            background: rgba(59, 130, 246, 0.2);
-            color: var(--primary);
         }
 
         /* ========== SERVICES HEADER ========== */
@@ -267,15 +231,9 @@
             padding: 1.5rem;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-        }
-
-        .dashboard-stat:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .dashboard-stat::before {
@@ -292,6 +250,12 @@
 
         .dashboard-stat:hover::before {
             transform: scaleX(1);
+        }
+
+        .dashboard-stat:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .stat-number {
@@ -312,7 +276,7 @@
             letter-spacing: 1px;
         }
 
-        /* ========== FIXED SERVICES GRID - NO COLLAPSING ========== */
+        /* ========== SERVICES GRID ========== */
         .services-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -332,7 +296,6 @@
             }
         }
 
-        /* FIX: Ensure all cards have same height */
         .service-card {
             background: var(--card-bg);
             border-radius: 20px;
@@ -343,7 +306,6 @@
             overflow: hidden;
             height: 100%;
             min-height: 450px;
-            /* FIXED: Minimum height to prevent collapsing */
             display: flex;
             flex-direction: column;
         }
@@ -367,9 +329,7 @@
         .service-card:hover {
             transform: translateY(-10px) scale(1.02);
             border-color: var(--primary);
-            box-shadow:
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         .service-icon {
@@ -407,7 +367,6 @@
             flex: 1;
         }
 
-        /* Service Features */
         .service-features {
             list-style: none;
             margin: 1.5rem 0;
@@ -434,13 +393,11 @@
             margin-top: 0.2rem;
         }
 
-        /* Service Tags */
         .service-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-top: auto;
-            /* Pushes to bottom */
             padding-top: 1rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -498,7 +455,7 @@
             border-radius: 16px;
             padding: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
         }
@@ -520,7 +477,7 @@
         }
 
         /* ========== TECH STACK ========== */
-        .tech-stack {
+        .tech-stack-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
@@ -528,13 +485,13 @@
         }
 
         @media (min-width: 640px) {
-            .tech-stack {
+            .tech-stack-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
 
         @media (min-width: 1024px) {
-            .tech-stack {
+            .tech-stack-grid {
                 grid-template-columns: repeat(7, 1fr);
             }
         }
@@ -592,7 +549,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .process-step:hover {
@@ -612,6 +569,11 @@
             font-weight: 700;
             font-size: 1.2rem;
             color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .process-step:hover .step-number {
+            transform: scale(1.1);
         }
 
         .process-step h4 {
@@ -636,6 +598,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
+            transition: all 0.4s ease;
         }
 
         .cta-section::before {
@@ -650,13 +613,12 @@
         }
 
         @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
-            to {
-                transform: rotate(360deg);
-            }
+        .cta-section:hover {
+            transform: translateY(-5px);
         }
 
         .cta-title {
@@ -751,16 +713,14 @@
             transform: translateY(-5px);
         }
 
-        /* ========== RESPONSIVE DESIGN ========== */
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .navbar {
                 padding: 0 1rem;
             }
-
             .hamburger {
                 display: flex;
             }
-
             .nav-right {
                 position: fixed;
                 top: 80px;
@@ -774,39 +734,31 @@
                 transition: right 0.4s ease;
                 z-index: 999;
             }
-
             .nav-right.active {
                 right: 0;
             }
-
             .nav-right ul {
                 flex-direction: column;
                 gap: 1rem;
                 width: 100%;
             }
-
             .nav-right ul li a {
                 display: block;
                 text-align: center;
                 padding: 1rem;
                 width: 100%;
             }
-
             .quant-dashboard {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .service-card {
                 padding: 1.5rem;
                 min-height: 420px;
-                /* Adjusted for mobile */
             }
-
             .process-steps {
                 flex-direction: column;
             }
-
-            .tech-stack {
+            .tech-stack-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -815,23 +767,16 @@
             .quant-dashboard {
                 grid-template-columns: 1fr;
             }
-
             .services-header h1 {
                 font-size: 2rem;
             }
-
             .service-icon {
                 width: 60px;
                 height: 60px;
                 font-size: 1.5rem;
             }
-
-            .tech-stack {
+            .tech-stack-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .service-card {
-                min-height: 400px;
             }
         }
 
@@ -841,29 +786,17 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ========== SCROLL ANIMATIONS ========== */
-        .service-card,
-        .industry-card,
-        .process-step {
+        .service-card, .industry-card, .process-step {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .service-card.visible,
-        .industry-card.visible,
-        .process-step.visible {
+        .service-card.visible, .industry-card.visible, .process-step.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -874,24 +807,22 @@
     <!-- Animated Background Canvas -->
     <canvas id="quantBgCanvas"></canvas>
     <div class="quant-texture"></div>
+
     <!-- Navigation -->
     <header>
         <nav class="navbar">
             <div class="nav-left">
                 Muhammad Shaiq
             </div>
-
-            <!-- Hamburger Menu -->
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-
             <div class="nav-right" id="navMenu">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="About.html">About</a></li>
                     <li><a href="services.html" class="active">Services</a></li>
                     <li><a href="project.html">Projects</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -899,288 +830,284 @@
             </div>
         </nav>
     </header>
+
     <!-- Quant Dashboard Stats -->
     <div class="quant-dashboard">
         <div class="dashboard-stat">
-            <div class="stat-number">99.2%</div>
-            <div class="stat-label">Model Accuracy</div>
+            <div class="stat-number">98.7%</div>
+            <div class="stat-label">Agent Accuracy</div>
         </div>
         <div class="dashboard-stat">
-            <div class="stat-number">2.8x</div>
-            <div class="stat-label">Alpha Generated</div>
+            <div class="stat-number">47ms</div>
+            <div class="stat-label">Avg Response</div>
         </div>
         <div class="dashboard-stat">
             <div class="stat-number">24/7</div>
-            <div class="stat-label">Live Monitoring</div>
+            <div class="stat-label">Agent Uptime</div>
         </div>
         <div class="dashboard-stat">
-            <div class="stat-number">0.1%</div>
-            <div class="stat-label">Max Drawdown</div>
+            <div class="stat-number">7+</div>
+            <div class="stat-label">Data Sources</div>
         </div>
     </div>
+
     <!-- Services Main Section -->
     <div class="services-container">
         <div class="services-header">
-            <h1>Quantitative & Technical Services</h1>
+            <h1>AI Agent Development Services</h1>
             <p class="services-subtitle">
-                Professional quantitative analysis, machine learning development, and algorithmic solutions
-                for finance, technology, and research sectors.
+                Custom AI agents that connect to your data, understand your context, and execute tasks autonomously.
+                From conversational assistants to fully autonomous operations.
             </p>
         </div>
 
         <!-- Core Services Grid -->
         <div class="services-grid">
-            <!-- Service 1: Quantitative Analysis -->
+            <!-- Service 1: Custom RAG Agents -->
             <div class="service-card" data-delay="0.1">
-                <div class="service-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>Quantitative Analysis</h3>
-                <p class="service-description">
-                    Advanced statistical modeling and quantitative research for financial markets,
-                    risk assessment, and data-driven decision making.
-                </p>
-                <ul class="service-features">
-                    <li>Statistical arbitrage strategies</li>
-                    <li>Time series analysis & forecasting</li>
-                    <li>Portfolio optimization</li>
-                    <li>Risk modeling & VaR calculations</li>
-                    <li>Market microstructure analysis</li>
-                </ul>
-                <div class="service-tags">
-                    <span class="service-tag">Python</span>
-                    <span class="service-tag">Statistics</span>
-                    <span class="service-tag">Finance</span>
-                </div>
-            </div>
-
-            <!-- Service 2: Machine Learning Development -->
-            <div class="service-card" data-delay="0.2">
-                <div class="service-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h3>Machine Learning Development</h3>
-                <p class="service-description">
-                    End-to-end ML pipeline development from data preprocessing to model deployment
-                    with focus on financial and quantitative applications.
-                </p>
-                <ul class="service-features">
-                    <li>Predictive modeling for financial markets</li>
-                    <li>Fraud detection systems</li>
-                    <li>Natural language processing for sentiment analysis</li>
-                    <li>Deep learning for pattern recognition</li>
-                    <li>Model optimization & hyperparameter tuning</li>
-                </ul>
-                <div class="service-tags">
-                    <span class="service-tag">TensorFlow</span>
-                    <span class="service-tag">Scikit-learn</span>
-                    <span class="service-tag">MLOps</span>
-                </div>
-            </div>
-
-            <!-- Service 3: Algorithmic Trading -->
-            <div class="service-card" data-delay="0.3">
-                <div class="service-icon">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <h3>Algorithmic Trading Systems</h3>
-                <p class="service-description">
-                    Design, development, and backtesting of automated trading strategies
-                    using quantitative methods and machine learning.
-                </p>
-                <ul class="service-features">
-                    <li>Strategy research & development</li>
-                    <li>Backtesting framework implementation</li>
-                    <li>High-frequency trading algorithms</li>
-                    <li>Execution optimization</li>
-                    <li>Risk management integration</li>
-                </ul>
-                <div class="service-tags">
-                    <span class="service-tag">C++</span>
-                    <span class="service-tag">APIs</span>
-                </div>
-            </div>
-
-            <!-- Service 4: Data Science Solutions -->
-            <div class="service-card" data-delay="0.4">
                 <div class="service-icon">
                     <i class="fas fa-database"></i>
                 </div>
-                <h3>Data Science Solutions</h3>
+                <h3>Custom RAG Agents</h3>
                 <p class="service-description">
-                    Comprehensive data analysis, visualization, and insight generation
-                    for business intelligence and decision support.
+                    Retrieval-Augmented Generation agents that connect to your documents, databases, and knowledge bases for grounded, accurate responses.
                 </p>
                 <ul class="service-features">
-                    <li>Data pipeline development</li>
-                    <li>Exploratory data analysis</li>
-                    <li>Interactive dashboard creation</li>
-                    <li>Big data processing</li>
-                    <li>Business intelligence reporting</li>
+                    <li>Document ingestion & vectorization</li>
+                    <li>Semantic search & retrieval</li>
+                    <li>Multi-source data integration</li>
+                    <li>Context-aware response generation</li>
+                    <li>Source citation & transparency</li>
                 </ul>
                 <div class="service-tags">
-                    <span class="service-tag">Pandas</span>
-                    <span class="service-tag">SK-Learn</span>
-                    <span class="service-tag">Numpy</span>
+                    <span class="service-tag">LangChain</span>
+                    <span class="service-tag">Pinecone</span>
+                    <span class="service-tag">ChromaDB</span>
                 </div>
             </div>
 
-            <!-- Service 5: Mathematical Modeling -->
+            <!-- Service 2: Multi-Agent Orchestration -->
+            <div class="service-card" data-delay="0.2">
+                <div class="service-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Multi-Agent Orchestration</h3>
+                <p class="service-description">
+                    Design and deployment of specialized agents that collaborate, delegate, and execute complex workflows autonomously.
+                </p>
+                <ul class="service-features">
+                    <li>Agent role specialization</li>
+                    <li>Task decomposition & routing</li>
+                    <li>Inter-agent communication</li>
+                    <li>Conflict resolution</li>
+                    <li>Workflow automation</li>
+                </ul>
+                <div class="service-tags">
+                    <span class="service-tag">CrewAI</span>
+                    <span class="service-tag">AutoGen</span>
+                    <span class="service-tag">LangGraph</span>
+                </div>
+            </div>
+
+            <!-- Service 3: LLM Fine-Tuning -->
+            <div class="service-card" data-delay="0.3">
+                <div class="service-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>LLM Fine-Tuning</h3>
+                <p class="service-description">
+                    Custom fine-tuning of open-source models on your domain-specific data for optimized performance and reduced costs.
+                </p>
+                <ul class="service-features">
+                    <li>LoRA & QLoRA fine-tuning</li>
+                    <li>Domain adaptation</li>
+                    <li>Inference optimization</li>
+                    <li>Cost reduction strategies</li>
+                    <li>Local deployment options</li>
+                </ul>
+                <div class="service-tags">
+                    <span class="service-tag">LoRA</span>
+                    <span class="service-tag">Hugging Face</span>
+                    <span class="service-tag">Unsloth</span>
+                </div>
+            </div>
+
+            <!-- Service 4: WhatsApp-First Agents -->
+            <div class="service-card" data-delay="0.4">
+                <div class="service-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3>WhatsApp-First Agents</h3>
+                <p class="service-description">
+                    AI agents accessible via WhatsApp — no app download, no training. Perfect for Pakistan's 50M+ WhatsApp users.
+                </p>
+                <ul class="service-features">
+                    <li>WhatsApp Business API integration</li>
+                    <li>Urdu/English bilingual support</li>
+                    <li>Conversational workflows</li>
+                    <li>Automated customer support</li>
+                    <li>Lead qualification & nurturing</li>
+                </ul>
+                <div class="service-tags">
+                    <span class="service-tag">WhatsApp API</span>
+                    <span class="service-tag">Twilio</span>
+                    <span class="service-tag">Urdu NLP</span>
+                </div>
+            </div>
+
+            <!-- Service 5: Edge AI Agents -->
             <div class="service-card" data-delay="0.5">
                 <div class="service-icon">
-                    <i class="fas fa-calculator"></i>
+                    <i class="fas fa-microchip"></i>
                 </div>
-                <h3>Mathematical Modeling</h3>
+                <h3>Edge AI Agents</h3>
                 <p class="service-description">
-                    Advanced mathematical problem-solving and model development
-                    for complex quantitative challenges.
+                    Agents that run entirely on local hardware — no internet required. Perfect for unreliable connectivity and data privacy concerns.
                 </p>
                 <ul class="service-features">
-                    <li>Differential equation modeling</li>
-                    <li>Optimization algorithms</li>
-                    <li>Stochastic processes</li>
-                    <li>Numerical methods</li>
-                    <li>Simulation modeling</li>
+                    <li>Local LLM deployment</li>
+                    <li>Offline operation capability</li>
+                    <li>Data privacy compliance</li>
+                    <li>Low-latency inference</li>
+                    <li>Resource-optimized models</li>
                 </ul>
                 <div class="service-tags">
-                    <span class="service-tag">MATLAB</span>
-                    <span class="service-tag">MAPPLE</span>
-                    <span class="service-tag">Optimization</span>
-                    <span class="service-tag">Calculus</span>
+                    <span class="service-tag">Ollama</span>
+                    <span class="service-tag">Llama.cpp</span>
+                    <span class="service-tag">ONNX</span>
                 </div>
             </div>
 
-            <!-- Service 6: Quantitative Research -->
+            <!-- Service 6: Workflow Automation Agents -->
             <div class="service-card" data-delay="0.6">
                 <div class="service-icon">
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-play-circle"></i>
                 </div>
-                <h3>Quantitative Research</h3>
+                <h3>Workflow Automation</h3>
                 <p class="service-description">
-                    Research and development of quantitative methods,
-                    academic-style analysis, and publication-ready reports.
+                    Agents that don't just talk — they do. Execute API calls, generate reports, send alerts, and route approvals automatically.
                 </p>
                 <ul class="service-features">
-                    <li>Academic research support</li>
-                    <li>Methodology development</li>
-                    <li>Statistical hypothesis testing</li>
-                    <li>Research paper preparation</li>
-                    <li>Literature review & synthesis</li>
+                    <li>API integration & execution</li>
+                    <li>Report generation</li>
+                    <li>Alert & notification systems</li>
+                    <li>Approval routing</li>
+                    <li>Data transformation</li>
                 </ul>
                 <div class="service-tags">
-                    <span class="service-tag">Research</span>
-                    <span class="service-tag">Statistics</span>
-                    <span class="service-tag">Papers</span>
+                    <span class="service-tag">REST APIs</span>
+                    <span class="service-tag">Zapier</span>
+                    <span class="service-tag">n8n</span>
                 </div>
             </div>
         </div>
 
-        <!-- Industry Specific Applications -->
+        <!-- Industry Applications -->
         <div class="industry-section">
-            <h2 class="industry-title">Industry Applications</h2>
+            <h2 class="section-title">Industry Applications</h2>
             <div class="industry-grid">
                 <div class="industry-card">
-                    <h4>Investment Banking</h4>
+                    <h4><i class="fas fa-university"></i> Banking & Finance</h4>
                     <ul class="service-features">
-                        <li>Risk modeling & stress testing</li>
-                        <li>Derivatives pricing models</li>
-                        <li>Portfolio optimization</li>
-                        <li>Market risk analysis</li>
+                        <li>Fraud detection agents</li>
+                        <li>Compliance monitoring</li>
+                        <li>Customer support automation</li>
+                        <li>Transaction analysis</li>
                     </ul>
                 </div>
                 <div class="industry-card">
-                    <h4>Hedge Funds</h4>
+                    <h4><i class="fas fa-hospital"></i> Healthcare</h4>
                     <ul class="service-features">
-                        <li>Algorithmic trading strategies</li>
-                        <li>Statistical arbitrage</li>
-                        <li>Quantitative research</li>
-                        <li>Execution algorithms</li>
+                        <li>Patient query assistants</li>
+                        <li>Insurance verification</li>
+                        <li>Medical record retrieval</li>
+                        <li>Appointment scheduling</li>
                     </ul>
                 </div>
                 <div class="industry-card">
-                    <h4>FinTech Companies</h4>
+                    <h4><i class="fas fa-graduation-cap"></i> Education</h4>
                     <ul class="service-features">
-                        <li>Credit scoring models</li>
-                        <li>Fraud detection systems</li>
-                        <li>Robo-advisory algorithms</li>
-                        <li>Payment analytics</li>
+                        <li>Student query assistants</li>
+                        <li>Course information</li>
+                        <li>Faculty directory</li>
+                        <li>Academic advising</li>
                     </ul>
                 </div>
                 <div class="industry-card">
-                    <h4>Technology Companies</h4>
+                    <h4><i class="fas fa-store"></i> Retail & E-commerce</h4>
                     <ul class="service-features">
-                        <li>Predictive analytics</li>
-                        <li>Recommendation systems</li>
-                        <li>Anomaly detection</li>
-                        <li>Optimization algorithms</li>
+                        <li>Product recommendations</li>
+                        <li>Inventory management</li>
+                        <li>Customer support</li>
+                        <li>Order tracking</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Technical Stack -->
         <!-- Technical Stack -->
         <div class="industry-section">
             <h2 class="section-title">Technical Arsenal</h2>
-            <div class="tech-stack">
+            <div class="tech-stack-grid">
                 <div class="tech-item">
                     <i class="fab fa-python"></i>
                     <span>Python</span>
                 </div>
                 <div class="tech-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span>TensorFlow</span>
+                    <i class="fas fa-brain"></i>
+                    <span>LangChain</span>
                 </div>
                 <div class="tech-item">
-                    <i class="fas fa-brain"></i>
-                    <span>PyTorch</span>
+                    <i class="fas fa-robot"></i>
+                    <span>CrewAI</span>
                 </div>
                 <div class="tech-item">
                     <i class="fas fa-database"></i>
-                    <span>Pandas/Numpy</span>
+                    <span>ChromaDB</span>
                 </div>
                 <div class="tech-item">
-                    <i class="fas fa-calculator"></i>
-                    <span>MATLAB</span>
+                    <i class="fas fa-cloud"></i>
+                    <span>Groq API</span>
                 </div>
                 <div class="tech-item">
-                    <i class="fas fa-code"></i>
-                    <span>C++</span>
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp API</span>
                 </div>
                 <div class="tech-item">
-                    <i class="fas fa-project-diagram"></i>
-                    <span>Scikit-learn</span>
+                    <i class="fas fa-microchip"></i>
+                    <span>Ollama</span>
                 </div>
             </div>
         </div>
+
         <!-- Process -->
         <div class="industry-section">
-            <h2 class="industry-title">Development Process</h2>
+            <h2 class="section-title">Development Process</h2>
             <div class="process-steps">
                 <div class="process-step">
                     <div class="step-number">1</div>
-                    <h4>Requirement Analysis</h4>
-                    <p>Understand business objectives and quantitative requirements</p>
+                    <h4>Discovery & Audit</h4>
+                    <p>Understand your data landscape, workflows, and automation opportunities</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">2</div>
-                    <h4>Research & Design</h4>
-                    <p>Literature review and methodology design</p>
+                    <h4>Agent Design</h4>
+                    <p>Define agent roles, capabilities, and interaction patterns</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">3</div>
                     <h4>Development</h4>
-                    <p>Implementation of models and algorithms</p>
+                    <p>Build, test, and iterate on agent capabilities</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">4</div>
-                    <h4>Testing & Validation</h4>
-                    <p>Rigorous testing and performance validation</p>
+                    <h4>Integration</h4>
+                    <p>Connect to your data sources and existing systems</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">5</div>
-                    <h4>Deployment</h4>
-                    <p>Production deployment and monitoring</p>
+                    <h4>Deployment & Monitoring</h4>
+                    <p>Launch, monitor performance, and continuous improvement</p>
                 </div>
             </div>
         </div>
@@ -1189,20 +1116,12 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/muhammad-shaiq-b32873383/" class="social-link">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="https://github.com/muhammadshaiq-sys" class="social-link">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="mailto:shaiqsheikh797@gmail.com" class="social-link">
-                <i class="fas fa-envelope"></i>
-            </a>
+            <a href="https://www.linkedin.com/in/muhammad-shaiq-b32873383/" class="social-link"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/muhammadshaiq-sys" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="mailto:shaiqsheikh797@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
         </div>
-        <p>© 2024 Muhammad Shaiq. Quantitative Analyst & ML Developer.</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray);">
-            Specializing in algorithmic trading, machine learning, and financial mathematics
-        </p>
+        <p>© 2024 Muhammad Shaiq. AI Agent Developer & ML Engineer | Founder, Triveni AI</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Specializing in Multi-Agent Systems, RAG Architecture, and Production ML</p>
     </footer>
 
     <script>
@@ -1210,156 +1129,145 @@
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
 
-        if (hamburger) {
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
+        function closeMenu() {
+            hamburger?.classList.remove('active');
+            navMenu?.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function openMenu() {
+            hamburger?.classList.add('active');
+            navMenu?.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navMenu.classList.contains('active') ? closeMenu() : openMenu();
+            });
+
+            document.querySelectorAll('.nav-right a').forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            document.addEventListener('click', (e) => {
+                if (navMenu.classList.contains('active') && 
+                    !hamburger.contains(e.target) && 
+                    !navMenu.contains(e.target)) {
+                    closeMenu();
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                    closeMenu();
+                }
             });
         }
 
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-right a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-
-        // ========== ANIMATED BACKGROUND ==========
+        // Animated Background
         const canvas = document.getElementById('quantBgCanvas');
-        const ctx = canvas.getContext('2d');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let width, height;
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight - 80;
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        // Create math symbols particles
-        const symbols = ['Σ', '∫', '∂', '∇', 'π', 'θ', '∞', '√', '∑', '∏', '≈', '≠'];
-        const particles = [];
-        const particleCount = 60;
-
-        class Particle {
-            constructor() {
-                this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 20 + 10;
-                this.speedX = (Math.random() - 0.5) * 0.8;
-                this.speedY = (Math.random() - 0.5) * 0.8;
-                this.color = Math.random() > 0.5 ?
-                    `rgba(59, 130, 246, ${Math.random() * 0.3 + 0.1})` :
-                    `rgba(245, 158, 11, ${Math.random() * 0.2 + 0.1})`;
-                this.waveOffset = Math.random() * Math.PI * 2;
-                this.rotation = Math.random() * 360;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.5;
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight - 80;
+                canvas.width = width;
+                canvas.height = height;
             }
 
-            update(time) {
-                this.waveOffset += 0.03;
-                this.x += this.speedX + Math.sin(this.waveOffset) * 0.2;
-                this.y += this.speedY + Math.cos(this.waveOffset) * 0.2;
-                this.rotation += this.rotationSpeed;
+            const symbols = ['🤖', '🧠', '⚡', '📊', '🔗', '💬', '🔄', '🎯'];
+            const particles = [];
+            const particleCount = 60;
 
-                // Boundary check with wrap-around
-                if (this.x > canvas.width + this.size) this.x = -this.size;
-                if (this.x < -this.size) this.x = canvas.width + this.size;
-                if (this.y > canvas.height + this.size) this.y = -this.size;
-                if (this.y < -this.size) this.y = canvas.height + this.size;
+            class Particle {
+                constructor() {
+                    this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 20 + 12;
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
+                    this.color = Math.random() > 0.5 ?
+                        `rgba(59, 130, 246, ${Math.random() * 0.3 + 0.1})` :
+                        `rgba(245, 158, 11, ${Math.random() * 0.2 + 0.1})`;
+                    this.waveOffset = Math.random() * Math.PI * 2;
+                }
+
+                update(time) {
+                    this.waveOffset += 0.03;
+                    this.x += this.speedX + Math.sin(this.waveOffset) * 0.2;
+                    this.y += this.speedY + Math.cos(this.waveOffset) * 0.2;
+                    if (this.x > width + this.size) this.x = -this.size;
+                    if (this.x < -this.size) this.x = width + this.size;
+                    if (this.y > height + this.size) this.y = -this.size;
+                    if (this.y < -this.size) this.y = height + this.size;
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.font = `${this.size}px 'Segoe UI Emoji'`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = this.color;
+                    ctx.fillStyle = this.color;
+                    ctx.fillText(this.symbol, 0, 0);
+                    ctx.restore();
+                }
             }
 
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation * Math.PI / 180);
-
-                // Draw symbol with glow
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = this.color;
-                ctx.font = `${this.size}px 'JetBrains Mono', monospace`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillStyle = this.color;
-                ctx.fillText(this.symbol, 0, 0);
-
-                ctx.shadowBlur = 0;
-                ctx.restore();
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
             }
-        }
 
-        // Initialize particles
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
+            let time = 0;
 
-        let time = 0;
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                time += 0.01;
 
-        function animateBackground() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            time += 0.01;
-
-            // Draw connecting lines between nearby particles
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 150) {
-                        ctx.beginPath();
-                        const alpha = 0.15 * (1 - distance / 150);
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 120) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(59, 130, 246, ${0.12 * (1 - distance / 120)})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
                     }
                 }
+
+                particles.forEach(particle => {
+                    particle.update(time);
+                    particle.draw();
+                });
+
+                requestAnimationFrame(animate);
             }
 
-            // Update and draw particles
-            particles.forEach(particle => {
-                particle.update(time);
-                particle.draw();
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                particles.length = 0;
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
             });
-
-            // Draw grid lines occasionally
-            if (Math.floor(time * 10) % 50 === 0) {
-                const gridSize = 50;
-                ctx.strokeStyle = 'rgba(59, 130, 246, 0.05)';
-                ctx.lineWidth = 0.5;
-
-                // Vertical lines
-                for (let x = 0; x < canvas.width; x += gridSize) {
-                    ctx.beginPath();
-                    ctx.moveTo(x, 0);
-                    ctx.lineTo(x, canvas.height);
-                    ctx.stroke();
-                }
-
-                // Horizontal lines
-                for (let y = 0; y < canvas.height; y += gridSize) {
-                    ctx.beginPath();
-                    ctx.moveTo(0, y);
-                    ctx.lineTo(canvas.width, y);
-                    ctx.stroke();
-                }
-            }
-
-            requestAnimationFrame(animateBackground);
+            resizeCanvas();
+            animate();
         }
 
-        animateBackground();
-
-        // ========== SCROLL ANIMATIONS ==========
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
+        // Scroll Animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1368,12 +1276,11 @@
             });
         }, observerOptions);
 
-        // Observe all service cards and sections
         document.querySelectorAll('.service-card, .industry-card, .process-step').forEach(el => {
             observer.observe(el);
         });
 
-        // Animate dashboard stats on scroll
+        // Dashboard stats animation
         const dashboardStats = document.querySelectorAll('.dashboard-stat');
         const dashboardObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1390,17 +1297,6 @@
         if (document.querySelector('.quant-dashboard')) {
             dashboardObserver.observe(document.querySelector('.quant-dashboard'));
         }
-
-        // Add hover effects to tech stack
-        document.querySelectorAll('.tech-item').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.style.transform = 'translateY(-5px) scale(1.05)';
-            });
-
-            item.addEventListener('mouseleave', () => {
-                item.style.transform = 'translateY(0) scale(1)';
-            });
-        });
 
         // Service card hover animations
         document.querySelectorAll('.service-card').forEach(card => {
@@ -1430,21 +1326,7 @@
                 });
             }, 500);
         });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href.startsWith('#') && document.querySelector(href)) {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
     </script>
-
 </body>
 
 </html>
