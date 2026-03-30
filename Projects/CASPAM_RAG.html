@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASPAM AI - RAG Agent v2 | Muhammad Shaiq</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #f59e0b;
+            --dark: #030712;
+            --darker: #02040a;
+            --card-bg: rgba(20, 25, 35, 0.85);
+            --gray-400: #94a3b8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: white;
+            line-height: 1.6;
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background: rgba(15, 23, 42, 0.97);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+        .nav-left {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .nav-right ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-right ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+        .nav-right ul li a:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .project-header h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .project-badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--secondary);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .tech-tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .content-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .content-section h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .content-section p {
+            color: var(--gray-400);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: var(--gray-400);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .feature-list li i {
+            color: var(--secondary);
+            width: 20px;
+        }
+        .live-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        .live-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--gray-400);
+        }
+        @media (max-width: 768px) {
+            .project-header h1 { font-size: 2rem; }
+            .container { padding: 2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">Muhammad Shaiq</div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../About.html">About</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="../project.html">Projects</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="project-header">
+            <div class="project-badge">🚀 COMING SOON</div>
+            <h1>CASPAM AI - RAG Agent v2</h1>
+            <div class="tech-stack">
+                <span class="tech-tag">Advanced RAG</span>
+                <span class="tech-tag">LangChain</span>
+                <span class="tech-tag">ChromaDB</span>
+                <span class="tech-tag">Groq Llama 3.3</span>
+                <span class="tech-tag">Vector Search</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📖 Project Overview</h2>
+            <p>CASPAM AI RAG Agent v2 is an advanced version of the original CASPAM AI assistant, featuring enhanced document retrieval capabilities, multi-source data integration, and real-time knowledge base updates. The agent leverages state-of-the-art Retrieval-Augmented Generation (RAG) architecture to provide accurate, context-aware responses from departmental documents, course materials, and faculty publications.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>⚡ Key Features</h2>
+            <ul class="feature-list">
+                <li><i class="fas fa-search"></i> Advanced semantic search across 500+ documents</li>
+                <li><i class="fas fa-database"></i> Multi-source data integration (PDFs, databases, APIs)</li>
+                <li><i class="fas fa-bolt"></i> 47ms average response time with 94.7% retrieval accuracy</li>
+                <li><i class="fas fa-sync-alt"></i> Real-time knowledge base updates</li>
+                <li><i class="fas fa-language"></i> Urdu/English bilingual support</li>
+                <li><i class="fas fa-chart-line"></i> Continuous learning from user feedback</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>🔧 Technical Architecture</h2>
+            <p>The system uses ChromaDB for vector storage with 1536-dimensional embeddings, LangChain for orchestration, and Groq's Llama 3.3 70B for generation. Documents are chunked with semantic overlap, and retrieval uses hybrid search combining vector similarity with keyword matching. The agent maintains conversation context across sessions and can cite sources for all responses.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>📊 Performance Metrics</h2>
+            <ul class="feature-list">
+                <li><i class="fas fa-chart-line"></i> Retrieval Accuracy: 94.7%</li>
+                <li><i class="fas fa-bolt"></i> Average Latency: 47ms</li>
+                <li><i class="fas fa-database"></i> Documents Indexed: 500+</li>
+                <li><i class="fas fa-check-circle"></i> Response Quality Score: 4.8/5</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="#" class="live-button" onclick="alert('Coming soon! Launch scheduled for Q2 2025.')">
+                <i class="fas fa-rocket"></i> Launch Demo (Coming Soon)
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 Muhammad Shaiq. AI Agent Developer & ML Engineer</p>
+    </footer>
+</body>
+</html>

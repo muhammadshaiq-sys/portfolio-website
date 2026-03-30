@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilingual AI Agent (Urdu/English) | Muhammad Shaiq</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #f59e0b;
+            --dark: #030712;
+            --darker: #02040a;
+            --card-bg: rgba(20, 25, 35, 0.85);
+            --gray-400: #94a3b8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: white;
+            line-height: 1.6;
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background: rgba(15, 23, 42, 0.97);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+        .nav-left {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .nav-right ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-right ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+        .nav-right ul li a:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .project-header h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .project-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .tech-tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .content-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .content-section h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .content-section p {
+            color: var(--gray-400);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: var(--gray-400);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .feature-list li i {
+            color: var(--secondary);
+            width: 20px;
+        }
+        .urdu-text {
+            font-family: 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif;
+            font-size: 1.1rem;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .live-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        .live-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--gray-400);
+        }
+        @media (max-width: 768px) {
+            .project-header h1 { font-size: 2rem; }
+            .container { padding: 2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">Muhammad Shaiq</div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../About.html">About</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="../project.html">Projects</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="project-header">
+            <div class="project-badge">🇵🇰 PAKISTAN-FIRST</div>
+            <h1>Bilingual AI Agent (Urdu/English)</h1>
+            <div class="tech-stack">
+                <span class="tech-tag">NLP</span>
+                <span class="tech-tag">Urdu Language Model</span>
+                <span class="tech-tag">WhatsApp API</span>
+                <span class="tech-tag">Groq Llama 3.3</span>
+                <span class="tech-tag">Fine-Tuning</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📖 Project Overview</h2>
+            <p>The Bilingual AI Agent is designed specifically for Pakistan's 50M+ WhatsApp users, supporting natural language queries in Urdu, English, and Urduish (mixed language). This agent understands and responds in the user's preferred language, making AI accessible to non-English speakers across Pakistan's diverse population.</p>
+            <div class="urdu-text">
+                "یہ AI ایجنٹ اردو اور انگریزی دونوں زبانوں میں سوالات کو سمجھتا اور جواب دیتا ہے۔"
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>⚡ Key Features</h2>
+            <ul class="feature-list">
+                <li><i class="fas fa-language"></i> Full Urdu and English language support</li>
+                <li><i class="fab fa-whatsapp"></i> WhatsApp-first deployment (no app needed)</li>
+                <li><i class="fas fa-microphone-alt"></i> Voice message support (coming soon)</li>
+                <li><i class="fas fa-graduation-cap"></i> Culturally aware responses for Pakistani context</li>
+                <li><i class="fas fa-database"></i> Works with Roman Urdu (Urdu written in English script)</li>
+                <li><i class="fas fa-brain"></i> Fine-tuned on Pakistani Urdu datasets</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>🔧 Technical Architecture</h2>
+            <p>The agent uses a fine-tuned Llama 3.3 70B model with additional Urdu language tokens, integrated with WhatsApp Business API for seamless messaging. The system includes a custom Urdu tokenizer and handles code-switching (Urduish) effectively. Responses maintain cultural sensitivity and use appropriate Islamic greetings when contextually relevant.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>📊 Target Use Cases</h2>
+            <ul class="feature-list">
+                <li><i class="fas fa-university"></i> Educational institutions - student queries in Urdu</li>
+                <li><i class="fas fa-hospital"></i> Healthcare - patient information in native language</li>
+                <li><i class="fas fa-store"></i> E-commerce - customer support in Urdu/English</li>
+                <li><i class="fas fa-landmark"></i> Government services - citizen information portals</li>
+                <li><i class="fas fa-chart-line"></i> Banking - customer service in preferred language</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="#" class="live-button" onclick="alert('Coming soon! Beta launch scheduled for Q1 2025.')">
+                <i class="fab fa-whatsapp"></i> Try on WhatsApp (Coming Soon)
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 Muhammad Shaiq. AI Agent Developer & ML Engineer | Founder, Triveni AI</p>
+    </footer>
+</body>
+</html>
