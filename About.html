@@ -40,26 +40,14 @@
         }
 
         /* ========== ANIMATED BACKGROUND ========== */
-        #techBgCanvas {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 80px);
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        .tech-texture {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 80px);
-            z-index: -1;
-            pointer-events: none;
-            background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
-        }
+#techBgCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      pointer-events: none;
+    }
 
         /* ========== RESPONSIVE NAVBAR ========== */
         .navbar {
@@ -78,7 +66,18 @@
             z-index: 1000;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
-
+    .tech-grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image: 
+        linear-gradient(rgba(0, 102, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 102, 255, 0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+      opacity: 0.5;
+    }
         .nav-left {
             font-size: 1.5rem;
             font-weight: 800;
@@ -242,7 +241,7 @@
             50% { opacity: 0.5; }
         }
 
-        /* ========== QUANT STATS (with hover effects) ========== */
+        /* ========== QUANT STATS ========== */
         .quant-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -369,7 +368,111 @@
             color: white;
         }
 
-        /* ========== EXPERTISE GRID (with hover effects) ========== */
+        /* ========== WEB DEVELOPER JOURNEY SECTION ========== */
+        .webdev-journey {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(16, 185, 129, 0.05));
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .webdev-journey:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .journey-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .journey-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .journey-header h2 span {
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .journey-header p {
+            color: var(--gray-400);
+            margin-top: 0.5rem;
+        }
+
+        .journey-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .journey-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .journey-card {
+            background: var(--card-bg);
+            border-radius: 1.2rem;
+            padding: 1.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s;
+        }
+
+        .journey-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .journey-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .journey-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .journey-card p {
+            font-size: 0.9rem;
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        .journey-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .journey-list li {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .journey-list li i {
+            color: var(--accent);
+            font-size: 0.7rem;
+        }
+
+        /* ========== EXPERTISE GRID ========== */
         .expertise-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -633,7 +736,7 @@
             box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
         }
 
-        /* ========== TIMELINE (with hover effects) ========== */
+        /* ========== TIMELINE ========== */
         .timeline {
             position: relative;
             padding-left: 2rem;
@@ -696,11 +799,6 @@
             gap: 0.5rem;
         }
 
-        .timeline-date::before {
-            content: '📅';
-            font-size: 0.8rem;
-        }
-
         .timeline-title {
             font-size: 1.25rem;
             font-weight: 700;
@@ -714,7 +812,7 @@
             line-height: 1.6;
         }
 
-        /* ========== MISSION & VISION (with hover effects) ========== */
+        /* ========== MISSION & VISION ========== */
         .mission-vision-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -1010,8 +1108,8 @@
             .company-section {
                 padding: 1.5rem;
             }
-            .service-tiers {
-                grid-template-columns: 1fr;
+            .webdev-journey {
+                padding: 1.5rem;
             }
         }
 
@@ -1030,30 +1128,12 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .slide-in-left {
-            animation: slideInLeft 1s ease-out;
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .slide-in-right {
-            animation: slideInRight 1s ease-out;
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
     </style>
 </head>
 
 <body>
-    <canvas id="techBgCanvas"></canvas>
-    <div class="tech-texture"></div>
+     <canvas id="techBgCanvas"></canvas>
+    <div class="tech-grid-overlay"></div>
 
     <header>
         <nav class="navbar">
@@ -1079,7 +1159,7 @@
         <!-- Hero Section -->
         <section class="hero-container">
             <div class="hero-text">
-                <h1>AI Agent Developer & Machine Learning Engineer</h1>
+                <h1>AI Agent Developer, Machine Learning Engineer & Web Developer</h1>
                 <p class="hero-tagline">
                     Mathematician turned AI Agent Developer specializing in multi-agent systems, RAG architecture,
                     and production-grade machine learning. Building intelligent systems that transform how organizations work.
@@ -1112,6 +1192,58 @@
             </div>
         </section>
 
+        <!-- Web Developer Journey Section -->
+        <section class="webdev-journey">
+            <div class="journey-header">
+                <h2>Web Development <span>Journey & Philosophy</span></h2>
+                <p>How I craft websites : from concept to deployment</p>
+            </div>
+            <div class="journey-grid">
+                <div class="journey-card">
+                    <div class="journey-icon"><i class="fas fa-road"></i></div>
+                    <h3>How I Started</h3>
+                    <p>My web development journey began with a curiosity about how websites work. I started building static pages with HTML/CSS, then mastered Vanilla JavaScript to add interactivity. Each project taught me something new from responsive design to performance optimization.</p>
+                    <ul class="journey-list">
+                        <li><i class="fas fa-check-circle"></i> 6+ complete websites </li>
+                        <li><i class="fas fa-check-circle"></i> 100% custom code</li>
+                        <li><i class="fas fa-check-circle"></i> Mobile-first responsive approach</li>
+                    </ul>
+                </div>
+                <div class="journey-card">
+                    <div class="journey-icon"><i class="fas fa-gem"></i></div>
+                    <h3>Development Philosophy</h3>
+                    <p>I believe great websites are:</p>
+                    <ul class="journey-list">
+                        <li><i class="fas fa-check-circle"></i> <strong>Clean</strong> : Well-structured, readable code</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Fast</strong> : Optimized performance, minimal dependencies</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Responsive</strong> : Perfect on any device</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Accessible</strong> : Usable by everyone</li>
+                    </ul>
+                </div>
+                <div class="journey-card">
+                    <div class="journey-icon"><i class="fas fa-toolbox"></i></div>
+                    <h3>Tools & Workflow</h3>
+                    <p>My development process focuses on efficiency and quality:</p>
+                    <ul class="journey-list">
+                        <li><i class="fas fa-check-circle"></i> VS Code with custom snippets</li>
+                        <li><i class="fas fa-check-circle"></i> Git & GitHub for version control</li>
+                        <li><i class="fas fa-check-circle"></i> Chrome DevTools for debugging</li>
+                        <li><i class="fas fa-check-circle"></i> Local testing on multiple devices</li>
+                    </ul>
+                </div>
+                <div class="journey-card">
+                    <div class="journey-icon"><i class="fas fa-trophy"></i></div>
+                    <h3>Notable Achievements</h3>
+                    <ul class="journey-list">
+                        <li><i class="fas fa-check-circle"></i> Built Triveni AI Platform (fully responsive)</li>
+                        <li><i class="fas fa-check-circle"></i> Developed 5+ client websites with 100% satisfaction</li>
+                        <li><i class="fas fa-check-circle"></i> Achieved 90+ Lighthouse scores on all projects</li>
+                        <li><i class="fas fa-check-circle"></i> Self-taught, continuously learning modern standards</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <!-- TRIVENI AI COMPANY SECTION -->
         <section class="company-section">
             <div class="company-header">
@@ -1121,9 +1253,9 @@
             <div class="company-grid">
                 <div class="company-card">
                     <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
-                    <p>To eliminate "dead capital" — information locked in silos, PDFs, spreadsheets, and legacy systems — through intelligent AI agents that connect, understand, and act.</p>
+                    <p>To eliminate "dead capital": information locked in silos, PDFs, spreadsheets, and legacy systems through intelligent AI agents that connect, understand, and act.</p>
                     <h3 style="margin-top: 1.5rem;"><i class="fas fa-chart-line"></i> The Problem We Solve</h3>
-                    <p>Organizations don't have a data problem — they have a <strong>decision problem</strong>. Data exists, questions exist, but the bridge between them is broken. Triveni AI builds that bridge.</p>
+                    <p>Organizations don't have a data problem , they have a <strong>decision problem</strong>. Data exists, questions exist, but the bridge between them is broken. Triveni AI builds that bridge.</p>
                 </div>
                 <div class="company-card">
                     <h3><i class="fas fa-layer-group"></i> Our AI Tiers</h3>
@@ -1200,7 +1332,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">2022 - PRESENT</div>
                     <h3 class="timeline-title">Mathematics Foundation</h3>
-                    <p class="timeline-desc">Advanced mathematics including probability theory, linear algebra, and optimization — the mathematical backbone of AI systems.</p>
+                    <p class="timeline-desc">Advanced mathematics including probability theory, linear algebra, and optimization: the mathematical backbone of AI systems.</p>
                 </div>
             </div>
         </section>
@@ -1220,7 +1352,7 @@
                 <div class="mv-card">
                     <div class="mv-icon"><i class="fas fa-rocket"></i></div>
                     <h3 class="mv-title">Mission</h3>
-                    <p class="mv-content">To build AI agents that don't just talk, but do — transforming how organizations interact with their data, automate workflows, and make decisions. Bridging the gap between mathematical theory and practical AI applications.</p>
+                    <p class="mv-content">To build AI agents that don't just talk, but do transforming how organizations interact with their data, automate workflows, and make decisions. Bridging the gap between mathematical theory and practical AI applications.</p>
                 </div>
             </div>
         </section>
@@ -1245,10 +1377,10 @@
                     <div class="skill-item"><div class="skill-name">Model Deployment</div><div class="skill-bar"><div class="skill-fill" style="--skill-level: 85%"></div></div></div>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Development</h3>
-                    <div class="skill-item"><div class="skill-name">Python</div><div class="skill-bar"><div class="skill-fill" style="--skill-level: 88%"></div></div></div>
-                    <div class="skill-item"><div class="skill-name">FastAPI / Flask</div><div class="skill-bar"><div class="skill-fill" style="--skill-level: 80%"></div></div></div>
-                    <div class="skill-item"><div class="skill-name">JavaScript / HTML/CSS</div><div class="skill-bar"><div class="skill-fill" style="--skill-level: 85%"></div></div></div>
+                    <h3><i class="fas fa-code"></i> Web Development</h3>
+                    <div class="skill-item"><div class="skill-name">HTML5 / CSS3</div><div class="skill-bar"><div class="skill-fill" style="--skill-level: 90%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name">Vanilla JavaScript</div><div class="skill-bar"><div class="skill-fill" style="--skill-level: 88%"></div></div></div>
+                    <div class="skill-item"><div class="skill-name">Responsive Design</div><div class="skill-bar"><div class="skill-fill" style="--skill-level: 92%"></div></div></div>
                 </div>
             </div>
         </section>
@@ -1316,115 +1448,178 @@
             });
         }
 
-        // Background Canvas Animation
-        const canvas = document.getElementById('techBgCanvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let width, height;
+        // ========== GLOWING ORBS BACKGROUND - WORKING ANIMATION ==========
+        
+        (() => {
+    const canvas = document.getElementById('techBgCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
 
-            function resizeCanvas() {
-                width = window.innerWidth;
-                height = window.innerHeight - 80;
-                canvas.width = width;
-                canvas.height = height;
-            }
+    const HUB_COUNT = 6;
+    const PACKET_COUNT = 50;
+    const COLOR_BLUE = '0, 102, 255';
+    const COLOR_CYAN = '0, 240, 255';
+    const COLOR_ORANGE = '255, 85, 0';
 
-            const particles = [];
-            const particleCount = 80;
+    let hubs = [];
+    let packets = [];
 
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.size = Math.random() * 3 + 1;
-                    this.speedX = (Math.random() - 0.5) * 0.8;
-                    this.speedY = (Math.random() - 0.5) * 0.8;
-                    this.color = Math.random() > 0.7 ? 'rgba(59, 130, 246, 0.6)' : 
-                                Math.random() > 0.5 ? 'rgba(245, 158, 11, 0.4)' : 
-                                'rgba(16, 185, 129, 0.3)';
-                    this.waveOffset = Math.random() * Math.PI * 2;
-                }
+    // Static Server processing cores
+    class CircuitHub {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 3 + 2;
+        this.pulseOffset = Math.random() * Math.PI * 2;
+      }
+      draw(t) {
+        const pulse = Math.sin(t * 0.05 + this.pulseOffset);
+        const size = this.size + pulse * 1.2;
+        const opacity = 0.4 + pulse * 0.25;
 
-                update(time) {
-                    this.waveOffset += 0.05;
-                    this.x += this.speedX + Math.sin(this.waveOffset) * 0.3;
-                    this.y += this.speedY + Math.cos(this.waveOffset) * 0.3;
-                    if (this.x > width) this.x = 0;
-                    if (this.x < 0) this.x = width;
-                    if (this.y > height) this.y = 0;
-                    if (this.y < 0) this.y = height;
-                }
+        // Outer glow
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, size * 3, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${COLOR_BLUE}, ${opacity * 0.1})`;
+        ctx.fill();
 
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color;
-                    ctx.fill();
-                    ctx.shadowBlur = 15;
-                    ctx.shadowColor = this.color;
-                    ctx.fill();
-                    ctx.shadowBlur = 0;
-                }
-            }
+        // Inner Core
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${COLOR_CYAN}, 0.85)`;
+        ctx.fill();
+      }
+    }
 
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-
-            let time = 0;
-
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-                time += 0.01;
-
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < 100) {
-                            ctx.beginPath();
-                            ctx.strokeStyle = `rgba(59, 130, 246, ${0.15 * (1 - distance / 100)})`;
-                            ctx.lineWidth = 0.8;
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-
-                particles.forEach(particle => {
-                    particle.update(time);
-                    particle.draw();
-                });
-
-                requestAnimationFrame(animate);
-            }
-
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-                particles.length = 0;
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push(new Particle());
-                }
-            });
-            resizeCanvas();
-            animate();
+    // Glowing data packets traveling along straight paths
+    class DataPacket {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        // Start at a random hub or screen edge
+        if (hubs.length > 0 && Math.random() > 0.4) {
+          const h = hubs[Math.floor(Math.random() * hubs.length)];
+          this.x = h.x;
+          this.y = h.y;
+        } else {
+          this.x = Math.random() * width;
+          this.y = Math.random() > 0.5 ? 0 : height;
         }
 
-        // Scroll Animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
+        // Set direction (highly organized straight path matching PCB circuits)
+        this.dir = Math.random() > 0.5 ? 'H' : 'V';
+        this.speed = (Math.random() * 1.5 + 1.0) * (Math.random() > 0.5 ? 1 : -1);
+        this.color = Math.random() > 0.35 ? COLOR_CYAN : COLOR_ORANGE;
+        this.life = Math.random() * 200 + 100;
+        this.trail = [];
+        this.trailLength = Math.floor(Math.random() * 8 + 6);
+      }
+      update() {
+        // Log trails
+        this.trail.unshift({ x: this.x, y: this.y });
+        if (this.trail.length > this.trailLength) {
+          this.trail.pop();
+        }
 
-        document.querySelectorAll('.section, .company-section, .expertise-card, .timeline-item, .mv-card, .skill-category').forEach(el => {
-            observer.observe(el);
-        });
+        // Travel horizontally or vertically (Circuit trace)
+        if (this.dir === 'H') {
+          this.x += this.speed;
+        } else {
+          this.y += this.speed;
+        }
+
+        this.life--;
+        if (this.life <= 0 || this.x < -20 || this.x > width + 20 || this.y < -20 || this.y > height + 20) {
+          this.reset();
+        }
+      }
+      draw() {
+        if (this.trail.length < 2) return;
+
+        // Draw laser trails
+        ctx.lineWidth = 1.2;
+        for (let i = 0; i < this.trail.length - 1; i++) {
+          const opacity = (1 - i / this.trail.length) * 0.5;
+          ctx.strokeStyle = `rgba(${this.color}, ${opacity})`;
+          ctx.beginPath();
+          ctx.moveTo(this.trail[i].x, this.trail[i].y);
+          ctx.lineTo(this.trail[i+1].x, this.trail[i+1].y);
+          ctx.stroke();
+        }
+
+        // Pulse tip node
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      hubs = [];
+      packets = [];
+      const numHubs = Math.min(HUB_COUNT, Math.floor((width * height) / 140000));
+      for (let i = 0; i < numHubs; i++) hubs.push(new CircuitHub());
+      
+      const numPackets = Math.min(PACKET_COUNT, Math.floor((width * height) / 25000));
+      for (let i = 0; i < numPackets; i++) packets.push(new DataPacket());
+    }
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      window.scaleCanvasForDPI(canvas, ctx, width, height);
+    }
+
+    let time = 0;
+    function drawFrame(timestamp, elapsed) {
+      ctx.fillStyle = '#020204';
+      ctx.fillRect(0, 0, width, height);
+      time++;
+
+      // 1. Draw structured linear circuit connections between hubs
+      ctx.lineWidth = 0.5;
+      ctx.strokeStyle = `rgba(${COLOR_BLUE}, 0.08)`;
+      for (let i = 0; i < hubs.length; i++) {
+        for (let j = i + 1; j < hubs.length; j++) {
+          const dx = hubs[i].x - hubs[j].x;
+          const dy = hubs[i].y - hubs[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          
+          if (dist < 400) {
+            // Draw clean L-shaped straight lines instead of diagonal (futuristic PCB looks)
+            ctx.beginPath();
+            ctx.moveTo(hubs[i].x, hubs[i].y);
+            ctx.lineTo(hubs[j].x, hubs[i].y); // Right angle corner
+            ctx.lineTo(hubs[j].x, hubs[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // 2. Draw active circuit lines
+      packets.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      // 3. Draw processing hubs
+      hubs.forEach(h => h.draw(time));
+    }
+
+    window.addEventListener('resize', () => {
+      resize();
+      init();
+    });
+
+    // Register canvas with performance Registry
+    window.CanvasRegistry.register('projectsCore', init, drawFrame, resize);
+
+  })();
     </script>
 </body>
 
