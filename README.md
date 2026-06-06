@@ -1,2 +1,2 @@
 # portfolio-website
-This is portfolio website for Quant and ML Developer
+This is portfolio website for Ai Agent Developer, web developer and ML Engineer
