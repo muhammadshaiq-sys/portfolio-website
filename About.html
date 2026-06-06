@@ -39,15 +39,17 @@
             padding-top: 80px;
         }
 
-        /* ========== NEURAL NETWORK BACKGROUND - NEW ========== */
+        /* ========== NEURAL NETWORK BACKGROUND ========== */
         #neuralCanvas {
             position: fixed;
             top: 80px;
             left: 0;
             width: 100%;
             height: calc(100% - 80px);
-            z-index: -2;
+            z-index: 0;
             pointer-events: none;
+            display: block;
+            background: radial-gradient(circle at 30% 40%, #0a0c15, #02040a);
         }
 
         .neural-texture {
@@ -56,10 +58,16 @@
             left: 0;
             width: 100%;
             height: calc(100% - 80px);
-            z-index: -1;
+            z-index: 1;
             pointer-events: none;
             background: radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.06) 0%, transparent 60%),
                         radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.04) 0%, transparent 60%);
+        }
+
+        /* Content z-index */
+        .about-hero, .webdev-journey, .company-section, .section, .footer {
+            position: relative;
+            z-index: 10;
         }
 
         /* ========== RESPONSIVE NAVBAR ========== */
@@ -243,7 +251,7 @@
             50% { opacity: 0.5; }
         }
 
-        /* ========== QUANT STATS (with hover effects) ========== */
+        /* ========== QUANT STATS ========== */
         .quant-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -308,7 +316,6 @@
             letter-spacing: 1px;
         }
 
-        /* Hero Image */
         .hero-image {
             flex: 1;
             position: relative;
@@ -370,7 +377,7 @@
             color: white;
         }
 
-        /* ========== UNIQUE WEB DEVELOPER SECTION ========== */
+        /* ========== WEB DEVELOPER JOURNEY SECTION ========== */
         .webdev-journey {
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(16, 185, 129, 0.05));
             border-radius: 24px;
@@ -1450,31 +1457,24 @@
             });
         }
 
-        // ========== NEURAL NETWORK BACKGROUND - NEW ANIMATION ==========
-        const canvas = document.getElementById('neuralCanvas');
-        if (canvas) {
+        // ========== NEURAL NETWORK BACKGROUND - PERSISTENT ANIMATION ==========
+        (function initNeuralNetwork() {
+            const canvas = document.getElementById('neuralCanvas');
+            if (!canvas) return;
+            
             const ctx = canvas.getContext('2d');
             let width, height;
-
-            function resizeCanvas() {
-                width = window.innerWidth;
-                height = window.innerHeight - 80;
-                canvas.width = width;
-                canvas.height = height;
-            }
-
-            // Neural network nodes
-            const nodes = [];
-            const nodeCount = 28;
+            let animationId = null;
+            let nodes = [];
+            let dataPackets = [];
             
-            // Colors for nodes
             const nodeColors = [
-                { r: 59, g: 130, b: 246 },   // blue
-                { r: 139, g: 92, b: 246 },   // purple
-                { r: 16, g: 185, b: 129 },   // green
-                { r: 245, g: 158, b: 11 }    // orange
+                { r: 59, g: 130, b: 246 },
+                { r: 139, g: 92, b: 246 },
+                { r: 16, g: 185, b: 129 },
+                { r: 245, g: 158, b: 11 }
             ];
-
+            
             class NeuralNode {
                 constructor() {
                     this.x = Math.random() * width;
@@ -1489,19 +1489,15 @@
                     this.signalActive = Math.random() > 0.7;
                     this.signalProgress = Math.random();
                 }
-
+                
                 update() {
-                    // Move slowly
                     this.x += this.vx;
                     this.y += this.vy;
-                    
-                    // Bounce off edges
                     if (this.x < -50) this.x = width + 50;
                     if (this.x > width + 50) this.x = -50;
                     if (this.y < -50) this.y = height + 50;
                     if (this.y > height + 50) this.y = -50;
                     
-                    // Update signal
                     if (this.signalActive) {
                         this.signalProgress += 0.02;
                         if (this.signalProgress >= 1) {
@@ -1512,28 +1508,24 @@
                         this.signalActive = true;
                     }
                 }
-
+                
                 draw() {
                     const color = nodeColors[this.colorIndex];
                     const pulse = 0.7 + Math.sin(Date.now() * this.pulseSpeed + this.pulsePhase) * 0.3;
                     
-                    // Glow effect
                     ctx.shadowBlur = 15;
                     ctx.shadowColor = `rgba(${color.r}, ${color.g}, ${color.b}, 0.6)`;
                     
-                    // Node circle
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.radius * pulse, 0, Math.PI * 2);
                     ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.7)`;
                     ctx.fill();
                     
-                    // Inner core
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.radius * 0.4, 0, Math.PI * 2);
                     ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 1)`;
                     ctx.fill();
                     
-                    // Signal pulse (travelling data)
                     if (this.signalActive) {
                         ctx.beginPath();
                         ctx.arc(this.x, this.y, this.radius * (1 + this.signalProgress * 2), 0, Math.PI * 2);
@@ -1544,70 +1536,7 @@
                     ctx.shadowBlur = 0;
                 }
             }
-
-            // Create nodes
-            for (let i = 0; i < nodeCount; i++) {
-                nodes.push(new NeuralNode());
-            }
-
-            // Establish connections based on distance
-            function updateConnections() {
-                for (let i = 0; i < nodes.length; i++) {
-                    nodes[i].connections = [];
-                    for (let j = i + 1; j < nodes.length; j++) {
-                        const dx = nodes[i].x - nodes[j].x;
-                        const dy = nodes[i].y - nodes[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < 180) {
-                            nodes[i].connections.push({ node: nodes[j], distance: distance });
-                            nodes[j].connections.push({ node: nodes[i], distance: distance });
-                        }
-                    }
-                }
-            }
-
-            // Draw connections between nodes
-            function drawConnections() {
-                const drawnPairs = new Set();
-                
-                for (let i = 0; i < nodes.length; i++) {
-                    for (let conn of nodes[i].connections) {
-                        const key = `${Math.min(i, nodes.indexOf(conn.node))}-${Math.max(i, nodes.indexOf(conn.node))}`;
-                        if (drawnPairs.has(key)) continue;
-                        drawnPairs.add(key);
-                        
-                        const opacity = 0.15 * (1 - conn.distance / 180);
-                        const gradient = ctx.createLinearGradient(nodes[i].x, nodes[i].y, conn.node.x, conn.node.y);
-                        const color1 = nodeColors[nodes[i].colorIndex];
-                        const color2 = nodeColors[conn.node.colorIndex];
-                        gradient.addColorStop(0, `rgba(${color1.r}, ${color1.g}, ${color1.b}, ${opacity})`);
-                        gradient.addColorStop(1, `rgba(${color2.r}, ${color2.g}, ${color2.b}, ${opacity})`);
-                        
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(conn.node.x, conn.node.y);
-                        ctx.strokeStyle = gradient;
-                        ctx.lineWidth = 1.5;
-                        ctx.stroke();
-                        
-                        // Animated data flowing through connections
-                        if (Math.random() < 0.01) {
-                            const t = Math.random();
-                            const x = nodes[i].x + (conn.node.x - nodes[i].x) * t;
-                            const y = nodes[i].y + (conn.node.y - nodes[i].y) * t;
-                            ctx.beginPath();
-                            ctx.arc(x, y, 3, 0, Math.PI * 2);
-                            ctx.fillStyle = `rgba(255, 255, 255, 0.6)`;
-                            ctx.fill();
-                        }
-                    }
-                }
-            }
-
-            // Floating particles (data packets)
-            const dataPackets = [];
-            const packetCount = 25;
-
+            
             class DataPacket {
                 constructor() {
                     this.x = Math.random() * width;
@@ -1634,51 +1563,104 @@
                     ctx.fill();
                 }
             }
-
-            for (let i = 0; i < packetCount; i++) {
-                dataPackets.push(new DataPacket());
+            
+            function updateConnections() {
+                for (let i = 0; i < nodes.length; i++) {
+                    nodes[i].connections = [];
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dx = nodes[i].x - nodes[j].x;
+                        const dy = nodes[i].y - nodes[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 180) {
+                            nodes[i].connections.push({ node: nodes[j], distance: distance });
+                            nodes[j].connections.push({ node: nodes[i], distance: distance });
+                        }
+                    }
+                }
             }
-
-            function animateNeural() {
+            
+            function drawConnections() {
+                const drawnPairs = new Set();
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let conn of nodes[i].connections) {
+                        const key = `${Math.min(i, nodes.indexOf(conn.node))}-${Math.max(i, nodes.indexOf(conn.node))}`;
+                        if (drawnPairs.has(key)) continue;
+                        drawnPairs.add(key);
+                        
+                        const opacity = 0.15 * (1 - conn.distance / 180);
+                        const gradient = ctx.createLinearGradient(nodes[i].x, nodes[i].y, conn.node.x, conn.node.y);
+                        const color1 = nodeColors[nodes[i].colorIndex];
+                        const color2 = nodeColors[conn.node.colorIndex];
+                        gradient.addColorStop(0, `rgba(${color1.r}, ${color1.g}, ${color1.b}, ${opacity})`);
+                        gradient.addColorStop(1, `rgba(${color2.r}, ${color2.g}, ${color2.b}, ${opacity})`);
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(conn.node.x, conn.node.y);
+                        ctx.strokeStyle = gradient;
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+                        
+                        if (Math.random() < 0.01) {
+                            const t = Math.random();
+                            const x = nodes[i].x + (conn.node.x - nodes[i].x) * t;
+                            const y = nodes[i].y + (conn.node.y - nodes[i].y) * t;
+                            ctx.beginPath();
+                            ctx.arc(x, y, 3, 0, Math.PI * 2);
+                            ctx.fillStyle = `rgba(255, 255, 255, 0.6)`;
+                            ctx.fill();
+                        }
+                    }
+                }
+            }
+            
+            function resizeAndReset() {
+                width = window.innerWidth;
+                height = window.innerHeight - 80;
+                canvas.width = width;
+                canvas.height = height;
+                
+                // Reset all animations
+                nodes.length = 0;
+                for (let i = 0; i < 28; i++) {
+                    nodes.push(new NeuralNode());
+                }
+                dataPackets.length = 0;
+                for (let i = 0; i < 25; i++) {
+                    dataPackets.push(new DataPacket());
+                }
+                updateConnections();
+            }
+            
+            function animate() {
+                if (!ctx) return;
                 ctx.clearRect(0, 0, width, height);
                 
-                // Update node positions
+                // Draw background
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#030712');
+                gradient.addColorStop(1, '#0a0c15');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+                
                 nodes.forEach(node => node.update());
                 updateConnections();
-                
-                // Draw connections first (behind nodes)
                 drawConnections();
-                
-                // Draw nodes
                 nodes.forEach(node => node.draw());
-                
-                // Draw floating data packets
                 dataPackets.forEach(packet => {
                     packet.update();
                     packet.draw();
                 });
                 
-                requestAnimationFrame(animateNeural);
+                animationId = requestAnimationFrame(animate);
             }
-
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-                // Reset node positions on resize
-                nodes.length = 0;
-                for (let i = 0; i < nodeCount; i++) {
-                    nodes.push(new NeuralNode());
-                }
-                dataPackets.length = 0;
-                for (let i = 0; i < packetCount; i++) {
-                    dataPackets.push(new DataPacket());
-                }
-                updateConnections();
-            });
             
-            resizeCanvas();
-            updateConnections();
-            animateNeural();
-        }
+            window.removeEventListener('resize', resizeAndReset);
+            window.addEventListener('resize', resizeAndReset);
+            
+            resizeAndReset();
+            animate();
+        })();
 
         // Scroll Animations
         const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
