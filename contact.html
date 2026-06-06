@@ -39,15 +39,17 @@
             position: relative;
         }
 
-        /* ========== ANIMATED BACKGROUND ========== */
+        /* ========== ANIMATED BACKGROUND - GUARANTEED VISIBLE ========== */
         #contactBgCanvas {
             position: fixed;
             top: 80px;
             left: 0;
             width: 100%;
             height: calc(100% - 80px);
-            z-index: -2;
+            z-index: 0;
             pointer-events: none;
+            display: block;
+            background: radial-gradient(circle at 20% 30%, #0a0c15, #02040a);
         }
 
         .contact-texture {
@@ -56,12 +58,11 @@
             left: 0;
             width: 100%;
             height: calc(100% - 80px);
-            z-index: -1;
+            z-index: 1;
             pointer-events: none;
-            background-image:
-                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 40%);
-            opacity: 0.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.06) 0%, transparent 40%);
         }
 
         /* ========== NAVBAR ========== */
@@ -83,21 +84,20 @@
         }
 
         .nav-left {
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), #9333ea);
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: matrix-blinking 3s infinite;
+            animation: subtle-pulse 3s infinite;
             font-family: 'JetBrains Mono', monospace;
             letter-spacing: -0.5px;
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
-        @keyframes matrix-blinking {
-            0%, 45%, 55%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        @keyframes subtle-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         .nav-right ul {
@@ -176,6 +176,12 @@
             transform: rotate(-45deg) translate(7px, -6px);
         }
 
+        /* ========== CONTENT Z-INDEX FIX ========== */
+        .contact-section, .customer-section, .footer {
+            position: relative;
+            z-index: 10;
+        }
+
         /* ========== CONTACT SECTION ========== */
         .contact-section {
             padding: 4rem 5%;
@@ -184,7 +190,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            z-index: 1;
+            z-index: 10;
         }
 
         .contact-container {
@@ -253,6 +259,7 @@
         .profile-card {
             flex: 0 0 35%;
             background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 2.5rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -403,6 +410,7 @@
 
         .contact-card {
             background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border-radius: 16px;
             padding: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -503,7 +511,7 @@
             padding: 4rem 5%;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
-            z-index: 1;
+            z-index: 10;
         }
 
         .customer-container {
@@ -592,6 +600,7 @@
 
         .customer-option {
             background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 2.5rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -670,6 +679,7 @@
             transition: all 0.3s ease;
             width: fit-content;
             border: 1px solid rgba(245, 158, 11, 0.2);
+            cursor: pointer;
         }
 
         .option-button:hover {
@@ -863,7 +873,7 @@
             font-size: 0.9rem;
             background: rgba(10, 15, 25, 0.8);
             position: relative;
-            z-index: 1;
+            z-index: 10;
         }
 
         .social-links {
@@ -1019,12 +1029,12 @@
             <div class="contact-header">
                 <h1>Let's Connect</h1>
                 <div class="contact-subtitle">
-                    AI Agent Developer & ML Engineer. <br>
+                    AI Agent Developer , Web Developer& ML Engineer. <br>
                     Specializing in Multi-Agent Systems, RAG Architecture & Production ML.
                 </div>
                 <div class="status-badge">
                     <div class="status-dot"></div>
-                    OPEN TO AI AGENT & ML OPPORTUNITIES
+                    OPEN TO AI AGENT & ML OPPORTUNITIES & Interactive Web Designing Systems
                 </div>
             </div>
 
@@ -1038,7 +1048,7 @@
                         <div class="profile-info">
                             <h2>Muhammad Shaiq</h2>
                             <div class="profile-tagline">
-                                AI Agent Developer // ML Engineer // Founder @ Triveni AI
+                                AI Agent Developer // Web Developer //ML Engineer // Founder @ Triveni AI
                             </div>
                         </div>
                     </div>
@@ -1077,7 +1087,7 @@
                                 <div class="contact-card-content">
                                     <div class="contact-card-label">Code Portfolio</div>
                                     <h3 class="contact-card-title">GitHub</h3>
-                                    <p class="contact-card-detail">Browse AI agent projects & ML models</p>
+                                    <p class="contact-card-detail">Browse AI agent projects, websites & ML models</p>
                                 </div>
                             </div>
                         </a>
@@ -1099,7 +1109,7 @@
                                 <div class="contact-card-content">
                                     <div class="contact-card-label">Project Portfolio</div>
                                     <h3 class="contact-card-title">GitHub Repos</h3>
-                                    <p class="contact-card-detail">View all AI agents & ML projects</p>
+                                    <p class="contact-card-detail">View all AI agents, websites & ML projects</p>
                                 </div>
                             </div>
                         </a>
@@ -1407,11 +1417,14 @@
             });
         }
 
-        // ========== ANIMATED BACKGROUND ==========
+        // ========== GUARANTEED WORKING BACKGROUND ANIMATION ==========
         (function() {
             const canvas = document.getElementById('contactBgCanvas');
-            if (!canvas) return;
-
+            if (!canvas) {
+                console.error('Canvas not found');
+                return;
+            }
+            
             const ctx = canvas.getContext('2d');
             let width, height;
 
@@ -1422,77 +1435,101 @@
                 canvas.height = height;
             }
 
-            const symbols = ['🤖', '🧠', '⚡', '📊', '💬', '🔗', '🎯', '🤝'];
+            // Bright, visible particles
             const particles = [];
-            const particleCount = 55;
+            const particleCount = 65;
 
-            class Particle {
+            class VisibleParticle {
                 constructor() {
-                    this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
-                    this.size = Math.random() * 20 + 12;
-                    this.speedX = (Math.random() - 0.5) * 0.35;
-                    this.speedY = (Math.random() - 0.5) * 0.35;
-                    this.color = Math.random() > 0.6 ?
-                        `rgba(59, 130, 246, ${Math.random() * 0.3 + 0.1})` :
-                        `rgba(245, 158, 11, ${Math.random() * 0.25 + 0.1})`;
-                    this.waveOffset = Math.random() * Math.PI * 2;
+                    this.size = Math.random() * 5 + 2;
+                    this.speedX = (Math.random() - 0.5) * 0.8;
+                    this.speedY = (Math.random() - 0.5) * 0.8;
+                    // Brighter colors for visibility
+                    const colors = [
+                        { r: 59, g: 130, b: 246 },  // Blue
+                        { r: 139, g: 92, b: 246 },  // Purple
+                        { r: 16, g: 185, b: 129 },  // Green
+                        { r: 245, g: 158, b: 11 }   // Orange
+                    ];
+                    const colorChoice = colors[Math.floor(Math.random() * colors.length)];
+                    this.color = `rgba(${colorChoice.r}, ${colorChoice.g}, ${colorChoice.b}, 0.5)`;
+                    this.glowColor = `rgba(${colorChoice.r}, ${colorChoice.g}, ${colorChoice.b}, 0.8)`;
                 }
 
                 update() {
-                    this.waveOffset += 0.025;
-                    this.x += this.speedX + Math.sin(this.waveOffset) * 0.18;
-                    this.y += this.speedY + Math.cos(this.waveOffset) * 0.18;
-                    if (this.x > width + this.size) this.x = -this.size;
-                    if (this.x < -this.size) this.x = width + this.size;
-                    if (this.y > height + this.size) this.y = -this.size;
-                    if (this.y < -this.size) this.y = height + this.size;
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    
+                    // Wrap around
+                    if (this.x > width) this.x = 0;
+                    if (this.x < 0) this.x = width;
+                    if (this.y > height) this.y = 0;
+                    if (this.y < 0) this.y = height;
                 }
 
                 draw() {
-                    ctx.save();
-                    ctx.translate(this.x, this.y);
-                    ctx.font = `${this.size}px 'Segoe UI Emoji'`;
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.shadowBlur = 12;
-                    ctx.shadowColor = this.color;
+                    // Glow effect
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = this.glowColor;
+                    
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fillStyle = this.color;
-                    ctx.fillText(this.symbol, 0, 0);
-                    ctx.restore();
+                    ctx.fill();
+                    
+                    // Inner bright core
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 0.4, 0, Math.PI * 2);
+                    ctx.fillStyle = this.glowColor;
+                    ctx.fill();
+                    
+                    ctx.shadowBlur = 0;
                 }
             }
 
             for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
+                particles.push(new VisibleParticle());
             }
 
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-
-                // Draw connections between nearby particles
+            // Draw connecting lines
+            function drawConnections() {
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
                         const dy = particles[i].y - particles[j].y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < 110) {
+                        if (distance < 130) {
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(59, 130, 246, ${0.1 * (1 - distance / 110)})`;
-                            ctx.lineWidth = 0.6;
+                            const opacity = 0.15 * (1 - distance / 130);
+                            ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
+                            ctx.lineWidth = 1;
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
                             ctx.stroke();
                         }
                     }
                 }
+            }
 
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                
+                // Draw background gradient for depth
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#030712');
+                gradient.addColorStop(1, '#0a0c15');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+                
+                drawConnections();
+                
                 particles.forEach(particle => {
                     particle.update();
                     particle.draw();
                 });
-
+                
                 requestAnimationFrame(animate);
             }
 
@@ -1500,9 +1537,10 @@
                 resizeCanvas();
                 particles.length = 0;
                 for (let i = 0; i < particleCount; i++) {
-                    particles.push(new Particle());
+                    particles.push(new VisibleParticle());
                 }
             });
+            
             resizeCanvas();
             animate();
         })();
@@ -1597,7 +1635,6 @@
             feedbackForm.style.display = 'none';
             successMessage.style.display = 'block';
 
-            // Auto close after 4 seconds
             setTimeout(() => {
                 closeModal();
             }, 4000);
@@ -1625,7 +1662,7 @@
             });
         });
 
-        // Add ripple effect to buttons
+        // Ripple effect
         document.querySelectorAll('.option-button, .submit-button').forEach(button => {
             button.addEventListener('click', function(e) {
                 const x = e.clientX - e.target.getBoundingClientRect().left;
@@ -1650,7 +1687,6 @@
             });
         });
 
-        // Add ripple animation style
         const rippleStyle = document.createElement('style');
         rippleStyle.textContent = `
             @keyframes ripple {
