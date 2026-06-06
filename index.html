@@ -13,6 +13,85 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for Web Developer Section - does NOT affect original */
+        .webdev-section {
+            padding: 3rem 2rem;
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .webdev-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .webdev-header h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .webdev-header h2 span {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .webdev-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .webdev-card {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s;
+        }
+        .webdev-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .webdev-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .webdev-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 0.3rem;
+        }
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .skill-item {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.25rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            color: #cbd5e1;
+        }
+        @media (max-width: 768px) {
+            .webdev-section {
+                padding: 2rem 1rem;
+            }
+            .webdev-header h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -87,7 +166,52 @@
         </div>
     </section>
 
-    <!-- TRIVENI AI AGENT ORCHESTRATION HUB (Replaces Quant Market) -->
+    <!-- ============================================ -->
+    <!-- WEB DEVELOPER SHOWCASE SECTION (ADDED) -->
+    <!-- ============================================ -->
+    <section class="webdev-section">
+        <div class="webdev-header">
+            <h2>Web Development <span>Portfolio</span></h2>
+        </div>
+        <div class="webdev-grid">
+            <div class="webdev-card">
+                <div class="webdev-number">6+</div>
+                <div class="webdev-label">Websites Built </div>
+                <div class="skills-list">
+                    <span class="skill-item">Full Responsive</span>
+                    <span class="skill-item">Vanilla JS</span>
+                </div>
+            </div>
+            <div class="webdev-card">
+                <div class="webdev-number">100%</div>
+                <div class="webdev-label">Vanilla HTML/CSS/JS</div>
+                <div class="skills-list">
+                    <span class="skill-item">No Frameworks</span>
+                    <span class="skill-item">Clean Code</span>
+                </div>
+            </div>
+            <div class="webdev-card">
+                <div class="webdev-number">5+</div>
+                <div class="webdev-label">Client Projects Delivered</div>
+                <div class="skills-list">
+                    <span class="skill-item">Satisfied Clients</span>
+                    <span class="skill-item">Ongoing Support</span>
+                </div>
+            </div>
+            <div class="webdev-card">
+                <div class="webdev-number">⚡</div>
+                <div class="webdev-label">Tech Stack</div>
+                <div class="skills-list">
+                    <span class="skill-item">HTML5</span>
+                    <span class="skill-item">CSS3</span>
+                    <span class="skill-item">JavaScript </span>
+                    <span class="skill-item">REST APIs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRIVENI AI AGENT ORCHESTRATION HUB (YOUR ORIGINAL - UNCHANGED) -->
     <section class="quant-market">
         <div class="market-container">
             <!-- Header with Live Agent Status -->
@@ -240,7 +364,7 @@
                     </div>
                 </div>
 
-                <!-- Agent Learning Progress (replaces Model Training) -->
+                <!-- Agent Learning Progress -->
                 <div class="chart-container training">
                     <div class="chart-header">
                         <h3><i class="fas fa-brain"></i> RAG Agent Learning</h3>
@@ -337,12 +461,12 @@
     <!-- Typed.js Script -->
     <script>
         var typed = new Typed('#element', {
-            strings: ['AI Agent Developer', 'ML Engineer', 'Mathematician','Founder @ Triveni AI'],
+            strings: ['AI Agent Developer', 'ML Engineer', 'Mathematician','Founder @ Triveni AI', 'Web Developer'],
             typeSpeed: 50,
         });
     </script>
 
-    <!-- Globe Animation Script (Keep existing) -->
+    <!-- Globe Animation Script - FULLY RESTORED WORKING -->
     <script>
         (() => {
             const canvas = document.getElementById('globeCanvas');
@@ -437,7 +561,7 @@
         })();
     </script>
 
-    <!-- Agent Network Visualization & Live Updates -->
+    <!-- Agent Network Visualization & Live Updates - RESTORED -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Live clock with agent status
@@ -482,7 +606,6 @@
                 if (!ctx) return;
                 ctx.clearRect(0, 0, width, height);
                 
-                // Update agent positions based on actual canvas size
                 const positions = agents.map(a => ({
                     ...a,
                     xPos: a.x * width,
@@ -506,7 +629,7 @@
                     });
                 });
                 
-                // Draw data packets (moving particles)
+                // Draw data packets
                 const time = Date.now() / 1000;
                 positions.forEach((agent, idx) => {
                     agent.connections.forEach(connIndex => {
@@ -547,7 +670,6 @@
                     ctx.textBaseline = 'middle';
                     ctx.fillText(agent.name[0], agent.xPos, agent.yPos);
                     
-                    // Agent label
                     ctx.fillStyle = '#94a3b8';
                     ctx.font = '10px Inter';
                     ctx.fillText(agent.name, agent.xPos, agent.yPos - agent.size - 5);
@@ -578,7 +700,6 @@
                         const cell = document.createElement('div');
                         cell.className = 'heatmap-cell';
                         
-                        // Random activity level for visual effect
                         const intensity = Math.random() * 100;
                         let color, bgOpacity;
                         if (intensity > 70) {
@@ -627,7 +748,6 @@
             const taskTypesList = ['Query', 'Analysis', 'API Call', 'Training', 'Generation'];
             
             function updateDecisionStream() {
-                // Update decision rows
                 const newDecision = {
                     agent: agentsList[Math.floor(Math.random() * agentsList.length)],
                     action: actions[Math.floor(Math.random() * actions.length)]
@@ -644,7 +764,6 @@
                     decisionRows.removeChild(decisionRows.lastChild);
                 }
                 
-                // Update task rows
                 const newTask = {
                     status: statuses[Math.floor(Math.random() * statuses.length)],
                     type: taskTypesList[Math.floor(Math.random() * taskTypesList.length)]
@@ -661,7 +780,6 @@
                     taskRows.removeChild(taskRows.lastChild);
                 }
                 
-                // Update stats with random fluctuations
                 const tasksCompleted = document.getElementById('tasksCompleted');
                 const currentTasks = parseInt(tasksCompleted.textContent.replace(/,/g, ''));
                 tasksCompleted.textContent = (currentTasks + Math.floor(Math.random() * 5)).toLocaleString();
@@ -705,19 +823,16 @@
         });
     </script>
 
-    <!-- Mobile Navigation & Responsive Handler (Fixed) -->
+    <!-- Mobile Navigation Toggle - FIXED -->
     <script>
-        // Mobile Navigation Toggle - Fixed
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
 
         if (hamburger && navMenu) {
-            // Toggle menu on hamburger click
             hamburger.addEventListener('click', (e) => {
                 e.stopPropagation();
                 hamburger.classList.toggle('active');
                 navMenu.classList.toggle('active');
-                // Prevent body scroll when menu is open
                 if (navMenu.classList.contains('active')) {
                     document.body.style.overflow = 'hidden';
                 } else {
@@ -725,7 +840,6 @@
                 }
             });
 
-            // Close menu when clicking a link
             document.querySelectorAll('.nav-right a').forEach(link => {
                 link.addEventListener('click', () => {
                     hamburger.classList.remove('active');
@@ -734,7 +848,6 @@
                 });
             });
 
-            // Close menu when clicking outside
             document.addEventListener('click', (e) => {
                 if (navMenu.classList.contains('active') && 
                     !hamburger.contains(e.target) && 
@@ -746,7 +859,6 @@
             });
         }
 
-        // Handle window resize - close menu on resize if open
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768 && navMenu && navMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
@@ -756,11 +868,8 @@
             handleResize();
         });
 
-        // Responsive adjustments
         function handleResize() {
             const isMobile = window.innerWidth < 768;
-            
-            // Adjust heatmap columns for mobile
             const heatmapGrid = document.getElementById('agentHeatmapGrid');
             if (heatmapGrid) {
                 if (isMobile) {
@@ -769,8 +878,6 @@
                     heatmapGrid.style.gridTemplateColumns = 'repeat(4, 1fr)';
                 }
             }
-            
-            // Adjust order book layout
             const orderbookContent = document.querySelector('.orderbook-content');
             if (orderbookContent) {
                 if (isMobile) {
@@ -779,18 +886,14 @@
                     orderbookContent.style.flexDirection = 'row';
                 }
             }
-            
-            // Adjust chart wrapper height
             const chartWrapper = document.querySelector('.chart-wrapper');
             if (chartWrapper) {
                 chartWrapper.style.height = isMobile ? '200px' : '250px';
             }
         }
 
-        // Call on load and resize
         window.addEventListener('load', () => {
             handleResize();
-            // Re-initialize network canvas after load
             setTimeout(() => {
                 const canvas = document.getElementById('agentNetworkCanvas');
                 if (canvas && canvas.width > 0) {
