@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Agent Services | Muhammad Shaiq</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #3b82f6;
@@ -39,8 +39,8 @@
             position: relative;
         }
 
-        /* ========== ANIMATED BACKGROUND ========== */
-        #quantBgCanvas {
+        /* ========== ANIMATED BACKGROUND WITH MOVING PATTERNS ========== */
+        #patternCanvas {
             position: fixed;
             top: 80px;
             left: 0;
@@ -50,7 +50,7 @@
             pointer-events: none;
         }
 
-        .quant-texture {
+        .pattern-texture {
             position: fixed;
             top: 80px;
             left: 0;
@@ -58,10 +58,10 @@
             height: calc(100% - 80px);
             z-index: -1;
             pointer-events: none;
-            background-image:
-                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 40%);
-            opacity: 0.6;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(245, 158, 11, 0.06) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(59, 130, 246, 0.02) 40px, rgba(59, 130, 246, 0.02) 80px);
         }
 
         /* ========== RESPONSIVE NAVBAR ========== */
@@ -75,7 +75,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 5%;
-            background: rgba(15, 23, 42, 0.97);
+            background: var(--nav-bg);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
@@ -83,21 +83,20 @@
         }
 
         .nav-left {
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), #9333ea);
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: matrix-blinking 3s infinite;
+            animation: subtle-pulse 3s infinite;
             font-family: 'JetBrains Mono', monospace;
             letter-spacing: -0.5px;
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
-        @keyframes matrix-blinking {
-            0%, 45%, 55%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        @keyframes subtle-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         .nav-right ul {
@@ -419,6 +418,124 @@
             transform: translateY(-2px);
         }
 
+        /* ========== WEB DEVELOPER SERVICES SECTION ========== */
+        .webdev-services-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(59, 130, 246, 0.08));
+            border-radius: 28px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .webdev-services-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .webdev-services-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .webdev-services-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .webdev-services-header h2 span {
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .webdev-services-header p {
+            color: var(--gray-400);
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .webdev-offerings {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .webdev-offerings {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .webdev-offerings {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .webdev-offer-card {
+            background: var(--card-bg);
+            border-radius: 1.2rem;
+            padding: 1.8rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .webdev-offer-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.15);
+        }
+
+        .webdev-offer-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            font-size: 1.6rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .webdev-offer-card:hover .webdev-offer-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .webdev-offer-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .webdev-offer-card p {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            line-height: 1.5;
+        }
+
+        .webdev-pricing {
+            margin-top: 2rem;
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .webdev-pricing span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
         /* ========== INDUSTRY SECTION ========== */
         .industry-section {
             margin: 4rem 0;
@@ -474,6 +591,24 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .industry-card ul {
+            list-style: none;
+        }
+
+        .industry-card ul li {
+            padding: 0.4rem 0;
+            color: var(--gray-400);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .industry-card ul li::before {
+            content: '•';
+            color: var(--secondary);
         }
 
         /* ========== TECH STACK ========== */
@@ -725,7 +860,8 @@
                 position: fixed;
                 top: 80px;
                 right: -100%;
-                width: 80%;
+                width: 70%;
+                max-width: 280px;
                 height: calc(100vh - 80px);
                 background: rgba(15, 23, 42, 0.98);
                 backdrop-filter: blur(20px);
@@ -733,6 +869,7 @@
                 padding: 2rem;
                 transition: right 0.4s ease;
                 z-index: 999;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
             }
             .nav-right.active {
                 right: 0;
@@ -760,6 +897,9 @@
             }
             .tech-stack-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .webdev-services-section {
+                padding: 1.5rem;
             }
         }
 
@@ -790,13 +930,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .service-card, .industry-card, .process-step {
+        .service-card, .industry-card, .process-step, .webdev-offer-card {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .service-card.visible, .industry-card.visible, .process-step.visible {
+        .service-card.visible, .industry-card.visible, .process-step.visible, .webdev-offer-card.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -804,16 +944,12 @@
 </head>
 
 <body>
-    <!-- Animated Background Canvas -->
-    <canvas id="quantBgCanvas"></canvas>
-    <div class="quant-texture"></div>
+    <canvas id="patternCanvas"></canvas>
+    <div class="pattern-texture"></div>
 
-    <!-- Navigation -->
     <header>
         <nav class="navbar">
-            <div class="nav-left">
-                Muhammad Shaiq
-            </div>
+            <div class="nav-left">Muhammad Shaiq</div>
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
@@ -831,27 +967,6 @@
         </nav>
     </header>
 
-    <!-- Quant Dashboard Stats -->
-    <div class="quant-dashboard">
-        <div class="dashboard-stat">
-            <div class="stat-number">98.7%</div>
-            <div class="stat-label">Agent Accuracy</div>
-        </div>
-        <div class="dashboard-stat">
-            <div class="stat-number">47ms</div>
-            <div class="stat-label">Avg Response</div>
-        </div>
-        <div class="dashboard-stat">
-            <div class="stat-number">24/7</div>
-            <div class="stat-label">Agent Uptime</div>
-        </div>
-        <div class="dashboard-stat">
-            <div class="stat-number">7+</div>
-            <div class="stat-label">Data Sources</div>
-        </div>
-    </div>
-
-    <!-- Services Main Section -->
     <div class="services-container">
         <div class="services-header">
             <h1>AI Agent Development Services</h1>
@@ -861,23 +976,36 @@
             </p>
         </div>
 
-        <!-- Core Services Grid -->
+        <div class="quant-dashboard">
+            <div class="dashboard-stat">
+                <div class="stat-number">98.7%</div>
+                <div class="stat-label">Agent Accuracy</div>
+            </div>
+            <div class="dashboard-stat">
+                <div class="stat-number">47ms</div>
+                <div class="stat-label">Avg Response</div>
+            </div>
+            <div class="dashboard-stat">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Agent Uptime</div>
+            </div>
+            <div class="dashboard-stat">
+                <div class="stat-number">7+</div>
+                <div class="stat-label">Data Sources</div>
+            </div>
+        </div>
+
         <div class="services-grid">
-            <!-- Service 1: Custom RAG Agents -->
             <div class="service-card" data-delay="0.1">
-                <div class="service-icon">
-                    <i class="fas fa-database"></i>
-                </div>
+                <div class="service-icon"><i class="fas fa-database"></i></div>
                 <h3>Custom RAG Agents</h3>
-                <p class="service-description">
-                    Retrieval-Augmented Generation agents that connect to your documents, databases, and knowledge bases for grounded, accurate responses.
-                </p>
+                <p class="service-description">Retrieval-Augmented Generation agents that connect to your documents, databases, and knowledge bases for grounded, accurate responses.</p>
                 <ul class="service-features">
-                    <li>Document ingestion & vectorization</li>
-                    <li>Semantic search & retrieval</li>
+                    <li>Document ingestion and vectorization</li>
+                    <li>Semantic search and retrieval</li>
                     <li>Multi-source data integration</li>
                     <li>Context-aware response generation</li>
-                    <li>Source citation & transparency</li>
+                    <li>Source citation and transparency</li>
                 </ul>
                 <div class="service-tags">
                     <span class="service-tag">LangChain</span>
@@ -886,18 +1014,13 @@
                 </div>
             </div>
 
-            <!-- Service 2: Multi-Agent Orchestration -->
             <div class="service-card" data-delay="0.2">
-                <div class="service-icon">
-                    <i class="fas fa-robot"></i>
-                </div>
+                <div class="service-icon"><i class="fas fa-robot"></i></div>
                 <h3>Multi-Agent Orchestration</h3>
-                <p class="service-description">
-                    Design and deployment of specialized agents that collaborate, delegate, and execute complex workflows autonomously.
-                </p>
+                <p class="service-description">Design and deployment of specialized agents that collaborate, delegate, and execute complex workflows autonomously.</p>
                 <ul class="service-features">
                     <li>Agent role specialization</li>
-                    <li>Task decomposition & routing</li>
+                    <li>Task decomposition and routing</li>
                     <li>Inter-agent communication</li>
                     <li>Conflict resolution</li>
                     <li>Workflow automation</li>
@@ -909,17 +1032,12 @@
                 </div>
             </div>
 
-            <!-- Service 3: LLM Fine-Tuning -->
             <div class="service-card" data-delay="0.3">
-                <div class="service-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
+                <div class="service-icon"><i class="fas fa-brain"></i></div>
                 <h3>LLM Fine-Tuning</h3>
-                <p class="service-description">
-                    Custom fine-tuning of open-source models on your domain-specific data for optimized performance and reduced costs.
-                </p>
+                <p class="service-description">Custom fine-tuning of open-source models on your domain-specific data for optimized performance and reduced costs.</p>
                 <ul class="service-features">
-                    <li>LoRA & QLoRA fine-tuning</li>
+                    <li>LoRA and QLoRA fine-tuning</li>
                     <li>Domain adaptation</li>
                     <li>Inference optimization</li>
                     <li>Cost reduction strategies</li>
@@ -932,21 +1050,16 @@
                 </div>
             </div>
 
-            <!-- Service 4: WhatsApp-First Agents -->
             <div class="service-card" data-delay="0.4">
-                <div class="service-icon">
-                    <i class="fab fa-whatsapp"></i>
-                </div>
+                <div class="service-icon"><i class="fab fa-whatsapp"></i></div>
                 <h3>WhatsApp-First Agents</h3>
-                <p class="service-description">
-                    AI agents accessible via WhatsApp — no app download, no training. Perfect for Pakistan's 50M+ WhatsApp users.
-                </p>
+                <p class="service-description">AI agents accessible via WhatsApp: no app download, no training required. Perfect for Pakistan's 50M+ WhatsApp users.</p>
                 <ul class="service-features">
                     <li>WhatsApp Business API integration</li>
-                    <li>Urdu/English bilingual support</li>
+                    <li>Urdu and English bilingual support</li>
                     <li>Conversational workflows</li>
                     <li>Automated customer support</li>
-                    <li>Lead qualification & nurturing</li>
+                    <li>Lead qualification and nurturing</li>
                 </ul>
                 <div class="service-tags">
                     <span class="service-tag">WhatsApp API</span>
@@ -955,15 +1068,10 @@
                 </div>
             </div>
 
-            <!-- Service 5: Edge AI Agents -->
             <div class="service-card" data-delay="0.5">
-                <div class="service-icon">
-                    <i class="fas fa-microchip"></i>
-                </div>
+                <div class="service-icon"><i class="fas fa-microchip"></i></div>
                 <h3>Edge AI Agents</h3>
-                <p class="service-description">
-                    Agents that run entirely on local hardware — no internet required. Perfect for unreliable connectivity and data privacy concerns.
-                </p>
+                <p class="service-description">Agents that run entirely on local hardware with no internet required. Perfect for unreliable connectivity and data privacy concerns.</p>
                 <ul class="service-features">
                     <li>Local LLM deployment</li>
                     <li>Offline operation capability</li>
@@ -978,19 +1086,14 @@
                 </div>
             </div>
 
-            <!-- Service 6: Workflow Automation Agents -->
             <div class="service-card" data-delay="0.6">
-                <div class="service-icon">
-                    <i class="fas fa-play-circle"></i>
-                </div>
+                <div class="service-icon"><i class="fas fa-play-circle"></i></div>
                 <h3>Workflow Automation</h3>
-                <p class="service-description">
-                    Agents that don't just talk — they do. Execute API calls, generate reports, send alerts, and route approvals automatically.
-                </p>
+                <p class="service-description">Agents that don't just talk, they do. Execute API calls, generate reports, send alerts, and route approvals automatically.</p>
                 <ul class="service-features">
-                    <li>API integration & execution</li>
+                    <li>API integration and execution</li>
                     <li>Report generation</li>
-                    <li>Alert & notification systems</li>
+                    <li>Alert and notification systems</li>
                     <li>Approval routing</li>
                     <li>Data transformation</li>
                 </ul>
@@ -1002,45 +1105,68 @@
             </div>
         </div>
 
+        <!-- Web Developer Services Section -->
+        <div class="webdev-services-section">
+            <div class="webdev-services-header">
+                <h2>Web Development <span>Services</span></h2>
+                <p>Custom websites built with pure HTML, CSS, and Vanilla JavaScript: no bloat, just performance</p>
+            </div>
+            <div class="webdev-offerings">
+                <div class="webdev-offer-card">
+                    <div class="webdev-offer-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Custom Website Development</h3>
+                    <p>Fully responsive websites from scratch: portfolio, business, e-commerce, landing pages. 100% custom code with no templates.</p>
+                </div>
+                <div class="webdev-offer-card">
+                    <div class="webdev-offer-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Responsive Design</h3>
+                    <p>Pixel-perfect on all devices: mobile, tablet, desktop. Mobile-first approach with smooth navigation and touch-friendly interfaces.</p>
+                </div>
+                <div class="webdev-offer-card">
+                    <div class="webdev-offer-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <h3>Performance Optimization</h3>
+                    <p>Lightning-fast load times, optimized assets, lazy loading, and 90+ Lighthouse scores for better SEO and user experience.</p>
+                </div>
+                <div class="webdev-offer-card">
+                    <div class="webdev-offer-icon"><i class="fas fa-code"></i></div>
+                    <h3>Vanilla JavaScript</h3>
+                    <p>Interactive features without heavy frameworks: clean, maintainable, and performant Vanilla JS for dynamic user experiences.</p>
+                </div>
+                <div class="webdev-offer-card">
+                    <div class="webdev-offer-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>Modern UI/UX</h3>
+                    <p>Glassmorphism, gradients, smooth animations, micro-interactions, and hover effects that make your website stand out.</p>
+                </div>
+                <div class="webdev-offer-card">
+                    <div class="webdev-offer-icon"><i class="fas fa-search"></i></div>
+                    <h3>SEO and Accessibility</h3>
+                    <p>Semantic HTML, meta tags optimization, ARIA labels, and accessibility best practices for better search rankings and inclusivity.</p>
+                </div>
+            </div>
+            <div class="webdev-pricing">
+                <p><span>Starting from PKR 50,000</span> : Complete website built in 2-3 weeks. Includes design, development, testing, and deployment.</p>
+            </div>
+        </div>
+
         <!-- Industry Applications -->
         <div class="industry-section">
             <h2 class="section-title">Industry Applications</h2>
             <div class="industry-grid">
                 <div class="industry-card">
-                    <h4><i class="fas fa-university"></i> Banking & Finance</h4>
-                    <ul class="service-features">
-                        <li>Fraud detection agents</li>
-                        <li>Compliance monitoring</li>
-                        <li>Customer support automation</li>
-                        <li>Transaction analysis</li>
-                    </ul>
+                    <h4><i class="fas fa-university"></i> Banking and Finance</h4>
+                    <ul><li>Fraud detection agents</li><li>Compliance monitoring</li><li>Customer support automation</li><li>Transaction analysis</li></ul>
                 </div>
                 <div class="industry-card">
                     <h4><i class="fas fa-hospital"></i> Healthcare</h4>
-                    <ul class="service-features">
-                        <li>Patient query assistants</li>
-                        <li>Insurance verification</li>
-                        <li>Medical record retrieval</li>
-                        <li>Appointment scheduling</li>
-                    </ul>
+                    <ul><li>Patient query assistants</li><li>Insurance verification</li><li>Medical record retrieval</li><li>Appointment scheduling</li></ul>
                 </div>
                 <div class="industry-card">
                     <h4><i class="fas fa-graduation-cap"></i> Education</h4>
-                    <ul class="service-features">
-                        <li>Student query assistants</li>
-                        <li>Course information</li>
-                        <li>Faculty directory</li>
-                        <li>Academic advising</li>
-                    </ul>
+                    <ul><li>Student query assistants</li><li>Course information</li><li>Faculty directory</li><li>Academic advising</li></ul>
                 </div>
                 <div class="industry-card">
-                    <h4><i class="fas fa-store"></i> Retail & E-commerce</h4>
-                    <ul class="service-features">
-                        <li>Product recommendations</li>
-                        <li>Inventory management</li>
-                        <li>Customer support</li>
-                        <li>Order tracking</li>
-                    </ul>
+                    <h4><i class="fas fa-store"></i> Retail and E-commerce</h4>
+                    <ul><li>Product recommendations</li><li>Inventory management</li><li>Customer support</li><li>Order tracking</li></ul>
                 </div>
             </div>
         </div>
@@ -1049,34 +1175,13 @@
         <div class="industry-section">
             <h2 class="section-title">Technical Arsenal</h2>
             <div class="tech-stack-grid">
-                <div class="tech-item">
-                    <i class="fab fa-python"></i>
-                    <span>Python</span>
-                </div>
-                <div class="tech-item">
-                    <i class="fas fa-brain"></i>
-                    <span>LangChain</span>
-                </div>
-                <div class="tech-item">
-                    <i class="fas fa-robot"></i>
-                    <span>CrewAI</span>
-                </div>
-                <div class="tech-item">
-                    <i class="fas fa-database"></i>
-                    <span>ChromaDB</span>
-                </div>
-                <div class="tech-item">
-                    <i class="fas fa-cloud"></i>
-                    <span>Groq API</span>
-                </div>
-                <div class="tech-item">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>WhatsApp API</span>
-                </div>
-                <div class="tech-item">
-                    <i class="fas fa-microchip"></i>
-                    <span>Ollama</span>
-                </div>
+                <div class="tech-item"><i class="fab fa-python"></i><span>Python</span></div>
+                <div class="tech-item"><i class="fas fa-brain"></i><span>LangChain</span></div>
+                <div class="tech-item"><i class="fas fa-robot"></i><span>CrewAI</span></div>
+                <div class="tech-item"><i class="fas fa-database"></i><span>ChromaDB</span></div>
+                <div class="tech-item"><i class="fas fa-cloud"></i><span>Groq API</span></div>
+                <div class="tech-item"><i class="fab fa-whatsapp"></i><span>WhatsApp API</span></div>
+                <div class="tech-item"><i class="fas fa-microchip"></i><span>Ollama</span></div>
             </div>
         </div>
 
@@ -1084,48 +1189,34 @@
         <div class="industry-section">
             <h2 class="section-title">Development Process</h2>
             <div class="process-steps">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <h4>Discovery & Audit</h4>
-                    <p>Understand your data landscape, workflows, and automation opportunities</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h4>Agent Design</h4>
-                    <p>Define agent roles, capabilities, and interaction patterns</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h4>Development</h4>
-                    <p>Build, test, and iterate on agent capabilities</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <h4>Integration</h4>
-                    <p>Connect to your data sources and existing systems</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">5</div>
-                    <h4>Deployment & Monitoring</h4>
-                    <p>Launch, monitor performance, and continuous improvement</p>
-                </div>
+                <div class="process-step"><div class="step-number">1</div><h4>Discovery and Audit</h4><p>Understand your data landscape, workflows, and automation opportunities</p></div>
+                <div class="process-step"><div class="step-number">2</div><h4>Agent Design</h4><p>Define agent roles, capabilities, and interaction patterns</p></div>
+                <div class="process-step"><div class="step-number">3</div><h4>Development</h4><p>Build, test, and iterate on agent capabilities</p></div>
+                <div class="process-step"><div class="step-number">4</div><h4>Integration</h4><p>Connect to your data sources and existing systems</p></div>
+                <div class="process-step"><div class="step-number">5</div><h4>Deployment and Monitoring</h4><p>Launch, monitor performance, and continuously improve</p></div>
             </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="cta-title">Ready to Build Your AI Agent?</h2>
+            <p class="cta-subtitle">Let's discuss your requirements and build an intelligent agent that transforms your business operations.</p>
+            <a href="contact.html" class="cta-button"><span>Start Your AI Journey</span><i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="social-links">
             <a href="https://www.linkedin.com/in/muhammad-shaiq-b32873383/" class="social-link"><i class="fab fa-linkedin"></i></a>
             <a href="https://github.com/muhammadshaiq-sys" class="social-link"><i class="fab fa-github"></i></a>
             <a href="mailto:shaiqsheikh797@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
         </div>
-        <p>© 2024 Muhammad Shaiq. AI Agent Developer & ML Engineer | Founder, Triveni AI</p>
+        <p>© 2024 Muhammad Shaiq. AI Agent Developer and ML Engineer | Founder, Triveni AI</p>
         <p style="margin-top: 0.5rem; font-size: 0.8rem;">Specializing in Multi-Agent Systems, RAG Architecture, and Production ML</p>
     </footer>
 
     <script>
-        // Mobile Navigation
+        // Mobile Navigation Toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
 
@@ -1166,8 +1257,8 @@
             });
         }
 
-        // Animated Background
-        const canvas = document.getElementById('quantBgCanvas');
+        // Animated Pattern Background (different from homepage's globe)
+        const canvas = document.getElementById('patternCanvas');
         if (canvas) {
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -1179,58 +1270,105 @@
                 canvas.height = height;
             }
 
-            const symbols = ['🤖', '🧠', '⚡', '📊', '🔗', '💬', '🔄', '🎯'];
+            // Geometric pattern particles
             const particles = [];
-            const particleCount = 60;
+            const particleCount = 45;
 
-            class Particle {
+            class PatternParticle {
                 constructor() {
-                    this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
-                    this.size = Math.random() * 20 + 12;
-                    this.speedX = (Math.random() - 0.5) * 0.5;
-                    this.speedY = (Math.random() - 0.5) * 0.5;
-                    this.color = Math.random() > 0.5 ?
-                        `rgba(59, 130, 246, ${Math.random() * 0.3 + 0.1})` :
-                        `rgba(245, 158, 11, ${Math.random() * 0.2 + 0.1})`;
-                    this.waveOffset = Math.random() * Math.PI * 2;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.6;
+                    this.speedY = (Math.random() - 0.5) * 0.6;
+                    this.opacity = Math.random() * 0.4 + 0.1;
+                    this.shape = Math.floor(Math.random() * 3);
+                    this.rotation = Math.random() * Math.PI * 2;
+                    this.rotationSpeed = (Math.random() - 0.5) * 0.02;
                 }
 
-                update(time) {
-                    this.waveOffset += 0.03;
-                    this.x += this.speedX + Math.sin(this.waveOffset) * 0.2;
-                    this.y += this.speedY + Math.cos(this.waveOffset) * 0.2;
-                    if (this.x > width + this.size) this.x = -this.size;
-                    if (this.x < -this.size) this.x = width + this.size;
-                    if (this.y > height + this.size) this.y = -this.size;
-                    if (this.y < -this.size) this.y = height + this.size;
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    this.rotation += this.rotationSpeed;
+
+                    if (this.x > width + 50) this.x = -50;
+                    if (this.x < -50) this.x = width + 50;
+                    if (this.y > height + 50) this.y = -50;
+                    if (this.y < -50) this.y = height + 50;
                 }
 
                 draw() {
                     ctx.save();
                     ctx.translate(this.x, this.y);
-                    ctx.font = `${this.size}px 'Segoe UI Emoji'`;
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.shadowBlur = 12;
-                    ctx.shadowColor = this.color;
-                    ctx.fillStyle = this.color;
-                    ctx.fillText(this.symbol, 0, 0);
+                    ctx.rotate(this.rotation);
+                    
+                    if (this.shape === 0) {
+                        // Square pattern
+                        ctx.fillStyle = `rgba(59, 130, 246, ${this.opacity})`;
+                        ctx.fillRect(-this.size, -this.size, this.size * 2, this.size * 2);
+                    } else if (this.shape === 1) {
+                        // Circular pattern
+                        ctx.beginPath();
+                        ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(245, 158, 11, ${this.opacity})`;
+                        ctx.fill();
+                    } else {
+                        // Triangle pattern
+                        ctx.beginPath();
+                        ctx.moveTo(0, -this.size);
+                        ctx.lineTo(this.size, this.size);
+                        ctx.lineTo(-this.size, this.size);
+                        ctx.closePath();
+                        ctx.fillStyle = `rgba(16, 185, 129, ${this.opacity})`;
+                        ctx.fill();
+                    }
+                    
                     ctx.restore();
                 }
             }
 
             for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
+                particles.push(new PatternParticle());
             }
 
-            let time = 0;
+            // Animated wave lines
+            let waveOffset = 0;
 
-            function animate() {
+            function drawWaveLines() {
+                ctx.beginPath();
+                for (let x = 0; x < width + 100; x += 50) {
+                    const y = height * 0.7 + Math.sin(x * 0.01 + waveOffset) * 40;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = 'rgba(59, 130, 246, 0.08)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.beginPath();
+                for (let x = 0; x < width + 100; x += 50) {
+                    const y = height * 0.3 + Math.cos(x * 0.012 + waveOffset + 2) * 35;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = 'rgba(245, 158, 11, 0.06)';
+                ctx.stroke();
+            }
+
+            function animatePattern() {
                 ctx.clearRect(0, 0, width, height);
-                time += 0.01;
-
+                
+                waveOffset += 0.02;
+                
+                drawWaveLines();
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                
+                // Draw connecting lines between nearby particles
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
@@ -1238,95 +1376,46 @@
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < 120) {
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(59, 130, 246, ${0.12 * (1 - distance / 120)})`;
-                            ctx.lineWidth = 0.6;
+                            ctx.strokeStyle = `rgba(59, 130, 246, ${0.08 * (1 - distance / 120)})`;
+                            ctx.lineWidth = 0.8;
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
                             ctx.stroke();
                         }
                     }
                 }
-
-                particles.forEach(particle => {
-                    particle.update(time);
-                    particle.draw();
-                });
-
-                requestAnimationFrame(animate);
+                
+                requestAnimationFrame(animatePattern);
             }
 
             window.addEventListener('resize', () => {
                 resizeCanvas();
                 particles.length = 0;
                 for (let i = 0; i < particleCount; i++) {
-                    particles.push(new Particle());
+                    particles.push(new PatternParticle());
                 }
             });
+            
             resizeCanvas();
-            animate();
+            animatePattern();
         }
 
         // Scroll Animations
         const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, observerOptions);
 
-        document.querySelectorAll('.service-card, .industry-card, .process-step').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.service-card, .industry-card, .process-step, .webdev-offer-card').forEach(el => observer.observe(el));
 
         // Dashboard stats animation
         const dashboardStats = document.querySelectorAll('.dashboard-stat');
         const dashboardObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    dashboardStats.forEach((stat, index) => {
-                        setTimeout(() => {
-                            stat.classList.add('fade-in');
-                        }, index * 100);
-                    });
-                }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) dashboardStats.forEach((stat, idx) => setTimeout(() => stat.classList.add('fade-in'), idx * 100)); });
         }, { threshold: 0.5 });
-
-        if (document.querySelector('.quant-dashboard')) {
-            dashboardObserver.observe(document.querySelector('.quant-dashboard'));
-        }
-
-        // Service card hover animations
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                const icon = card.querySelector('.service-icon');
-                if (icon) {
-                    icon.style.transform = 'rotate(15deg) scale(1.1)';
-                }
-            });
-
-            card.addEventListener('mouseleave', () => {
-                const icon = card.querySelector('.service-icon');
-                if (icon) {
-                    icon.style.transform = 'rotate(0) scale(1)';
-                }
-            });
-        });
-
-        // Auto-animate tech stack on load
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.querySelectorAll('.tech-item').forEach((item, index) => {
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateY(0)';
-                    }, index * 100);
-                });
-            }, 500);
-        });
+        if (document.querySelector('.quant-dashboard')) dashboardObserver.observe(document.querySelector('.quant-dashboard'));
     </script>
 </body>
 
+</html>
 </html>
