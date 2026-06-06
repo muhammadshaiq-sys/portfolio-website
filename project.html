@@ -84,21 +84,20 @@
     }
 
     .nav-left {
-        font-size: 1.8rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, var(--primary), var(--secondary), #9333ea);
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        animation: matrix-blinking 3s infinite;
+        animation: subtle-pulse 3s infinite;
         font-family: 'JetBrains Mono', monospace;
         letter-spacing: -0.5px;
-        text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
     }
 
-    @keyframes matrix-blinking {
-        0%, 45%, 55%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
+    @keyframes subtle-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
     }
 
     .nav-right ul {
@@ -206,6 +205,23 @@
         font-family: 'JetBrains Mono', monospace;
     }
 
+    /* ========== SECTION DIVIDERS ========== */
+    .section-divider {
+        text-align: center;
+        margin: 3rem 0 2rem;
+        position: relative;
+    }
+
+    .section-divider span {
+        background: rgba(15, 23, 42, 0.8);
+        padding: 0.5rem 1.5rem;
+        border-radius: 2rem;
+        font-size: 0.8rem;
+        color: var(--gray-400);
+        font-family: monospace;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
     /* ========== PROJECT CARDS GRID ========== */
     .projects-grid {
         display: grid;
@@ -238,7 +254,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        min-height: 300px;
+        min-height: 320px;
     }
 
     .project-card::before {
@@ -350,6 +366,21 @@
 
     .project-link:hover i {
         transform: translateX(3px);
+    }
+
+    /* Web Development Card Specific Styling */
+    .project-card.web-card {
+        border-left: 3px solid var(--accent);
+    }
+
+    .project-card.web-card .project-number {
+        color: var(--accent);
+    }
+
+    .project-card.web-card .project-tech-tag {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--accent);
+        border-color: rgba(16, 185, 129, 0.3);
     }
 
     /* ========== UPCOMING PROJECTS ========== */
@@ -550,7 +581,7 @@
         }
         .project-card, .upcoming-card {
             padding: 1.5rem;
-            min-height: 280px;
+            min-height: 300px;
         }
     }
 
@@ -606,12 +637,70 @@
 
     <section class="hero">
         <div class="section-content">
-            <h2>&lt; Deployed AI Agents /&gt;</h2>
+            <h2>&lt; Projects /&gt;</h2>
 
+            <!-- Web Development Projects Section -->
+            <div class="section-divider">
+                <span>🌐 WEB DEVELOPMENT</span>
+            </div>
             <div class="projects-grid">
-                <!-- NEW: CASPAM AI Agent with Live Link -->
+                <!-- 1. CropAI Website -->
+                <div class="project-card web-card">
+                    <div class="project-number">[WEB_01]</div>
+                    <h3>CropAI Website</h3>
+                    <p class="project-description">A professional portfolio website for CottonAI Dynamics, a company applying stochastic differential equations and predictive AI to solve energy and cotton shortage crises in the textile industry. Features include Geometric Brownian Motion Simulator, Monte Carlo Risk Assessment, and Energy & Shortage Predictor dashboard.</p>
+                    <div class="project-tech">
+                        <span class="project-tech-tag">HTML5</span>
+                        <span class="project-tech-tag">CSS3</span>
+                        <span class="project-tech-tag">Vanilla JS</span>
+                        <span class="project-tech-tag">Responsive Design</span>
+                    </div>
+                    <a href="https://muhammadshaiq-sys.github.io/portfolio-website-for-Crops/" target="_blank" class="project-link">
+                        LAUNCH_WEBSITE <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+
+                <!-- 2. Marriage Bureau Portfolio Website -->
+                <div class="project-card web-card">
+                    <div class="project-number">[WEB_02]</div>
+                    <h3>Marriage Bureau Portfolio</h3>
+                    <p class="project-description">A comprehensive portfolio website for a marriage bureau service. Showcases available profiles, success stories, and consultation booking. Built with modern UI/UX principles including smooth animations, responsive layouts, and interactive contact forms.</p>
+                    <div class="project-tech">
+                        <span class="project-tech-tag">HTML5</span>
+                        <span class="project-tech-tag">CSS3</span>
+                        <span class="project-tech-tag">JavaScript</span>
+                        <span class="project-tech-tag">Responsive Design</span>
+                    </div>
+                    <a href="https://muhammadshaiq-sys.github.io/marriage-bureau/" target="_blank" class="project-link">
+                        LAUNCH_WEBSITE <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+
+                <!-- 3. Real Estate Website -->
+                <div class="project-card web-card">
+                    <div class="project-number">[WEB_03]</div>
+                    <h3>Real Estate Website</h3>
+                    <p class="project-description">A portfolio-based real estate platform serving customers to buy, invest, and explore properties. Features property listings, investment calculators, market insights, and agent contact system. Fully responsive with modern glassmorphism design.</p>
+                    <div class="project-tech">
+                        <span class="project-tech-tag">HTML5</span>
+                        <span class="project-tech-tag">CSS3</span>
+                        <span class="project-tech-tag">Vanilla JS</span>
+                        <span class="project-tech-tag">Property Listings</span>
+                    </div>
+                    <a href="https://muhammadshaiq-sys.github.io/real-estate-website/" target="_blank" class="project-link">
+                        LAUNCH_WEBSITE <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- AI & Machine Learning Projects Section -->
+            <div class="section-divider">
+                <span>🤖 AI AGENTS & ML ENGINEERING</span>
+            </div>
+            <div class="projects-grid">
+                <!-- CASPAM AI Agent with Live Link -->
                 <div class="project-card">
-                    <div class="project-number">[LIVE]</div>
+                    <div class="project-number">[AI_01]</div>
                     <h3>CASPAM AI Agent</h3>
                     <p class="project-description">Intelligent virtual assistant for CASPAM department at BZU Multan. Answers queries about faculty, programs, courses, events, and provides career guidance using Groq's Llama 3.3 70B with RAG architecture.</p>
                     <div class="project-tech">
@@ -625,9 +714,9 @@
                     </a>
                 </div>
 
-                <!-- NEW: SkinSense - Skin Cancer Classifier -->
+                <!-- SkinSense - Skin Cancer Classifier -->
                 <div class="project-card">
-                    <div class="project-number">[02]</div>
+                    <div class="project-number">[AI_02]</div>
                     <h3>SkinSense</h3>
                     <p class="project-description">AI-powered diagnostic support system for early detection of BCC, AKIEC, and Melanoma. XGBoost classifier with 99.8% accuracy, integrated with Groq LLM for conversational explanations.</p>
                     <div class="project-tech">
@@ -641,9 +730,9 @@
                     </a>
                 </div>
 
-                <!-- Existing: Credit Fraud Detection -->
+                <!-- Credit Fraud Detection -->
                 <div class="project-card">
-                    <div class="project-number">[03]</div>
+                    <div class="project-number">[AI_03]</div>
                     <h3>Credit Fraud Detection</h3>
                     <p class="project-description">Advanced fraud detection system using logistic regression and anomaly detection algorithms to identify fraudulent transactions in real-time.</p>
                     <div class="project-tech">
@@ -656,9 +745,9 @@
                     </a>
                 </div>
 
-                <!-- Existing: Stock Predictor -->
+                <!-- Stock Predictor -->
                 <div class="project-card">
-                    <div class="project-number">[04]</div>
+                    <div class="project-number">[AI_04]</div>
                     <h3>Stock Predictor & Future Analyzer</h3>
                     <p class="project-description">Machine learning model for stock price prediction and market trend analysis using time series forecasting and sentiment analysis.</p>
                     <div class="project-tech">
@@ -671,9 +760,9 @@
                     </a>
                 </div>
 
-                <!-- Existing: Breast Cancer Classification -->
+                <!-- Breast Cancer Classification -->
                 <div class="project-card">
-                    <div class="project-number">[05]</div>
+                    <div class="project-number">[AI_05]</div>
                     <h3>Breast Cancer Binary Classification</h3>
                     <p class="project-description">SVM-based binary classification system for early detection of breast cancer with high accuracy and interpretable results.</p>
                     <div class="project-tech">
@@ -686,9 +775,9 @@
                     </a>
                 </div>
 
-                <!-- Existing: Customer Segmentation -->
+                <!-- Customer Segmentation -->
                 <div class="project-card">
-                    <div class="project-number">[06]</div>
+                    <div class="project-number">[AI_06]</div>
                     <h3>Customer Segmentation</h3>
                     <p class="project-description">AI-driven customer behavior segmentation using clustering algorithms for targeted marketing strategies.</p>
                     <div class="project-tech">
@@ -701,9 +790,9 @@
                     </a>
                 </div>
 
-                <!-- Existing: Multi Image Classification -->
+                <!-- Multi Image Classification -->
                 <div class="project-card">
-                    <div class="project-number">[07]</div>
+                    <div class="project-number">[AI_07]</div>
                     <h3>Multi Image Classification</h3>
                     <p class="project-description">Convolutional Neural Network for multi-class image classification with real-time processing capabilities.</p>
                     <div class="project-tech">
@@ -716,9 +805,9 @@
                     </a>
                 </div>
 
-                <!-- Existing: Digit Classification -->
+                <!-- Digit Classification -->
                 <div class="project-card">
-                    <div class="project-number">[08]</div>
+                    <div class="project-number">[AI_08]</div>
                     <h3>Digit Classification</h3>
                     <p class="project-description">Deep learning model for handwritten digit recognition using MNIST dataset with 99%+ accuracy.</p>
                     <div class="project-tech">
@@ -731,9 +820,9 @@
                     </a>
                 </div>
 
-                <!-- Existing: Educational Platform -->
+                <!-- Educational Platform -->
                 <div class="project-card">
-                    <div class="project-number">[09]</div>
+                    <div class="project-number">[AI_09]</div>
                     <h3>Educational Platform</h3>
                     <p class="project-description">Interactive learning platform with AI-powered content recommendations and progress tracking.</p>
                     <div class="project-tech">
@@ -752,7 +841,7 @@
                 <h3>What's Coming Next...</h3>
                 
                 <div class="upcoming-grid">
-                    <!-- Upcoming: Advanced RAG Agent -->
+                    <!-- Advanced RAG Agent -->
                     <div class="upcoming-card">
                         <h3>CASPAM AI - RAG Agent v2</h3>
                         <p class="upcoming-description">Enhanced version with advanced document retrieval, multi-source data integration, and real-time knowledge base updates. 47ms response time with 94.7% retrieval accuracy.</p>
@@ -767,7 +856,7 @@
                         </a>
                     </div>
 
-                    <!-- Upcoming: Multi-Agent Trading System -->
+                    <!-- Multi-Agent Trading System -->
                     <div class="upcoming-card">
                         <h3>Multi-Agent Trading System</h3>
                         <p class="upcoming-description">Orchestrated AI agents for market analysis, strategy execution, and risk management. Each agent specializes in different market conditions with collaborative decision-making.</p>
@@ -781,7 +870,7 @@
                         </a>
                     </div>
 
-                    <!-- Upcoming: Urdu-English Bilingual Agent -->
+                    <!-- Urdu-English Bilingual Agent -->
                     <div class="upcoming-card">
                         <h3>Bilingual AI Agent (Urdu/English)</h3>
                         <p class="upcoming-description">AI agent supporting natural language queries in Urdu, English, and Urduish. Built for Pakistan's 50M+ WhatsApp users with culturally aware responses.</p>
@@ -805,29 +894,51 @@
             <a href="https://github.com/muhammadshaiq-sys" class="social-link"><i class="fab fa-github"></i></a>
             <a href="mailto:shaiqsheikh797@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
         </div>
-        <p>© 2024 Muhammad Shaiq. AI Agent Developer & ML Engineer | Founder, Triveni AI</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Specializing in Multi-Agent Systems, RAG Architecture, and Production ML</p>
+        <p>© 2024 Muhammad Shaiq. AI Agent Developer, ML Engineer & Web Developer | Founder, Triveni AI</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Specializing in Multi-Agent Systems, RAG Architecture, Production ML, and Modern Web Development</p>
     </footer>
 
     <script>
-    // Mobile Navigation
+    // Mobile Navigation Toggle
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
+
+    function closeMenu() {
+        hamburger?.classList.remove('active');
+        navMenu?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function openMenu() {
+        hamburger?.classList.add('active');
+        navMenu?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navMenu.classList.contains('active') ? closeMenu() : openMenu();
+        });
+
+        document.querySelectorAll('.nav-right a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (navMenu.classList.contains('active') && 
+                !hamburger.contains(e.target) && 
+                !navMenu.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                closeMenu();
+            }
         });
     }
-    
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav-right a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
     
     // Scroll animations for project cards
     const observerOptions = {
@@ -843,12 +954,12 @@
         });
     }, observerOptions);
     
-    // Observe all project cards
+    // Observe all project and upcoming cards
     document.querySelectorAll('.project-card, .upcoming-card').forEach(el => {
         observer.observe(el);
     });
     
-    // Add hover effects
+    // Add hover effects for icons
     document.querySelectorAll('.project-card, .upcoming-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
             const link = card.querySelector('a');
@@ -878,7 +989,7 @@
                 setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
-                }, index * 100);
+                }, index * 80);
             });
         }, 300);
         
@@ -891,7 +1002,6 @@
             });
         }, 300);
         
-        // Initialize background animation
         initBackgroundAnimation();
     });
     
@@ -903,16 +1013,14 @@
         const ctx = canvas.getContext('2d');
         let width, height, dpr;
 
-        // --- Config ---
         const HUB_COUNT = 6;
         const STREAM_COUNT = 60;
-        const COLOR_BLUE = '59, 130, 246';   // Blue-500
-        const COLOR_ORANGE = '245, 158, 11'; // Amber-500
+        const COLOR_BLUE = '59, 130, 246';
+        const COLOR_ORANGE = '245, 158, 11';
 
         const hubs = [];
         const streams = [];
 
-        // 1. Hubs (Static processing cores)
         class Hub {
             constructor() {
                 this.x = Math.random() * width;
@@ -926,13 +1034,11 @@
                 const size = this.baseSize + pulse * 1.5;
                 const opacity = 0.3 + pulse * 0.2;
 
-                // Outer glow ring (Blue)
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, size * 4, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(${COLOR_BLUE}, ${opacity * 0.1})`;
                 ctx.fill();
 
-                // Inner core
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(${COLOR_BLUE}, 0.8)`;
@@ -943,7 +1049,6 @@
             }
         }
 
-        // 2. Data Streams (Fast packets)
         class DataStream {
             constructor() {
                 this.reset();
@@ -982,8 +1087,6 @@
                 this.trail = [];
                 this.life = 0;
                 this.maxLife = dist / this.speed + 50;
-
-                // Randomly pick Blue or Orange
                 this.color = Math.random() > 0.3 ? COLOR_BLUE : COLOR_ORANGE;
             }
 
@@ -1035,7 +1138,7 @@
         function resize() {
             dpr = window.devicePixelRatio || 1;
             width = window.innerWidth;
-            height = window.innerHeight - 80; // Adjust for navbar
+            height = window.innerHeight - 80;
             canvas.width = width * dpr;
             canvas.height = height * dpr;
             ctx.scale(dpr, dpr);
@@ -1047,7 +1150,6 @@
             ctx.clearRect(0, 0, width, height);
             time++;
 
-            // Draw connections between hubs
             ctx.lineWidth = 0.5;
             ctx.shadowBlur = 0;
             for (let i = 0; i < hubs.length; i++) {
@@ -1075,7 +1177,6 @@
         resize();
         animate();
     }
-
     </script>
 </body>
 
