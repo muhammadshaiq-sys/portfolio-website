@@ -39,15 +39,28 @@
             padding-top: 80px;
         }
 
-        /* ========== ANIMATED BACKGROUND ========== */
-#techBgCanvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      pointer-events: none;
-    }
+        /* ========== NEURAL NETWORK BACKGROUND - NEW ========== */
+        #neuralCanvas {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 80px);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .neural-texture {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 80px);
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.06) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.04) 0%, transparent 60%);
+        }
 
         /* ========== RESPONSIVE NAVBAR ========== */
         .navbar {
@@ -66,18 +79,7 @@
             z-index: 1000;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
-    .tech-grid-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background-image: 
-        linear-gradient(rgba(0, 102, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 102, 255, 0.04) 1px, transparent 1px);
-      background-size: 50px 50px;
-      mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
-      opacity: 0.5;
-    }
+
         .nav-left {
             font-size: 1.5rem;
             font-weight: 800;
@@ -241,7 +243,7 @@
             50% { opacity: 0.5; }
         }
 
-        /* ========== QUANT STATS ========== */
+        /* ========== QUANT STATS (with hover effects) ========== */
         .quant-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -368,7 +370,7 @@
             color: white;
         }
 
-        /* ========== WEB DEVELOPER JOURNEY SECTION ========== */
+        /* ========== UNIQUE WEB DEVELOPER SECTION ========== */
         .webdev-journey {
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(16, 185, 129, 0.05));
             border-radius: 24px;
@@ -1132,8 +1134,8 @@
 </head>
 
 <body>
-     <canvas id="techBgCanvas"></canvas>
-    <div class="tech-grid-overlay"></div>
+    <canvas id="neuralCanvas"></canvas>
+    <div class="neural-texture"></div>
 
     <header>
         <nav class="navbar">
@@ -1448,178 +1450,250 @@
             });
         }
 
-        // ========== GLOWING ORBS BACKGROUND - WORKING ANIMATION ==========
+        // ========== NEURAL NETWORK BACKGROUND - NEW ANIMATION ==========
+        const canvas = document.getElementById('neuralCanvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let width, height;
+
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight - 80;
+                canvas.width = width;
+                canvas.height = height;
+            }
+
+            // Neural network nodes
+            const nodes = [];
+            const nodeCount = 28;
+            
+            // Colors for nodes
+            const nodeColors = [
+                { r: 59, g: 130, b: 246 },   // blue
+                { r: 139, g: 92, b: 246 },   // purple
+                { r: 16, g: 185, b: 129 },   // green
+                { r: 245, g: 158, b: 11 }    // orange
+            ];
+
+            class NeuralNode {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.radius = Math.random() * 8 + 4;
+                    this.colorIndex = Math.floor(Math.random() * nodeColors.length);
+                    this.pulseSpeed = 0.02 + Math.random() * 0.03;
+                    this.pulsePhase = Math.random() * Math.PI * 2;
+                    this.vx = (Math.random() - 0.5) * 0.3;
+                    this.vy = (Math.random() - 0.5) * 0.3;
+                    this.connections = [];
+                    this.signalActive = Math.random() > 0.7;
+                    this.signalProgress = Math.random();
+                }
+
+                update() {
+                    // Move slowly
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    
+                    // Bounce off edges
+                    if (this.x < -50) this.x = width + 50;
+                    if (this.x > width + 50) this.x = -50;
+                    if (this.y < -50) this.y = height + 50;
+                    if (this.y > height + 50) this.y = -50;
+                    
+                    // Update signal
+                    if (this.signalActive) {
+                        this.signalProgress += 0.02;
+                        if (this.signalProgress >= 1) {
+                            this.signalActive = false;
+                            this.signalProgress = 0;
+                        }
+                    } else if (Math.random() < 0.005) {
+                        this.signalActive = true;
+                    }
+                }
+
+                draw() {
+                    const color = nodeColors[this.colorIndex];
+                    const pulse = 0.7 + Math.sin(Date.now() * this.pulseSpeed + this.pulsePhase) * 0.3;
+                    
+                    // Glow effect
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = `rgba(${color.r}, ${color.g}, ${color.b}, 0.6)`;
+                    
+                    // Node circle
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius * pulse, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.7)`;
+                    ctx.fill();
+                    
+                    // Inner core
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius * 0.4, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 1)`;
+                    ctx.fill();
+                    
+                    // Signal pulse (travelling data)
+                    if (this.signalActive) {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.radius * (1 + this.signalProgress * 2), 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${0.4 * (1 - this.signalProgress)})`;
+                        ctx.fill();
+                    }
+                    
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            // Create nodes
+            for (let i = 0; i < nodeCount; i++) {
+                nodes.push(new NeuralNode());
+            }
+
+            // Establish connections based on distance
+            function updateConnections() {
+                for (let i = 0; i < nodes.length; i++) {
+                    nodes[i].connections = [];
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dx = nodes[i].x - nodes[j].x;
+                        const dy = nodes[i].y - nodes[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 180) {
+                            nodes[i].connections.push({ node: nodes[j], distance: distance });
+                            nodes[j].connections.push({ node: nodes[i], distance: distance });
+                        }
+                    }
+                }
+            }
+
+            // Draw connections between nodes
+            function drawConnections() {
+                const drawnPairs = new Set();
+                
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let conn of nodes[i].connections) {
+                        const key = `${Math.min(i, nodes.indexOf(conn.node))}-${Math.max(i, nodes.indexOf(conn.node))}`;
+                        if (drawnPairs.has(key)) continue;
+                        drawnPairs.add(key);
+                        
+                        const opacity = 0.15 * (1 - conn.distance / 180);
+                        const gradient = ctx.createLinearGradient(nodes[i].x, nodes[i].y, conn.node.x, conn.node.y);
+                        const color1 = nodeColors[nodes[i].colorIndex];
+                        const color2 = nodeColors[conn.node.colorIndex];
+                        gradient.addColorStop(0, `rgba(${color1.r}, ${color1.g}, ${color1.b}, ${opacity})`);
+                        gradient.addColorStop(1, `rgba(${color2.r}, ${color2.g}, ${color2.b}, ${opacity})`);
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(conn.node.x, conn.node.y);
+                        ctx.strokeStyle = gradient;
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+                        
+                        // Animated data flowing through connections
+                        if (Math.random() < 0.01) {
+                            const t = Math.random();
+                            const x = nodes[i].x + (conn.node.x - nodes[i].x) * t;
+                            const y = nodes[i].y + (conn.node.y - nodes[i].y) * t;
+                            ctx.beginPath();
+                            ctx.arc(x, y, 3, 0, Math.PI * 2);
+                            ctx.fillStyle = `rgba(255, 255, 255, 0.6)`;
+                            ctx.fill();
+                        }
+                    }
+                }
+            }
+
+            // Floating particles (data packets)
+            const dataPackets = [];
+            const packetCount = 25;
+
+            class DataPacket {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.radius = Math.random() * 2 + 1;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.color = `rgba(${59 + Math.random() * 100}, ${130 + Math.random() * 50}, ${246 - Math.random() * 100}, 0.4)`;
+                }
+                
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x > width) this.x = 0;
+                    if (this.x < 0) this.x = width;
+                    if (this.y > height) this.y = 0;
+                    if (this.y < 0) this.y = height;
+                }
+                
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < packetCount; i++) {
+                dataPackets.push(new DataPacket());
+            }
+
+            function animateNeural() {
+                ctx.clearRect(0, 0, width, height);
+                
+                // Update node positions
+                nodes.forEach(node => node.update());
+                updateConnections();
+                
+                // Draw connections first (behind nodes)
+                drawConnections();
+                
+                // Draw nodes
+                nodes.forEach(node => node.draw());
+                
+                // Draw floating data packets
+                dataPackets.forEach(packet => {
+                    packet.update();
+                    packet.draw();
+                });
+                
+                requestAnimationFrame(animateNeural);
+            }
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                // Reset node positions on resize
+                nodes.length = 0;
+                for (let i = 0; i < nodeCount; i++) {
+                    nodes.push(new NeuralNode());
+                }
+                dataPackets.length = 0;
+                for (let i = 0; i < packetCount; i++) {
+                    dataPackets.push(new DataPacket());
+                }
+                updateConnections();
+            });
+            
+            resizeCanvas();
+            updateConnections();
+            animateNeural();
+        }
+
+        // Scroll Animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .company-section, .webdev-journey, .expertise-card, .timeline-item, .mv-card, .skill-category').forEach(el => {
+            observer.observe(el);
+        });
         
-        (() => {
-    const canvas = document.getElementById('techBgCanvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-
-    const HUB_COUNT = 6;
-    const PACKET_COUNT = 50;
-    const COLOR_BLUE = '0, 102, 255';
-    const COLOR_CYAN = '0, 240, 255';
-    const COLOR_ORANGE = '255, 85, 0';
-
-    let hubs = [];
-    let packets = [];
-
-    // Static Server processing cores
-    class CircuitHub {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.size = Math.random() * 3 + 2;
-        this.pulseOffset = Math.random() * Math.PI * 2;
-      }
-      draw(t) {
-        const pulse = Math.sin(t * 0.05 + this.pulseOffset);
-        const size = this.size + pulse * 1.2;
-        const opacity = 0.4 + pulse * 0.25;
-
-        // Outer glow
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, size * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${COLOR_BLUE}, ${opacity * 0.1})`;
-        ctx.fill();
-
-        // Inner Core
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${COLOR_CYAN}, 0.85)`;
-        ctx.fill();
-      }
-    }
-
-    // Glowing data packets traveling along straight paths
-    class DataPacket {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        // Start at a random hub or screen edge
-        if (hubs.length > 0 && Math.random() > 0.4) {
-          const h = hubs[Math.floor(Math.random() * hubs.length)];
-          this.x = h.x;
-          this.y = h.y;
-        } else {
-          this.x = Math.random() * width;
-          this.y = Math.random() > 0.5 ? 0 : height;
-        }
-
-        // Set direction (highly organized straight path matching PCB circuits)
-        this.dir = Math.random() > 0.5 ? 'H' : 'V';
-        this.speed = (Math.random() * 1.5 + 1.0) * (Math.random() > 0.5 ? 1 : -1);
-        this.color = Math.random() > 0.35 ? COLOR_CYAN : COLOR_ORANGE;
-        this.life = Math.random() * 200 + 100;
-        this.trail = [];
-        this.trailLength = Math.floor(Math.random() * 8 + 6);
-      }
-      update() {
-        // Log trails
-        this.trail.unshift({ x: this.x, y: this.y });
-        if (this.trail.length > this.trailLength) {
-          this.trail.pop();
-        }
-
-        // Travel horizontally or vertically (Circuit trace)
-        if (this.dir === 'H') {
-          this.x += this.speed;
-        } else {
-          this.y += this.speed;
-        }
-
-        this.life--;
-        if (this.life <= 0 || this.x < -20 || this.x > width + 20 || this.y < -20 || this.y > height + 20) {
-          this.reset();
-        }
-      }
-      draw() {
-        if (this.trail.length < 2) return;
-
-        // Draw laser trails
-        ctx.lineWidth = 1.2;
-        for (let i = 0; i < this.trail.length - 1; i++) {
-          const opacity = (1 - i / this.trail.length) * 0.5;
-          ctx.strokeStyle = `rgba(${this.color}, ${opacity})`;
-          ctx.beginPath();
-          ctx.moveTo(this.trail[i].x, this.trail[i].y);
-          ctx.lineTo(this.trail[i+1].x, this.trail[i+1].y);
-          ctx.stroke();
-        }
-
-        // Pulse tip node
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.fill();
-      }
-    }
-
-    function init() {
-      hubs = [];
-      packets = [];
-      const numHubs = Math.min(HUB_COUNT, Math.floor((width * height) / 140000));
-      for (let i = 0; i < numHubs; i++) hubs.push(new CircuitHub());
-      
-      const numPackets = Math.min(PACKET_COUNT, Math.floor((width * height) / 25000));
-      for (let i = 0; i < numPackets; i++) packets.push(new DataPacket());
-    }
-
-    function resize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      window.scaleCanvasForDPI(canvas, ctx, width, height);
-    }
-
-    let time = 0;
-    function drawFrame(timestamp, elapsed) {
-      ctx.fillStyle = '#020204';
-      ctx.fillRect(0, 0, width, height);
-      time++;
-
-      // 1. Draw structured linear circuit connections between hubs
-      ctx.lineWidth = 0.5;
-      ctx.strokeStyle = `rgba(${COLOR_BLUE}, 0.08)`;
-      for (let i = 0; i < hubs.length; i++) {
-        for (let j = i + 1; j < hubs.length; j++) {
-          const dx = hubs[i].x - hubs[j].x;
-          const dy = hubs[i].y - hubs[j].y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          
-          if (dist < 400) {
-            // Draw clean L-shaped straight lines instead of diagonal (futuristic PCB looks)
-            ctx.beginPath();
-            ctx.moveTo(hubs[i].x, hubs[i].y);
-            ctx.lineTo(hubs[j].x, hubs[i].y); // Right angle corner
-            ctx.lineTo(hubs[j].x, hubs[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // 2. Draw active circuit lines
-      packets.forEach(p => {
-        p.update();
-        p.draw();
-      });
-
-      // 3. Draw processing hubs
-      hubs.forEach(h => h.draw(time));
-    }
-
-    window.addEventListener('resize', () => {
-      resize();
-      init();
-    });
-
-    // Register canvas with performance Registry
-    window.CanvasRegistry.register('projectsCore', init, drawFrame, resize);
-
-  })();
     </script>
 </body>
 
