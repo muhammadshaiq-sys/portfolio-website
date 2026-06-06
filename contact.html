@@ -39,7 +39,7 @@
             position: relative;
         }
 
-        /* ========== ANIMATED BACKGROUND - GUARANTEED VISIBLE ========== */
+        /* ========== ANIMATED BACKGROUND ========== */
         #contactBgCanvas {
             position: fixed;
             top: 80px;
@@ -49,7 +49,6 @@
             z-index: 0;
             pointer-events: none;
             display: block;
-            background: radial-gradient(circle at 20% 30%, #0a0c15, #02040a);
         }
 
         .contact-texture {
@@ -63,6 +62,12 @@
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.06) 0%, transparent 40%);
+        }
+
+        /* Content z-index */
+        .contact-section, .customer-section, .footer {
+            position: relative;
+            z-index: 10;
         }
 
         /* ========== NAVBAR ========== */
@@ -174,12 +179,6 @@
         }
         .hamburger.active span:nth-child(3) {
             transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        /* ========== CONTENT Z-INDEX FIX ========== */
-        .contact-section, .customer-section, .footer {
-            position: relative;
-            z-index: 10;
         }
 
         /* ========== CONTACT SECTION ========== */
@@ -1029,7 +1028,7 @@
             <div class="contact-header">
                 <h1>Let's Connect</h1>
                 <div class="contact-subtitle">
-                    AI Agent Developer , Web Developer& ML Engineer. <br>
+                    AI Agent Developer, Web Developer & ML Engineer. <br>
                     Specializing in Multi-Agent Systems, RAG Architecture & Production ML.
                 </div>
                 <div class="status-badge">
@@ -1048,7 +1047,7 @@
                         <div class="profile-info">
                             <h2>Muhammad Shaiq</h2>
                             <div class="profile-tagline">
-                                AI Agent Developer // Web Developer //ML Engineer // Founder @ Triveni AI
+                                AI Agent Developer // Web Developer // ML Engineer // Founder @ Triveni AI
                             </div>
                         </div>
                     </div>
@@ -1371,8 +1370,8 @@
             <a href="https://github.com/muhammadshaiq-sys" class="social-link"><i class="fab fa-github"></i></a>
             <a href="mailto:shaiqsheikh797@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
         </div>
-        <p>© 2024 Muhammad Shaiq. AI Agent Developer & ML Engineer | Founder, Triveni AI</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Specializing in Multi-Agent Systems, RAG Architecture, and Production ML</p>
+        <p>© 2024 Muhammad Shaiq. AI Agent Developer, Web Developer & ML Engineer | Founder, Triveni AI</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Specializing in Multi-Agent Systems, RAG Architecture, Production ML and Modern Web Development</p>
     </footer>
 
     <script>
@@ -1417,28 +1416,23 @@
             });
         }
 
-        // ========== GUARANTEED WORKING BACKGROUND ANIMATION ==========
-        (function() {
+        // ========== PERSISTENT BACKGROUND ANIMATION ==========
+        (function initContactAnimation() {
             const canvas = document.getElementById('contactBgCanvas');
-            if (!canvas) {
-                console.error('Canvas not found');
-                return;
-            }
+            if (!canvas) return;
             
             const ctx = canvas.getContext('2d');
             let width, height;
-
-            function resizeCanvas() {
-                width = window.innerWidth;
-                height = window.innerHeight - 80;
-                canvas.width = width;
-                canvas.height = height;
-            }
-
-            // Bright, visible particles
-            const particles = [];
+            let particles = [];
             const particleCount = 65;
-
+            
+            const colors = [
+                { r: 59, g: 130, b: 246 },  // Blue
+                { r: 139, g: 92, b: 246 },  // Purple
+                { r: 16, g: 185, b: 129 },  // Green
+                { r: 245, g: 158, b: 11 }   // Orange
+            ];
+            
             class VisibleParticle {
                 constructor() {
                     this.x = Math.random() * width;
@@ -1446,13 +1440,6 @@
                     this.size = Math.random() * 5 + 2;
                     this.speedX = (Math.random() - 0.5) * 0.8;
                     this.speedY = (Math.random() - 0.5) * 0.8;
-                    // Brighter colors for visibility
-                    const colors = [
-                        { r: 59, g: 130, b: 246 },  // Blue
-                        { r: 139, g: 92, b: 246 },  // Purple
-                        { r: 16, g: 185, b: 129 },  // Green
-                        { r: 245, g: 158, b: 11 }   // Orange
-                    ];
                     const colorChoice = colors[Math.floor(Math.random() * colors.length)];
                     this.color = `rgba(${colorChoice.r}, ${colorChoice.g}, ${colorChoice.b}, 0.5)`;
                     this.glowColor = `rgba(${colorChoice.r}, ${colorChoice.g}, ${colorChoice.b}, 0.8)`;
@@ -1461,8 +1448,6 @@
                 update() {
                     this.x += this.speedX;
                     this.y += this.speedY;
-                    
-                    // Wrap around
                     if (this.x > width) this.x = 0;
                     if (this.x < 0) this.x = width;
                     if (this.y > height) this.y = 0;
@@ -1470,30 +1455,20 @@
                 }
 
                 draw() {
-                    // Glow effect
                     ctx.shadowBlur = 15;
                     ctx.shadowColor = this.glowColor;
-                    
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fillStyle = this.color;
                     ctx.fill();
-                    
-                    // Inner bright core
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size * 0.4, 0, Math.PI * 2);
                     ctx.fillStyle = this.glowColor;
                     ctx.fill();
-                    
                     ctx.shadowBlur = 0;
                 }
             }
-
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new VisibleParticle());
-            }
-
-            // Draw connecting lines
+            
             function drawConnections() {
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
@@ -1512,11 +1487,23 @@
                     }
                 }
             }
-
+            
+            function resizeAndReset() {
+                width = window.innerWidth;
+                height = window.innerHeight - 80;
+                canvas.width = width;
+                canvas.height = height;
+                
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new VisibleParticle());
+                }
+            }
+            
             function animate() {
+                if (!ctx) return;
                 ctx.clearRect(0, 0, width, height);
                 
-                // Draw background gradient for depth
                 const gradient = ctx.createLinearGradient(0, 0, width, height);
                 gradient.addColorStop(0, '#030712');
                 gradient.addColorStop(1, '#0a0c15');
@@ -1524,7 +1511,6 @@
                 ctx.fillRect(0, 0, width, height);
                 
                 drawConnections();
-                
                 particles.forEach(particle => {
                     particle.update();
                     particle.draw();
@@ -1532,16 +1518,11 @@
                 
                 requestAnimationFrame(animate);
             }
-
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-                particles.length = 0;
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push(new VisibleParticle());
-                }
-            });
             
-            resizeCanvas();
+            window.removeEventListener('resize', resizeAndReset);
+            window.addEventListener('resize', resizeAndReset);
+            
+            resizeAndReset();
             animate();
         })();
 
@@ -1559,7 +1540,6 @@
             observer.observe(el);
         });
 
-        // Initial animation for cards
         setTimeout(() => {
             document.querySelectorAll('.contact-card, .customer-option').forEach((card, index) => {
                 setTimeout(() => {
@@ -1580,13 +1560,11 @@
             const feedbackForm = document.getElementById('feedbackForm');
             const successMessage = document.getElementById('successMessage');
 
-            // Hide all forms
             projectForm.style.display = 'none';
             supportForm.style.display = 'none';
             feedbackForm.style.display = 'none';
             successMessage.style.display = 'none';
 
-            // Show selected form
             if (formType === 'project') {
                 projectForm.style.display = 'block';
             } else if (formType === 'support') {
@@ -1604,27 +1582,25 @@
             const modal = document.getElementById('contactModal');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-            // Reset all forms
             document.querySelectorAll('form').forEach(form => form.reset());
         }
 
-        // Form submission handlers
         document.getElementById('projectInquiryForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
-            showSuccessMessage('project');
+            showSuccessMessage();
         });
 
         document.getElementById('supportTicketForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
-            showSuccessMessage('support');
+            showSuccessMessage();
         });
 
         document.getElementById('feedbackReviewForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
-            showSuccessMessage('feedback');
+            showSuccessMessage();
         });
 
-        function showSuccessMessage(formType) {
+        function showSuccessMessage() {
             const projectForm = document.getElementById('projectForm');
             const supportForm = document.getElementById('supportForm');
             const feedbackForm = document.getElementById('feedbackForm');
@@ -1640,17 +1616,14 @@
             }, 4000);
         }
 
-        // Close modal when clicking outside
         document.getElementById('contactModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
 
-        // Close modal on ESC key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modalOpen) closeModal();
         });
 
-        // Fix option buttons
         document.querySelectorAll('.option-button').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1661,42 +1634,6 @@
                 }
             });
         });
-
-        // Ripple effect
-        document.querySelectorAll('.option-button, .submit-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const x = e.clientX - e.target.getBoundingClientRect().left;
-                const y = e.clientY - e.target.getBoundingClientRect().top;
-                const ripple = document.createElement('span');
-                ripple.style.cssText = `
-                    position: absolute;
-                    background: rgba(255, 255, 255, 0.3);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s linear;
-                    pointer-events: none;
-                    width: 100px;
-                    height: 100px;
-                    left: ${x - 50}px;
-                    top: ${y - 50}px;
-                `;
-                button.style.position = 'relative';
-                button.style.overflow = 'hidden';
-                button.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
-
-        const rippleStyle = document.createElement('style');
-        rippleStyle.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(rippleStyle);
     </script>
 </body>
 
