@@ -1,4 +1,3 @@
-/* ========== RESET & BASE STYLES ========== */
 * {
     margin: 0;
     padding: 0;
@@ -68,7 +67,6 @@ body {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Blinking name in navbar */
 .nav-left .logo {
     font-size: 1.5rem;
     font-weight: 800;
@@ -93,7 +91,7 @@ body {
     }
 }
 
-/* Desktop Navigation - Clean, no lines */
+/* Desktop Navigation */
 .nav-right ul {
     display: flex;
     list-style: none;
@@ -114,11 +112,8 @@ body {
     padding: 0.5rem 1rem;
     border-radius: 8px;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
-/* Clean hover effect - no underline unless hovering */
 .nav-right ul li a::before {
     content: '';
     position: absolute;
@@ -140,12 +135,12 @@ body {
     transform: translateY(-2px);
 }
 
-/* ========== HAMBURGER MENU ========== */
+/* ========== HAMBURGER MENU - FIXED ========== */
 .hamburger {
     display: none;
     flex-direction: column;
     cursor: pointer;
-    gap: 4px;
+    gap: 5px;
     z-index: 1001;
 }
 
@@ -169,6 +164,50 @@ body {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* ========== MOBILE MENU - FIXED ========== */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-right {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        width: 70%;
+        max-width: 280px;
+        height: calc(100vh - 80px);
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem;
+        transition: right 0.3s ease;
+        z-index: 999;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-right.active {
+        right: 0;
+    }
+
+    .nav-right ul {
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .nav-right ul li a {
+        display: block;
+        text-align: center;
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+    
+    .nav-right ul li a::before {
+        display: none;
+    }
+}
+
 /* ========== HERO SECTION ========== */
 .firstSection {
     display: flex;
@@ -187,29 +226,24 @@ body {
     line-height: 1.2;
 }
 
-/* Fixed the double underline issue */
 .leftSection>* {
     margin-bottom: 1rem;
     display: block;
 }
 
-/* Purple text - NO BLINK */
 .purple {
     color: #9333ea;
     margin-top: 20px;
     font-weight: 800;
     text-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
-    /* Removed blink animation */
 }
 
-/* Typed.js container */
 .typed-cursor {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
 }
 
-/* Custom cursor styling */
 .custom-cursor {
     color: var(--secondary);
     font-weight: bold;
@@ -231,7 +265,6 @@ body {
     }
 }
 
-/* Fix hero text appearance */
 #element {
     color: var(--secondary);
     font-weight: 700;
@@ -245,17 +278,13 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    position: relative;
 }
 
-/* Remove any white borders from text */
 #element::before,
 #element::after {
     content: none !important;
 }
 
-
-/* Buttons Container */
 .buttons {
     margin-top: 2.5rem;
     display: flex;
@@ -302,24 +331,28 @@ body {
     background: linear-gradient(135deg, var(--secondary), #ea580c);
 }
 
-/* Right Section - Image */
+/* ========== RIGHT SECTION IMAGE - FIXED ========== */
 .rightSection {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .rightSection img {
-    width: 100%;
-    max-width: 500px;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 600px;
     border-radius: 20px;
     box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.5),
         0 0 0 1px rgba(255, 255, 255, 0.1);
     transition: all 0.5s ease;
     filter: brightness(1.05) contrast(1.1);
-    position: relative;
+    object-fit: contain;
 }
 
 .rightSection img:hover {
@@ -330,7 +363,6 @@ body {
 }
 
 /* ========== UNIQUE VISUALIZATION SECTION ========== */
-/* Add this after your buttons in HTML */
 .unique-visuals {
     margin: 4rem auto;
     max-width: 1200px;
@@ -394,7 +426,6 @@ body {
     opacity: 0.8;
 }
 
-/* Live Equation Display */
 .equation-display {
     background: rgba(0, 0, 0, 0.3);
     padding: 1.5rem;
@@ -408,217 +439,7 @@ body {
     font-size: 1.1rem;
     color: var(--secondary);
     text-align: center;
-}
-
-/* ========== QUANT VISUALIZER ========== */
-.quant-visualizer {
-    padding: 4rem 5%;
-    max-width: 1200px;
-    margin: 4rem auto;
-    background: rgba(10, 15, 25, 0.6);
-    border-radius: 24px;
-    border: 1px solid rgba(59, 130, 246, 0.1);
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.visualizer-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.visualizer-header h2 {
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 800;
-    margin-bottom: 1rem;
-}
-
-.highlight {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: blink 3s infinite;
-}
-
-@keyframes blink {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
-}
-
-.subtitle {
-    font-size: 1.1rem;
-    color: var(--text-light);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* Keep existing quant visualizer styles but clean them up */
-.visualizer-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    margin-bottom: 4rem;
-}
-
-/* ========== RESPONSIVE DESIGN ========== */
-@media (max-width: 1024px) {
-    .firstSection {
-        flex-direction: column;
-        text-align: center;
-        gap: 3rem;
-    }
-
-    .leftSection,
-    .rightSection {
-        width: 100%;
-    }
-
-    .rightSection img {
-        max-width: 400px;
-    }
-
-    .visualizer-content {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-
-    /* Show hamburger menu */
-    .hamburger {
-        display: flex;
-    }
-
-    /* Mobile navigation menu */
-    .nav-right {
-        position: fixed;
-        top: 80px;
-        right: -100%;
-        width: 80%;
-        height: calc(100vh - 80px);
-        background: var(--nav-bg);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 3rem 2rem;
-        transition: right 0.4s ease;
-        border-left: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .nav-right.active {
-        right: 0;
-    }
-
-    .nav-right ul {
-        flex-direction: column;
-        gap: 1.5rem;
-        width: 100%;
-    }
-
-    .nav-right ul li a {
-        display: block;
-        text-align: center;
-        padding: 1rem;
-        font-size: 1.1rem;
-    }
-
-    /* Hero section mobile */
-    .leftSection {
-        font-size: 2rem;
-    }
-
-    .buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .btn {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    /* Quant visualizer mobile */
-    .quant-visualizer {
-        padding: 2rem;
-        margin: 2rem;
-    }
-
-    .flow-container {
-        flex-wrap: wrap;
-    }
-
-    .flow-arrow {
-        transform: rotate(90deg);
-    }
-}
-
-@media (max-width: 480px) {
-    .navbar {
-        padding: 0 1rem;
-    }
-
-    .firstSection {
-        padding: 1rem;
-    }
-
-    .leftSection {
-        font-size: 1.8rem;
-    }
-
-    .visual-card {
-        padding: 1.5rem;
-    }
-
-    .stat-card {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-    }
-}
-
-/* ========== FOOTER ========== */
-.footer {
-    text-align: center;
-    padding: 3rem 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    color: var(--text-light);
-    font-size: 0.9rem;
-    margin-top: 4rem;
-    background: rgba(10, 15, 25, 0.6);
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.social-link {
-    color: var(--text-light);
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.social-link:hover {
-    color: var(--primary);
-    background: rgba(59, 130, 246, 0.1);
-    transform: translateY(-5px);
+    animation: equation-change 15s infinite;
 }
 
 @keyframes equation-change {
@@ -626,36 +447,18 @@ body {
         opacity: 0;
         transform: translateY(10px);
     }
-
     10%,
     90% {
         opacity: 1;
         transform: translateY(0);
     }
-
     100% {
         opacity: 0;
         transform: translateY(-10px);
     }
 }
 
-.equation {
-    animation: equation-change 15s infinite;
-}
-
-.equation:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.equation:nth-child(2) {
-    animation-delay: 5s;
-}
-
-.equation:nth-child(3) {
-    animation-delay: 10s;
-}
-
-/* ========== QUANT MARKET DASHBOARD - MOBILE FIRST ========== */
+/* ========== QUANT MARKET DASHBOARD ========== */
 .quant-market {
     padding: 2rem 1rem;
     margin: 2rem auto;
@@ -671,7 +474,6 @@ body {
     width: 100%;
 }
 
-/* Market Header - Stack on mobile */
 .market-header {
     display: flex;
     flex-direction: column;
@@ -682,28 +484,40 @@ body {
     text-align: center;
 }
 
+@media (min-width: 768px) {
+    .market-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+}
+
 .market-title h2 {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 800;
     margin-bottom: 0.5rem;
-    line-height: 1.2;
+}
+
+.highlight {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .subtitle {
     color: var(--text-light);
     font-size: 1rem;
     max-width: 600px;
-    margin: 0 auto;
 }
 
-/* Market Clock - Full width on mobile */
 .market-clock {
     background: rgba(0, 0, 0, 0.3);
     padding: 1rem;
     border-radius: 12px;
     border: 1px solid rgba(59, 130, 246, 0.2);
-    max-width: 300px;
-    margin: 0 auto;
+    text-align: center;
 }
 
 .clock-time {
@@ -711,7 +525,6 @@ body {
     font-weight: 700;
     font-family: 'JetBrains Mono', monospace;
     color: var(--secondary);
-    margin-bottom: 0.25rem;
 }
 
 .clock-status {
@@ -730,7 +543,6 @@ body {
     margin-top: 0.5rem;
 }
 
-/* SIMPLIFIED MARKET GRID - No complex grids */
 .market-grid {
     display: flex;
     flex-direction: column;
@@ -738,7 +550,6 @@ body {
     margin-bottom: 2rem;
 }
 
-/* All containers have same base style */
 .chart-container {
     background: rgba(20, 25, 35, 0.8);
     border-radius: 16px;
@@ -747,7 +558,6 @@ body {
     width: 100%;
 }
 
-/* Main Chart - Full width */
 .main-chart .chart-header {
     display: flex;
     flex-direction: column;
@@ -798,8 +608,6 @@ body {
     cursor: pointer;
     font-size: 0.85rem;
     transition: all 0.3s ease;
-    flex: 1;
-    min-width: 60px;
 }
 
 .time-btn:hover,
@@ -813,7 +621,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 100%;
 }
 
 @media (min-width: 480px) {
@@ -826,12 +633,10 @@ body {
 .stat {
     text-align: center;
     flex: 1;
-}
-
-@media (min-width: 768px) {
-    .stat {
-        text-align: right;
-    }
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary);
 }
 
 .stat-label {
@@ -846,38 +651,38 @@ body {
     font-weight: 700;
 }
 
-@media (min-width: 768px) {
-    .stat-value {
-        font-size: 1.5rem;
-    }
-}
-
 .stat-value.positive {
     color: #10b981;
 }
 
-.stat-value.negative {
-    color: #ef4444;
-}
-
-/* Chart Canvas - Fixed height */
 .chart-wrapper {
     height: 250px;
     position: relative;
     width: 100%;
+    background: rgba(10, 15, 25, 0.6);
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Heatmap - Simplified for mobile */
+#agentNetworkCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: rgba(10, 15, 25, 0.4);
+    border-radius: 12px;
+}
+
 .heatmap-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
     margin-top: 1rem;
 }
 
-@media (min-width: 480px) {
+@media (max-width: 640px) {
     .heatmap-grid {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -888,19 +693,20 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 600;
-    transition: transform 0.3s ease;
+    font-size: 0.7rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
     padding: 0.5rem;
     text-align: center;
-    line-height: 1.2;
+    cursor: pointer;
 }
 
 .heatmap-cell:hover {
     transform: scale(1.05);
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Stats Grid - Stack on mobile, grid on desktop */
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -919,16 +725,46 @@ body {
     }
 }
 
-.algo-stat {
+.stat-card {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(59, 130, 246, 0.1);
-    height: 100%;
+    border-radius: 1rem;
+    padding: 1rem;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    height: 100%;
 }
 
-/* Order Book - Stack vertically on mobile */
+.stat-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.stat-content .stat-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.stat-trend {
+    font-size: 0.7rem;
+    margin-top: 0.25rem;
+}
+
+.stat-trend.positive {
+    color: #10b981;
+}
+
+.stat-trend.neutral {
+    color: #94a3b8;
+}
+
 .orderbook-content {
     display: flex;
     flex-direction: column;
@@ -973,14 +809,6 @@ body {
     text-align: center;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    margin: 0.5rem 0;
-}
-
-@media (min-width: 768px) {
-    .orderbook-spread {
-        margin: 0 1rem;
-        align-self: center;
-    }
 }
 
 .spread-value {
@@ -989,13 +817,6 @@ body {
     color: var(--secondary);
 }
 
-.spread-label {
-    font-size: 0.85rem;
-    color: var(--text-light);
-    margin-top: 0.25rem;
-}
-
-/* Training Section */
 .training-content {
     display: flex;
     flex-direction: column;
@@ -1039,16 +860,20 @@ body {
     border-radius: 12px;
     max-height: 200px;
     overflow-y: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
 }
 
 .log-entry {
-    font-size: 0.85rem;
     padding: 0.5rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    font-family: 'JetBrains Mono', monospace;
 }
 
-/* Indicators Grid - Responsive */
+.log-time {
+    color: var(--secondary);
+    margin-right: 0.75rem;
+}
+
 .indicators-section {
     margin-top: 2rem;
     padding-top: 1.5rem;
@@ -1070,394 +895,259 @@ body {
     text-align: center;
 }
 
-/* ========== MAIN LAYOUT FIXES ========== */
-/* Ensure body doesn't overflow */
-body {
-    overflow-x: hidden;
-    width: 100%;
+.indicator-name {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
 }
 
-/* Fix first section on mobile */
-.firstSection {
-    flex-direction: column;
-    padding: 2rem 1rem;
-    margin: 1rem 0;
-    gap: 2rem;
-    min-height: auto;
+.indicator-value {
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
-@media (min-width: 1024px) {
-    .firstSection {
-        flex-direction: row;
-        padding: 4rem 5%;
-    }
+.indicator-value.positive {
+    color: #10b981;
 }
 
-.leftSection {
-    font-size: clamp(1.8rem, 5vw, 3rem);
+.indicator-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.indicator-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+}
+
+/* ========== FOOTER ========== */
+.footer {
     text-align: center;
-    width: 100%;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-top: 4rem;
+    background: rgba(10, 15, 25, 0.6);
 }
 
-@media (min-width: 1024px) {
-    .leftSection {
-        text-align: left;
-    }
-}
-
-.rightSection {
-    width: 100%;
+.social-links {
     display: flex;
     justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.rightSection img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 20px;
-}
-
-/* Buttons responsive */
-.buttons {
-    flex-direction: column;
-    gap: 1rem;
+.social-link {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
     align-items: center;
-    width: 100%;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
 }
 
-@media (min-width: 640px) {
+.social-link:hover {
+    color: var(--primary);
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-5px);
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 1024px) {
+    .firstSection {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .leftSection,
+    .rightSection {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .rightSection img {
+        max-width: 80%;
+        max-height: 350px;
+    }
+    
     .buttons {
-        flex-direction: row;
         justify-content: center;
     }
 }
 
-@media (min-width: 1024px) {
-    .buttons {
-        justify-content: flex-start;
-    }
-}
-
-.btn {
-    width: 100%;
-    max-width: 250px;
-    text-align: center;
-}
-
-/* Navbar fixes for mobile */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 0 1rem;
-    }
-
-    .nav-left .logo {
-        font-size: 1.4rem;
-    }
-
-    /* Hide nav on mobile, show hamburger */
-    .nav-right {
-        position: fixed;
-        top: 80px;
-        right: -100%;
-        width: 80%;
-        height: calc(100vh - 80px);
-        background: rgba(15, 23, 42, 0.98);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 2rem;
-        transition: right 0.4s ease;
-        z-index: 999;
-    }
-
-    .nav-right.active {
-        right: 0;
-    }
-
-    .nav-right ul {
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-    }
-
-    .nav-right ul li a {
-        display: block;
-        text-align: center;
-        padding: 1rem;
-        width: 100%;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-}
-
-/* Prevent horizontal scrolling */
-@media (max-width: 768px) {
-
-    .quant-market,
-    .firstSection,
-    .navbar {
-        width: 100vw;
-        box-sizing: border-box;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
     body {
-        width: 100%;
-        overflow-x: hidden;
-        position: relative;
-    }
-}
-
-/* Smooth transitions for all elements */
-* {
-    transition: all 0.3s ease;
-}
-
-/* Force remove any overflow issues */
-.chart-container,
-.market-grid,
-.stats-grid {
-    overflow: hidden;
-}
-/* Add this to your CSS file (in the chart-wrapper section) */
-.chart-wrapper {
-    height: 250px;
-    position: relative;
-    width: 100%;
-    background: rgba(10, 15, 25, 0.6);
-    border-radius: 12px;
-    padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Make sure chart canvas is smooth */
-#stockChart {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-/* Professional chart header styling */
-.main-chart .chart-header {
-    background: rgba(15, 23, 42, 0.8);
-    padding: 1rem;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Professional time buttons */
-.time-btn {
-    padding: 0.4rem 0.8rem;
-    background: transparent;
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    color: var(--text-light);
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: all 0.3s ease;
-    min-width: 50px;
-}
-
-.time-btn.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-}
-
-/* Professional stat boxes */
-.chart-stats .stat {
-    padding: 0.5rem 1rem;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    border-left: 3px solid var(--primary);
-}
-/* ========== AI AGENT DASHBOARD ADDITIONS ========== */
-
-/* Agent Network Canvas Styling */
-#agentNetworkCanvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-    background: rgba(10, 15, 25, 0.4);
-    border-radius: 12px;
-}
-
-/* Ensure chart wrapper works with canvas */
-.chart-wrapper {
-    height: 250px;
-    position: relative;
-    width: 100%;
-    background: rgba(10, 15, 25, 0.6);
-    border-radius: 12px;
-    padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Agent decision stream - consistent with orderbook */
-.orderbook-rows {
-    max-height: 180px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-}
-
-.orderbook-rows::-webkit-scrollbar {
-    width: 4px;
-}
-
-.orderbook-rows::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
-}
-
-.orderbook-rows::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 4px;
-}
-
-/* Agent status badge */
-.clock-status {
-    font-size: 0.85rem;
-    font-weight: 600;
-    background: rgba(16, 185, 129, 0.1);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    display: inline-block;
-}
-
-/* Agent heatmap cells - enhanced */
-.heatmap-cell {
-    aspect-ratio: 1;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 0.5rem;
-    text-align: center;
-    line-height: 1.3;
-    cursor: pointer;
-}
-
-.heatmap-cell:hover {
-    transform: scale(1.05);
-    z-index: 2;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Agent stat cards */
-.algo-stat {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(59, 130, 246, 0.1);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.algo-stat:hover {
-    border-color: var(--primary);
-    transform: translateY(-2px);
-}
-
-.stat-icon {
-    font-size: 1.8rem;
-    color: var(--primary);
-    margin-bottom: 0.5rem;
-}
-
-.stat-trend {
-    font-size: 0.7rem;
-    margin-top: 0.25rem;
-}
-
-.stat-trend.positive {
-    color: #10b981;
-}
-
-.stat-trend.negative {
-    color: #ef4444;
-}
-
-.stat-trend.neutral {
-    color: #94a3b8;
-}
-
-/* Training log for agent learning */
-.training-log {
-    flex: 1;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 1rem;
-    border-radius: 12px;
-    max-height: 200px;
-    overflow-y: auto;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-}
-
-.log-entry {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.log-time {
-    color: var(--secondary);
-    margin-right: 0.75rem;
-    font-weight: 500;
-}
-
-/* Mobile optimizations */
-@media (max-width: 768px) {
-    .heatmap-cell {
-        font-size: 0.6rem;
-        padding: 0.25rem;
+        padding-top: 70px;
     }
     
-    .stat-icon {
+    .navbar {
+        height: 70px;
+        padding: 0 1rem;
+    }
+    
+    .nav-left .logo {
         font-size: 1.2rem;
     }
     
-    .stat-value {
-        font-size: 1rem;
+    .firstSection {
+        padding: 1.5rem;
     }
     
-    .stat-label {
-        font-size: 0.7rem;
+    .leftSection {
+        font-size: 1.8rem;
     }
     
-    .training-log {
-        max-height: 150px;
-        font-size: 0.7rem;
+    .rightSection img {
+        max-width: 70%;
+        max-height: 280px;
     }
     
-    .log-time {
-        font-size: 0.65rem;
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .visual-card {
+        padding: 1.5rem;
+    }
+    
+    .chart-stats {
+        flex-direction: column;
     }
 }
 
 @media (max-width: 480px) {
+    .firstSection {
+        padding: 1rem;
+    }
+    
+    .leftSection {
+        font-size: 1.5rem;
+    }
+    
+    .rightSection img {
+        max-width: 85%;
+        max-height: 250px;
+    }
+    
+    .market-title h2 {
+        font-size: 1.3rem;
+    }
+    
     .chart-buttons {
-        flex-wrap: wrap;
         justify-content: center;
     }
     
     .time-btn {
-        padding: 0.25rem 0.5rem;
+        padding: 0.3rem 0.6rem;
         font-size: 0.7rem;
-        min-width: 45px;
-    }
-    
-    .heatmap-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
     }
     
     .orderbook-row {
         font-size: 0.7rem;
+    }
+}
+
+/* ========== WEB DEVELOPER SECTION (ADDED) ========== */
+.webdev-section {
+    padding: 3rem 2rem;
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.webdev-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.webdev-header h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.webdev-header h2 span {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.webdev-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.webdev-card {
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: all 0.3s;
+}
+
+.webdev-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.webdev-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.webdev-label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 0.3rem;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.skill-item {
+    background: rgba(59, 130, 246, 0.1);
+    padding: 0.25rem 0.8rem;
+    border-radius: 2rem;
+    font-size: 0.7rem;
+    color: #cbd5e1;
+}
+
+@media (max-width: 768px) {
+    .webdev-section {
+        padding: 2rem 1rem;
+    }
+    .webdev-header h2 {
+        font-size: 1.4rem;
     }
 }
